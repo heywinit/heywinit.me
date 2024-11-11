@@ -1,34 +1,47 @@
+import { Github, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <aside className="flex flex-col border-x-2 justify-between border-p border-2 select-none lg:min-w-[20%] lg:w-[20%] lg:h-full">
-      <div className="flex pr-4 lg:pr-0 lg:block justify-between">
-        <div className="flex flex-col justify-center content-center lg:p-8 px-2 py-2 lg:border-b-2 lg:border-p bg-p ">
-          <h1 className="lg:text-3xl font-bold">Winit.</h1>
-          <h2 className="text-xl italic font-medium hidden lg:block">
-            backend developer
-          </h2>
-        </div>
-        <nav className="flex lg:block item-center lg:px-8 lg:py-4 py-2 lg:space-y-2 lg:border-b-2 lg:border-p">
-          {["home", "projects", "blog", "contact"].map((e, i) => {
+    <nav className="flex h-max w-full flex-row items-center justify-between space-x-2 bg-bg2 p-4 lg:px-32">
+      <div className="flex text-3xl font-semibold">WINIT</div>
+      <div className="text-stone flex flex-row items-center space-x-8">
+        <div className="flex flex-row space-x-2 text-xl font-medium">
+          {[
+            {
+              title: "About",
+            },
+            {
+              title: "Projects",
+            },
+            {
+              title: "Contact",
+            },
+          ].map((e, i) => {
             return (
-              <div key={i}>
-                <Link
-                  className={`font-semibold hover:bg-p px-1 text-lg ${
-                    window.location.pathname === (e === "home" ? "/" : `/${e}`)
-                      ? "bg-p text-white"
-                      : ""
-                  }`}
-                  to={i === 0 ? "/" : `/${e}`}
-                >
-                  {e}
-                </Link>
-              </div>
+              <Link
+                to={e.title.toLowerCase()}
+                key={i}
+                className="px-1 hover:bg-p hover:text-black"
+              >
+                {e.title}
+              </Link>
             );
           })}
-        </nav>
+        </div>
+        <div className="flex flex-row space-x-4">
+          {[
+            { icon: <Github />, link: "https://github.com/heywinit" },
+            { icon: <Youtube />, link: "https://youtube.com/@heywinit" },
+          ].map((e, i) => {
+            return (
+              <a href={e.link} key={i} className="hover:text-p">
+                {e.icon}
+              </a>
+            );
+          })}
+        </div>
       </div>
-    </aside>
+    </nav>
   );
 }

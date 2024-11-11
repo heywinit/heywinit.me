@@ -1,126 +1,123 @@
+import Footer from "@/components/Footer";
 import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 
 export default function Home() {
+  const projects = [
+    {
+      name: "Laksh",
+      desc: "A complete study companion empowering students with structured learning, practice, and community.",
+      tech: [
+        "react",
+        "reactnative",
+        "express",
+        "node",
+        "postgresql",
+        "tailwindcss",
+      ],
+      status: "work in progress",
+      github: "https://laksh.app",
+    },
+    {
+      name: "QuatTar RGAM-1",
+      desc: "A rocket built for delivering payloads with precision.",
+      tech: ["c", "c++"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/QT-MHK-26",
+    },
+    {
+      name: "discodb",
+      desc: "database that stores data in discord allowing for unlimited storage.",
+      tech: ["golang", "discordgo"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/discodb",
+    },
+    {
+      name: "rootus",
+      desc: "a one stop solution for all your commuting needs.",
+      tech: [
+        "golang",
+        "reactnative",
+        "react",
+        "tailwindcss",
+        "node",
+        "express",
+      ],
+      status: "work in progress",
+      github: "https://github.com/heywinit/rootus",
+    },
+    {
+      name: "statisfy",
+      desc: "music taste visualization app that presents your listening habits in fancy charts and graphs.",
+      tech: [
+        "golang",
+        "spotify web api",
+        "mysql",
+        "react",
+        "reactnative",
+        "tailwindcss",
+      ],
+      status: "work in progress",
+      github: "https://github.com/heywinit/statisfy",
+    },
+    {
+      name: "stail",
+      desc: "css as a configuration language.",
+      tech: ["golang", "js/ts", "python", "java"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/stail",
+    },
+    {
+      name: "bgqr",
+      desc: "qr code generator & scanner that generates qr codes with colors for increased storage capacity.",
+      tech: ["golang"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/bgqr",
+    },
+    {
+      name: "jesensi",
+      desc: "my own defence technology encyclopedia web app.",
+      tech: ["springboot", "java", "mongodb", "react", "tailwindcss"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/jesensi-api",
+    },
+    {
+      name: "minechek",
+      desc: "tui minecraft server management tool",
+      tech: ["golang", "minecraft protocol", "spigot", "paper", "charm"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/minechek",
+    },
+    {
+      name: "goise",
+      desc: "web app built with wasm that delivers a wide range of noises and textures using paramters.",
+      tech: ["golang", "webassembly"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/Goise",
+    },
+    {
+      name: "gort",
+      desc: "web app for visualizing data structures, sorting and pathfinding algorithms.",
+      tech: ["golang", "webassembly"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/Gort",
+    },
+    {
+      name: "heyhud",
+      desc: "firefox extension that replaces new tab page with a more customized dashboard.",
+      tech: ["js/ts", "webextension api", "react", "tailwindcss"],
+      status: "work in progress",
+      github: "https://github.com/heywinit/heyhud",
+    },
+  ];
+
   return (
-    <div className="flex flex-col lg:flex-row h-screen w-screen justify-center lg:px-32">
-      <NavBar />
-      <div className="flex flex-col flex-grow lg:border-r-2 border-r-p overflow-y-auto">
-        <div className="flex flex-col flex-grow p-8">
-          <h1 className="text-3xl font-bold">/</h1>
-          <hr className="my-4 bg-p" />
-          <div className="text-lg leading-tight space-y-3">
-            <p>
-              Hey there! I'm a backend developer and avionics enthusiast,
-              currently studying computer science and aerospace engineering.
-              I've been programming since I was 12, and professionally for about
-              4 years now. My current favorite languages are GoLang &
-              TypeScript.
-            </p>
-
-            <p>
-              I started off with QBASIC in school, then meddled with some C# &
-              C++ for Unity and Unreal while trying to make my own Grand Theft
-              Auto V when I was 14 (sounds silly, I know). Later, I started
-              playing a lot of Minecraft and got into Java using which I made
-              mods and plugins. Then I started learning React & Node.js,
-              succeeded by Python. And at last I found GoLang, which I've been
-              using for the past 1.5 years.
-            </p>
-
-            <p>
-              I love to build things, usually software, sometimes hardware.
-              Currently, I'm working on two exciting projects:
-              <ul className="list-disc ml-5">
-                <li>
-                  <Link
-                    className="font-semibold hover:bg-p px-1"
-                    to={"/projects"}
-                  >
-                    DiscoDB
-                  </Link>
-                  : A database stored on Discord, offering theoretically
-                  infinite storage.
-                </li>
-                <li>
-                  <Link
-                    className="font-semibold hover:bg-p px-1"
-                    to={"/projects"}
-                  >
-                    QT MHK-26X
-                  </Link>
-                  : A supermaneuverable missile I'm building, capable of
-                  executing an S maneuver.
-                </li>
-              </ul>
-            </p>
-
-            <p>
-              I am a BIG nerd when it comes to fighter jets, missiles,
-              helicopters, and anything related to defense technology. This
-              passion was ignited by the original Top Gun movie, and I've been
-              learning more about defense technology every day since. I'm
-              particularly fascinated by aircraft that push the boundaries of
-              speed and technology.
-            </p>
-
-            <p>
-              My personal favorite aircraft are:
-              <ul className="list-disc ml-5">
-                <li>
-                  <a
-                    className="font-semibold hover:bg-p px-1"
-                    href="https://www.wikiwand.com/en/articles/Lockheed_F-117_Nighthawk"
-                    target="_blank"
-                  >
-                    Lockheed Martin F-117 NightHawk
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="font-semibold hover:bg-p px-1"
-                    href="https://www.wikiwand.com/en/articles/Rockwell_B-1_Lancer"
-                    target="_blank"
-                  >
-                    Rockwell B-1 Lancer
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="font-semibold hover:bg-p px-1"
-                    href="https://www.wikiwand.com/en/articles/Ilyushin_Il-76"
-                    target="_blank"
-                  >
-                    Ilyushin IL-76
-                  </a>
-                </li>
-              </ul>
-            </p>
-
-            <p>
-              Beyond tech and aviation, I'm also a huge fan of music, especially
-              hip-hop. I enjoy French Rap, Trap, and Desi hip-hop. Recently,
-              I've been learning to play the flute, adding a new dimension to my
-              musical interests.
-            </p>
-
-            <p>
-              I am here to learn, grow, and build. I'm always open to new ideas
-              and challenges. Feel free to{" "}
-              <Link
-                className="font-semibold hover:bg-p px-1"
-                to="/contact"
-                target="_blank"
-              >
-                reach out
-              </Link>{" "}
-              if you want to collaborate or just chat.
-            </p>
-          </div>
-        </div>
-        <Footer />
+    <div className="flex flex-col h-screen w-screen overflow-y-auto justify-between">
+      <div className="flex flex-col">
+        <NavBar />
+        <div className="flex flex-col justify-center items-center px-32 py-16 space-y-4"></div>
+        <div className="flex flex-col justify-center items-center px-32 py-16 space-y-4"></div>
       </div>
+      <Footer />
     </div>
   );
 }

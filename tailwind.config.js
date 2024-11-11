@@ -5,7 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        p: "#eb5e28",
+        p: "#cc7832",
+        sl: "#ffc66d",
+        bg2: "#27282c",
+        gray: "#3d3e42",
+        stone: "#aaaaaa",
       },
     },
   },
