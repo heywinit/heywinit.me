@@ -1,5 +1,3 @@
-import NavBar from "../components/NavBar";
-
 export default function Contact() {
-  return <div className="flex flex-col flex-grow overflow-y-auto"></div>;
+  return <div className="flex flex-grow flex-col overflow-y-auto"></div>;
 }

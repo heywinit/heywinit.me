@@ -1,5 +1,8 @@
 import Footer from "@/components/Footer";
-import NavBar from "../components/NavBar";
+import NavBar from "./components/NavBar";
+import Hero from "./pages/Hero";
+import About from "./pages/About";
+import TechStack from "./pages/TechStack";
 
 export default function Home() {
   const projects = [
@@ -111,11 +114,14 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-y-auto justify-between">
+    <div className="flex h-screen w-screen flex-col justify-between overflow-y-auto">
       <div className="flex flex-col">
         <NavBar />
-        <div className="flex flex-col justify-center items-center px-32 py-16 space-y-4"></div>
-        <div className="flex flex-col justify-center items-center px-32 py-16 space-y-4"></div>
+        <div className="flex flex-col items-center justify-center space-y-4 pt-16">
+          <Hero />
+          <About />
+          <TechStack />
+        </div>
       </div>
       <Footer />
     </div>

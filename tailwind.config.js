@@ -11,6 +11,9 @@ export default {
         gray: "#3d3e42",
         stone: "#aaaaaa",
       },
+      fontFamily: {
+        mono: ["JetBrains Mono", "monospace"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
