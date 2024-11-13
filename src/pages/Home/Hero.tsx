@@ -57,7 +57,7 @@ export default function Hero() {
         </div>
 
         {/* Right side developer icon */}
-        <div className="hidden select-none items-center justify-center lg:flex">
+        <div className="hidden select-none items-center justify-center lg:-ml-20 lg:flex xl:-ml-32">
           <div className="relative">
             <div className="flex h-[300px] w-[300px] items-center justify-center rounded-full border-4 border-primary/40">
               <div className="flex h-[200px] w-[200px] items-center justify-center rounded-full border-4 border-primary/60 bg-primary/5">
