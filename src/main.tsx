@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import "./index.css";
+import { ThemeProvider } from "./components/theme-provider";
+import { Loader } from "./components/ui/Loader";
 
 const router = createBrowserRouter([
   {
@@ -12,5 +14,8 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />,
+  <ThemeProvider>
+    <Loader />
+    <RouterProvider router={router} />
+  </ThemeProvider>,
 );

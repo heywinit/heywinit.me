@@ -1,23 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Tillana:wght@400;500;600;700;800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Tillana:wght@400;500;600;700;800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Hubot Sans";
-  src:
-    url("./assets/fonts/HubotSans/Hubot-Sans.woff2")
-      format("woff2 supports variations"),
-    url("./assets/fonts/HubotSans/Hubot-Sans.woff2") format("woff2-variations");
-  font-weight: 200 900;
-  font-stretch: 75% 125%;
-}
-
 :root {
-  font-family:
-    "Hubot Sans",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont;
+  font-family: "Geist", sans-serif;
 
   line-height: 1.5;
   font-weight: 400;
@@ -31,39 +20,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-input[type="checkbox"] {
-  accent-color: #eb5e28;
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -88,6 +46,7 @@ input[type="checkbox"] {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
   }
 }
 
@@ -98,4 +57,58 @@ input[type="checkbox"] {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+@layer base {
+  [data-theme="dark"] {
+    --border: 215 27.9% 16.9%;
+    --background: 224 71.4% 4.1%;
+  }
+}
+
+.shadow-feature-card {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.dark .shadow-feature-card-dark {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Add new global scrollbar hiding styles */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Make sure overflow behavior is preserved */
+html,
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Add this to your existing CSS */
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
