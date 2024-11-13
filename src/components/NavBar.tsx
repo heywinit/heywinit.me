@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
