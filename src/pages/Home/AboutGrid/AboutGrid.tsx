@@ -1,49 +1,13 @@
-import { motion } from "framer-motion";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import LocationCard from "./LocationCard";
 
 export default function AboutGrid() {
-  const primaryTools = [
-    { name: "JavaScript", icon: "devicon-javascript-plain" },
-    { name: "TypeScript", icon: "devicon-typescript-plain" },
-    { name: "Go", icon: "devicon-go-original-wordmark" },
-    { name: "Java", icon: "devicon-java-plain" },
-    { name: "Python", icon: "devicon-python-plain" },
-    { name: "React", icon: "devicon-react-original" },
-    { name: "Express", icon: "devicon-express-original" },
-    { name: "NodeJS", icon: "devicon-nodejs-plain" },
-    { name: "Tailwind", icon: "devicon-tailwindcss-plain" },
-    { name: "PostgreSQL", icon: "devicon-postgresql-plain" },
-    { name: "MySQL", icon: "devicon-mysql-plain" },
-    { name: "Spring", icon: "devicon-spring-plain" },
-    { name: "TensorFlow", icon: "devicon-tensorflow-original" },
-    { name: "PyTorch", icon: "devicon-pytorch-original" },
-  ];
-
-  const secondaryTools = [
-    { name: "Git", icon: "devicon-git-plain" },
-    { name: "GitHub", icon: "devicon-github-original" },
-    { name: "Linux", icon: "devicon-linux-plain" },
-    { name: "GraphQL", icon: "devicon-graphql-plain" },
-    { name: "Selenium", icon: "devicon-selenium-original" },
-    { name: "Redux", icon: "devicon-redux-original" },
-    { name: "Vercel", icon: "devicon-vercel-plain" },
-    { name: "Docker", icon: "devicon-docker-plain" },
-    { name: "AWS", icon: "devicon-amazonwebservices-original" },
-    { name: "MongoDB", icon: "devicon-mongodb-plain" },
-    { name: "Kubernetes", icon: "devicon-kubernetes-plain" },
-    { name: "Jenkins", icon: "devicon-jenkins-plain" },
-    { name: "Azure", icon: "devicon-azure-plain" },
-    { name: "Firebase", icon: "devicon-firebase-plain" },
-    { name: "Webpack", icon: "devicon-webpack-plain" },
-    { name: "Babel", icon: "devicon-babel-plain" },
-    { name: "Nginx", icon: "devicon-nginx-original" },
-  ];
-
   const socialLinks = [
     { platform: "GitHub", icon: "devicon-github-original", url: "#" },
     { platform: "Twitter", icon: "devicon-twitter-original", url: "#" },
@@ -54,78 +18,87 @@ export default function AboutGrid() {
     <TooltipProvider delayDuration={0}>
       <div
         id="about-section"
-        className="relative flex min-h-[90vh] flex-col justify-between bg-background px-4 pt-28 sm:px-8 lg:px-32"
+        className="relative min-h-screen w-full bg-background px-4 pt-20 sm:px-8 lg:px-32"
       >
-        <div className="grid grid-cols-4 gap-6">
-          {/* Introduction - spans 3 columns */}
-          <section className="col-span-3 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-4 text-2xl font-bold">About Me</h2>
-            <p className="text-lg">
-              Full Stack Developer passionate about building end-to-end
-              solutions
-            </p>
-          </section>
+        <BentoGrid className="mx-auto max-w-7xl">
+          {/* About Me - Tall Cell */}
+          <BentoGridItem
+            className="md:row-span-2"
+            title="About Me"
+            description={
+              <div className="flex items-start gap-6">
+                <div className="flex-1">
+                  <p className="text-lg leading-relaxed">
+                    I'm an 18-year-old full-stack developer passionate about
+                    building innovative solutions. Currently exploring the
+                    intersections of AI, web development, and cloud
+                    technologies. When I'm not coding, you'll find me
+                    contributing to open-source projects or learning new
+                    technologies.
+                  </p>
+                </div>
+                <div className="relative h-24 w-24 flex-shrink-0">
+                  <div className="animate-spin-slow absolute inset-0 rounded-full border-b-2 border-neutral-200"></div>
+                  <div className="absolute inset-[6px] rounded-full border-2 border-neutral-200 bg-background"></div>
+                </div>
+              </div>
+            }
+          />
 
-          {/* Coding Hours - 1 column */}
-          <section className="rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-2 text-2xl font-bold">Coding Hours</h2>
-            <p className="text-xl">18,923 hrs</p>
-          </section>
+          {/* Location */}
+          <LocationCard />
 
-          {/* Primary Toolkit - spans full width */}
-          <section className="col-span-4 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-4 text-2xl font-bold">Primary Toolkit</h2>
-            <div className="overflow-hidden whitespace-nowrap">
-              <motion.div
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                className="inline-block"
-              >
-                {[...primaryTools, ...primaryTools].map((tool, index) => (
-                  <Tooltip key={index}>
-                    <TooltipTrigger asChild>
-                      <span className="mx-4 inline-block cursor-pointer text-2xl">
-                        <i className={tool.icon + " colored"}></i>
+          {/* Working On */}
+          <BentoGridItem
+            title="Experience"
+            description={
+              <div className="group relative overflow-hidden rounded-lg p-4">
+                <div className="relative z-10 space-y-4">
+                  <div className="text-center">
+                    <div className="relative">
+                      <span className="block text-4xl font-bold text-primary">
+                        7.5
                       </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{tool.name}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </motion.div>
-            </div>
-          </section>
+                      <span className="text-sm text-muted-foreground">
+                        Years Programming
+                      </span>
+                    </div>
+                  </div>
 
-          {/* Working On - spans 2 columns */}
-          <section className="col-span-2 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-2 text-2xl font-bold">Working On</h2>
-            <p className="text-xl">LAKSH</p>
-          </section>
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="h-px flex-1 bg-border"></div>
+                    <span className="text-xs text-muted-foreground">
+                      including
+                    </span>
+                    <div className="h-px flex-1 bg-border"></div>
+                  </div>
 
-          {/* Connect - spans 2 columns */}
-          <section className="col-span-2 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-4 text-2xl font-bold">Connect</h2>
-            <div className="overflow-hidden whitespace-nowrap">
-              <motion.div
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                className="inline-block"
-              >
-                {[...socialLinks, ...socialLinks].map((link, index) => (
+                  <div className="text-center">
+                    <div className="relative">
+                      <span className="block text-3xl font-bold text-primary">
+                        4
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        Years Professionally
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          />
+
+          {/* Social Links */}
+          <BentoGridItem
+            title="Connect"
+            description={
+              <div className="flex justify-center gap-6">
+                {socialLinks.map((link, index) => (
                   <Tooltip key={index}>
                     <TooltipTrigger asChild>
                       <a
                         href={link.url}
-                        className="mx-4 inline-block cursor-pointer text-2xl transition-colors hover:text-blue-500"
+                        className="text-3xl transition-colors hover:text-primary"
                       >
                         <i className={link.icon + " colored"}></i>
                       </a>
@@ -135,39 +108,10 @@ export default function AboutGrid() {
                     </TooltipContent>
                   </Tooltip>
                 ))}
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Secondary Toolkit - spans full width */}
-          <section className="col-span-4 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">
-            <h2 className="mb-4 text-2xl font-bold">Secondary Toolkit</h2>
-            <div className="overflow-hidden whitespace-nowrap">
-              <motion.div
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                className="inline-block"
-              >
-                {[...secondaryTools, ...secondaryTools].map((tool, index) => (
-                  <Tooltip key={index}>
-                    <TooltipTrigger asChild>
-                      <span className="mx-4 inline-block cursor-pointer text-2xl">
-                        <i className={tool.icon + " colored"}></i>
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{tool.name}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </motion.div>
-            </div>
-          </section>
-        </div>
+              </div>
+            }
+          />
+        </BentoGrid>
       </div>
     </TooltipProvider>
   );

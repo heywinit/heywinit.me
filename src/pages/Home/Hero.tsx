@@ -41,7 +41,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative flex min-h-[90vh] flex-col justify-between bg-background/65 px-4 sm:px-8 lg:px-32">
+    <div className="relative flex min-h-[90vh] flex-col justify-between bg-background/45 px-4 sm:px-8 lg:px-32">
       <div className="flex h-full flex-col items-center justify-between lg:flex-row lg:pl-8 lg:pt-16">
         <div className="flex h-full max-w-2xl flex-col justify-between space-y-12 pb-24 text-center lg:text-left">
           <div className="space-y-6">
