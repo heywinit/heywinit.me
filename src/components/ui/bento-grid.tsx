@@ -23,10 +23,12 @@ export const BentoGridItem = ({
   className,
   title,
   description,
+  parentClassName,
 }: {
   className?: string;
   title?: string;
   description?: React.ReactNode;
+  parentClassName?: string;
 }) => {
   return (
     <div
@@ -35,7 +37,7 @@ export const BentoGridItem = ({
         className,
       )}
     >
-      <div className="relative z-10 h-full">
+      <div className={cn("relative z-10 h-full", parentClassName)}>
         <div className="mb-2">
           <h3 className="text-2xl font-bold">{title}</h3>
         </div>

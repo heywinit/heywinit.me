@@ -54,15 +54,28 @@ export default function LocationCard() {
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const response = await fetch("https://ipapi.co/json/");
-        const data = await response.json();
         const isDevMode = process.env.NODE_ENV === "development";
         const userLoc = {
-          latitude: isDevMode ? -14.235004 : data.latitude,
-          longitude: isDevMode ? -51.92528 : data.longitude,
-          name: isDevMode ? "South America" : data.city || "Your Location",
+          latitude: isDevMode ? -14.235004 : 0,
+          longitude: isDevMode ? -51.92528 : 0,
+          name: isDevMode ? "South America" : "Your Location",
         };
-        setUserLocation(userLoc);
+
+        if (!isDevMode) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              userLoc.latitude = position.coords.latitude;
+              userLoc.longitude = position.coords.longitude;
+              setUserLocation(userLoc);
+            },
+            (error) => {
+              console.error("Error fetching location:", error);
+              setUserLocation(userLoc);
+            },
+          );
+        } else {
+          setUserLocation(userLoc);
+        }
 
         // Calculate and set distance
         const dist = calculateDistance(
@@ -78,7 +91,7 @@ export default function LocationCard() {
     };
 
     fetchLocation();
-  }, []);
+  }, [WINIT_LOCATION.latitude, WINIT_LOCATION.longitude]);
 
   useEffect(() => {
     let width = 0;
