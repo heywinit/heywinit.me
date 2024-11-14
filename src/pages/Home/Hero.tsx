@@ -6,7 +6,11 @@ import { useLoaderStore } from "@/store/loader";
 import { motion } from "framer-motion";
 import { HoverTypewriter } from "@/components/ui/hover-typewriter";
 
-export default function Hero() {
+export default function Hero({
+  ref,
+}: {
+  ref?: React.RefObject<HTMLDivElement>;
+}) {
   const { isLoading } = useLoaderStore();
 
   const handleLearnMoreClick = (e: React.MouseEvent) => {
@@ -41,7 +45,10 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative flex min-h-[90vh] flex-col justify-between bg-background/30 px-4 sm:px-8 lg:px-32">
+    <div
+      ref={ref}
+      className="relative flex min-h-[90vh] flex-col justify-between bg-background/30 px-4 sm:px-8 lg:px-32 lg:pt-28"
+    >
       <div className="flex h-full flex-col items-center justify-between lg:flex-row lg:pl-8 lg:pt-16">
         <div className="flex h-full max-w-2xl flex-col justify-between space-y-12 pb-24 text-center lg:text-left">
           <div className="space-y-6">

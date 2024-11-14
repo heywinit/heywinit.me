@@ -8,7 +8,11 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import LocationCard from "./LocationCard";
 import { motion } from "framer-motion";
 
-export default function AboutGrid() {
+export default function AboutGrid({
+  ref,
+}: {
+  ref?: React.RefObject<HTMLDivElement>;
+}) {
   const socialLinks = [
     {
       platform: "GitHub",
@@ -229,6 +233,7 @@ export default function AboutGrid() {
   return (
     <TooltipProvider delayDuration={0}>
       <div
+        ref={ref}
         id="about-section"
         className="relative min-h-screen w-full bg-background px-4 pt-28 sm:px-8 lg:px-32"
       >
