@@ -52,7 +52,7 @@ export default function AboutGrid() {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="mx-auto w-full max-w-5xl p-4 py-8">
+      <div id="about-section" className="mx-auto w-full max-w-5xl p-4 py-8">
         <div className="grid grid-cols-4 gap-6">
           {/* Introduction - spans 3 columns */}
           <section className="col-span-3 rounded-xl border border-neutral-200 p-6 dark:border-neutral-800">

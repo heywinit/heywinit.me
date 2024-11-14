@@ -18,6 +18,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --logo-ring: 197 89% 50%;
 }
 
 @layer base {
@@ -90,7 +92,6 @@
     0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* Add new global scrollbar hiding styles */
 * {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
@@ -100,14 +101,12 @@
   display: none !important;
 }
 
-/* Make sure overflow behavior is preserved */
 html,
 body {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* Add this to your existing CSS */
 .transition-opacity {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

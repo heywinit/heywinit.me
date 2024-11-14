@@ -5,7 +5,7 @@ import ProjectsGrid from "./Home/ProjectsGrid/ProjectsGrid";
 
 export default function Home() {
   return (
-    <div className="flex h-screen w-screen flex-col">
+    <div className="flex h-screen w-screen flex-col pt-24">
       <NavBar />
       <Hero />
       <AboutGrid />

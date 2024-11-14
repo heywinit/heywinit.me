@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import FlickeringGrid from "./flickering-grid";
+import { useLoaderStore } from "@/store/loader";
 
 export const Loader = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const { isLoading, setIsLoading } = useLoaderStore();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(false);
+      setIsLoading(false);
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [setIsLoading]);
 
   return (
     <div
       className={cn(
         "fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500",
-        isVisible ? "opacity-100" : "pointer-events-none opacity-0",
+        isLoading ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >
       {/* Flickering Grid Background */}
