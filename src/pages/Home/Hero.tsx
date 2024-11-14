@@ -83,7 +83,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: isLoading ? 4.4 : 1.2, duration: 0.5 }}
-              className="flex gap-6 pt-8 sm:flex-col"
+              className="flex gap-6 pt-8"
             >
               <Button
                 asChild
