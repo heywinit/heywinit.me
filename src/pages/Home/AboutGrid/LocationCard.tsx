@@ -10,6 +10,13 @@ interface Location {
   name: string;
 }
 
+interface IpapiResponse {
+  latitude: number;
+  longitude: number;
+  city: string;
+  country_name: string;
+}
+
 // Function to calculate distance between two points using Haversine formula
 function calculateDistance(
   lat1: number,
@@ -50,32 +57,40 @@ export default function LocationCard() {
     },
   }));
 
-  // Fetch user's location
+  // Updated location fetching logic
   useEffect(() => {
     const fetchLocation = async () => {
       try {
         const isDevMode = process.env.NODE_ENV === "development";
+
+        if (isDevMode) {
+          const mockLocation = {
+            latitude: -14.235004,
+            longitude: -51.92528,
+            name: "South America",
+          };
+          setUserLocation(mockLocation);
+          const dist = calculateDistance(
+            WINIT_LOCATION.latitude,
+            WINIT_LOCATION.longitude,
+            mockLocation.latitude,
+            mockLocation.longitude,
+          );
+          setDistance(dist);
+          return;
+        }
+
+        // Fetch location from IP
+        const response = await fetch("https://ipapi.co/json/");
+        const data: IpapiResponse = await response.json();
+
         const userLoc = {
-          latitude: isDevMode ? -14.235004 : 0,
-          longitude: isDevMode ? -51.92528 : 0,
-          name: isDevMode ? "South America" : "Your Location",
+          latitude: data.latitude,
+          longitude: data.longitude,
+          name: `${data.city}, ${data.country_name}`,
         };
 
-        if (!isDevMode) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              userLoc.latitude = position.coords.latitude;
-              userLoc.longitude = position.coords.longitude;
-              setUserLocation(userLoc);
-            },
-            (error) => {
-              console.error("Error fetching location:", error);
-              setUserLocation(userLoc);
-            },
-          );
-        } else {
-          setUserLocation(userLoc);
-        }
+        setUserLocation(userLoc);
 
         // Calculate and set distance
         const dist = calculateDistance(
@@ -87,6 +102,13 @@ export default function LocationCard() {
         setDistance(dist);
       } catch (error) {
         console.error("Error fetching location:", error);
+        // Fallback to a default location if IP geolocation fails
+        const defaultLocation = {
+          latitude: 0,
+          longitude: 0,
+          name: "Unknown Location",
+        };
+        setUserLocation(defaultLocation);
       }
     };
 

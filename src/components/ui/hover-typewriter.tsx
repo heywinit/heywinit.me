@@ -12,10 +12,35 @@ export function HoverTypewriter({
   hoverText,
   className = "",
 }: HoverTypewriterProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
   const defaultRef = useRef<HTMLSpanElement>(null);
   const hoverRef = useRef<HTMLSpanElement>(null);
+
+  // Handle click animation
+  const handleClick = () => {
+    setIsAnimating(true);
+    setIsActive(true);
+
+    // Reset after animation completes
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 300); // matches the duration of the transition
+  };
+
+  // Only respond to hover when not animating from click
+  const handleHoverStart = () => {
+    if (!isAnimating) {
+      setIsActive(true);
+    }
+  };
+
+  const handleHoverEnd = () => {
+    if (!isAnimating) {
+      setIsActive(false);
+    }
+  };
 
   useEffect(() => {
     if (!containerRef.current || !defaultRef.current || !hoverRef.current)
@@ -24,7 +49,7 @@ export function HoverTypewriter({
     const updateWidth = () => {
       if (defaultRef.current && hoverRef.current && containerRef.current) {
         const paddingWidth = 8;
-        const width = isHovered
+        const width = isActive
           ? hoverRef.current.offsetWidth + paddingWidth
           : defaultRef.current.offsetWidth + paddingWidth;
         containerRef.current.style.width = `${width}px`;
@@ -41,7 +66,7 @@ export function HoverTypewriter({
     updateWidth();
 
     return () => resizeObserver.disconnect();
-  }, [isHovered]); // Re-run when hover state changes
+  }, [isActive]); // Re-run when hover state changes
 
   return (
     <motion.span
@@ -49,9 +74,11 @@ export function HoverTypewriter({
       className={`cursor-pointer px-1 py-0 underline ${className}`}
       initial={{ backgroundColor: "hsl(var(--logo-ring) / 0.2)" }}
       whileHover={{ backgroundColor: "hsl(var(--logo-ring) / 0.5)" }}
+      whileTap={{ backgroundColor: "hsl(var(--logo-ring) / 0.5)" }}
       transition={{ duration: 0.3 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      onClick={handleClick}
       style={{
         display: "inline-block",
         transition: "width 0.3s ease-in-out",
@@ -61,7 +88,7 @@ export function HoverTypewriter({
         <span
           ref={defaultRef}
           className={`inline-block whitespace-nowrap transition-opacity duration-300 ${
-            isHovered ? "opacity-0" : "opacity-100"
+            isActive ? "opacity-0" : "opacity-100"
           }`}
         >
           {defaultText}
@@ -69,10 +96,10 @@ export function HoverTypewriter({
         <span
           ref={hoverRef}
           className={`absolute left-0 top-0 inline-block whitespace-nowrap transition-opacity duration-300 ${
-            isHovered ? "opacity-100" : "opacity-0"
+            isActive ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            clipPath: isHovered ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+            clipPath: isActive ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
             transition: "clip-path 0.3s ease-in-out",
           }}
         >

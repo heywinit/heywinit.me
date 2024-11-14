@@ -45,7 +45,7 @@ export default function Hero() {
       <div className="flex h-full flex-col items-center justify-between lg:flex-row lg:pl-8 lg:pt-16">
         <div className="flex h-full max-w-2xl flex-col justify-between space-y-12 pb-24 text-center lg:text-left">
           <div className="space-y-6">
-            <div className="font-mono text-5xl font-bold leading-tight tracking-tight sm:text-3xl md:text-6xl">
+            <div className="font-mono text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl">
               <WordPullUp delay={isLoading ? 3.2 : 0}>
                 <h1>Writing code that</h1>
               </WordPullUp>
@@ -54,7 +54,7 @@ export default function Hero() {
               </WordPullUp>
             </div>
 
-            <div className="font-mono text-lg text-muted-foreground sm:text-2xl">
+            <div className="font-mono text-base text-muted-foreground sm:text-xl md:text-2xl">
               <p className="mt-4 leading-relaxed">
                 Usually writing code for{" "}
                 <HoverTypewriter defaultText="screens" hoverText="(software)" />
@@ -83,7 +83,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: isLoading ? 4.4 : 1.2, duration: 0.5 }}
-              className="flex gap-6 pt-8"
+              className="flex gap-6 pt-8 sm:flex-col"
             >
               <Button
                 asChild
