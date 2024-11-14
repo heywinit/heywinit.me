@@ -419,10 +419,10 @@ export default function AboutGrid() {
           {/* Quote */}
           <div className="flex flex-col rounded-[--radius] border bg-white/80 p-6 shadow-sm md:col-span-1">
             <span className="text-lg font-medium text-zinc-800">
-              "An idiot admires complexity, a genius admires simplicity"
+              "A day without sunshine is like, you know, night."
             </span>
             <span className="mt-4 self-end text-lg text-zinc-800">
-              - Terry A. Davis
+              - Steve Martin
             </span>
           </div>
 
