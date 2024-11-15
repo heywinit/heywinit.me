@@ -1,18 +1,29 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { useState, useRef, useCallback } from "react";
 import LocationCard from "./LocationCard";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import AboutMeCell from "./components/AboutMeCell";
+import ExperienceCell from "./components/ExperienceCell";
+import ConnectCell from "./components/ConnectCell";
+import HotBarCell from "./components/HotBarCell";
+import InventoryCell from "./components/InventoryCell";
+import QuoteCell from "./components/QuoteCell";
+import LearningJourneyCell from "./components/LearningJourneyCell";
+import CurrentlyBuildingCell from "./components/CurrentlyBuildingCell";
 
-export default function AboutGrid({
-  ref,
-}: {
-  ref?: React.RefObject<HTMLDivElement>;
-}) {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+      when: "beforeChildren",
+    },
+  },
+};
+
+export default function AboutGrid() {
   const socialLinks = [
     {
       platform: "GitHub",
@@ -117,7 +128,7 @@ export default function AboutGrid({
     },
     {
       name: "AWS",
-      icon: "devicon-amazonwebservices-original",
+      icon: "devicon-amazonwebservices-plain-wordmark",
       color:
         "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300",
     },
@@ -166,339 +177,52 @@ export default function AboutGrid({
   const [emailCopied, setEmailCopied] = useState(false);
   const [logoKey, setLogoKey] = useState(0);
 
+  const handleLogoHover = useCallback(() => {
+    setLogoKey((prev) => prev + 1);
+  }, []);
+
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, {
+    once: true,
+    margin: "-100px",
+  });
+
   const handleEmailClick = async () => {
     await navigator.clipboard.writeText("heywinit@gmail.com");
     setEmailCopied(true);
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
-  const handleLogoHover = useCallback(() => {
-    setLogoKey((prev) => prev + 1);
-  }, []);
-
-  const InventoryContent = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [hasOverflow, setHasOverflow] = useState(false);
-    const [visibleCount, setVisibleCount] = useState(frameworks.length);
-
-    useEffect(() => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const checkOverflow = () => {
-        const items = Array.from(container.children) as HTMLElement[];
-        let totalWidth = 0;
-        let visibleItems = items.length;
-
-        for (let i = 0; i < items.length; i++) {
-          totalWidth += items[i].offsetWidth + 4; // 4px for gap
-          if (totalWidth > container.offsetWidth - 100) {
-            // Leave space for "much more"
-            visibleItems = i;
-            break;
-          }
-        }
-
-        setHasOverflow(totalWidth > container.offsetWidth);
-        setVisibleCount(visibleItems);
-      };
-
-      checkOverflow();
-      window.addEventListener("resize", checkOverflow);
-      return () => window.removeEventListener("resize", checkOverflow);
-    }, []);
-
-    return (
-      <div ref={containerRef} className="flex flex-wrap gap-1">
-        {frameworks
-          .slice(0, hasOverflow ? visibleCount : frameworks.length)
-          .map((framework, index) => (
-            <div
-              key={index}
-              className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${framework.color} transition-all duration-200 hover:scale-105`}
-            >
-              <i className={framework.icon}></i>
-              {framework.name}
-            </div>
-          ))}
-        {hasOverflow && (
-          <div className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary transition-all duration-200 hover:scale-105">
-            much more...
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <TooltipProvider delayDuration={0}>
-      <div
-        ref={ref}
+      <motion.div
+        ref={sectionRef}
         id="about-section"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={containerVariants}
         className="relative min-h-screen w-full bg-background px-4 pt-28 sm:px-8 lg:px-32"
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-3">
-          {/* About Me - Tall Cell */}
-          <div className="rounded-[--radius] border bg-card p-6 shadow-sm md:col-span-1 md:row-span-2">
-            <h3 className="mb-4 font-semibold leading-none tracking-tight">
-              About Me
-            </h3>
-            <div>
-              <div
-                className="relative float-right mb-2 ml-4 h-24 w-24"
-                onMouseEnter={handleLogoHover}
-              >
-                <motion.div
-                  key={`outer-${logoKey}`}
-                  initial={{ rotate: 720, scale: 0.2, opacity: 0 }}
-                  animate={{
-                    rotate: 0,
-                    scale: 1,
-                    opacity: 1,
-                    borderColor: "hsl(var(--logo-ring) / 0.6)",
-                  }}
-                  transition={{
-                    duration: 2,
-                    ease: [0.19, 1, 0.22, 1],
-                  }}
-                  className="absolute inset-0 rounded-full border-2"
-                >
-                  <motion.div
-                    key={`inner-${logoKey}`}
-                    initial={{ rotate: -720, scale: 0.2, opacity: 0 }}
-                    animate={{
-                      rotate: 0,
-                      scale: 1,
-                      opacity: 1,
-                      borderColor: "hsl(var(--logo-ring) / 0.6)",
-                    }}
-                    transition={{
-                      duration: 2,
-                      delay: 0.2,
-                      ease: [0.19, 1, 0.22, 1],
-                    }}
-                    className="absolute inset-[4px] flex items-center justify-center rounded-full border-2 bg-[hsl(var(--logo-ring)_/_0.05)]"
-                  >
-                    <span className="select-none font-mono text-2xl font-bold text-white">
-                      {"W"}
-                    </span>
-                  </motion.div>
-                </motion.div>
-              </div>
-              <div className="space-y-2 text-lg leading-snug">
-                <p>
-                  Hey there, I'm Winit, a 19 y/o software developer and avionics
-                  engineer. Currently pursuing a degree in computer science,
-                  driven by my interest in software development, aviation, and
-                  continuous learning.
-                </p>
-                <p>
-                  I've worked on a variety of projects ranging from web
-                  development to mobile apps and even some rocketry.
-                </p>
-                <p>
-                  My days are filled with coding and researching defence tech
-                  like fighter jets and missiles. If you're a fan of the F-117
-                  Nighthawk or the Ilyushin IL-76, we're homies.
-                </p>
-                <p>
-                  Beyond tech and aviation, I'm an avid music enthusiast. You'll
-                  often find me listening to hip-hop, R&B and folk.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="md:col-span-1">
-            <LocationCard />
-          </div>
+        <motion.div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-3">
+          <AboutMeCell logoKey={logoKey} handleLogoHover={handleLogoHover} />
+          <LocationCard />
 
           <div className="row-span-3 flex flex-col space-y-4 md:col-span-1">
-            <div className="rounded-[--radius] border bg-card p-6 shadow-sm">
-              <h3 className="font-semibold leading-none tracking-tight">
-                Experience
-              </h3>
-              <div className="group relative overflow-hidden rounded-lg p-2">
-                <div className="relative z-10 space-y-2">
-                  <div className="text-center">
-                    <div className="relative">
-                      <span className="block text-5xl font-bold text-primary">
-                        7.5
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        Years Programming
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="h-px flex-1 bg-border"></div>
-                    <span className="text-xs text-muted-foreground">
-                      including
-                    </span>
-                    <div className="h-px flex-1 bg-border"></div>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="relative">
-                      <span className="block text-4xl font-bold text-primary">
-                        4
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        Years Professionally
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="rounded-[--radius] border bg-card p-6 shadow-sm">
-              <h3 className="mb-4 font-semibold leading-none tracking-tight">
-                Connect
-              </h3>
-              <div className="flex flex-grow flex-col justify-center">
-                <div className="flex flex-wrap justify-center space-x-4">
-                  {socialLinks.map((link, index) => (
-                    <Tooltip key={index}>
-                      <TooltipTrigger asChild>
-                        <a
-                          href={link.url}
-                          className={`transform text-4xl transition-all duration-200 hover:scale-110 ${link.color}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <i className={link.icon}></i>
-                        </a>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{link.platform}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  ))}
-                  <Tooltip open={emailCopied}>
-                    <TooltipTrigger asChild>
-                      <button
-                        onClick={handleEmailClick}
-                        className="transform text-4xl transition-all duration-200 hover:scale-110 hover:text-[#EA4335]"
-                      >
-                        <i className="devicon-google-plain"></i>
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className={emailCopied ? "text-green-500" : ""}>
-                        {emailCopied ? "Copied email!" : "Copy email"}
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
-              </div>
-            </div>
-
-            {/* Hot Bar */}
-            <div className="cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm">
-              <h3 className="mb-2 font-semibold leading-none tracking-tight">
-                Hot Bar
-              </h3>
-              <div className="flex flex-wrap gap-1">
-                {techStack.map((tech, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${tech.color} transition-all duration-200 hover:scale-105`}
-                  >
-                    <i className={tech.icon}></i>
-                    {tech.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Inventory Section */}
-            <div className="flex-grow cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm">
-              <h3 className="mb-4 font-semibold leading-none tracking-tight">
-                Inventory
-              </h3>
-              <InventoryContent />
-            </div>
+            <ExperienceCell />
+            <ConnectCell
+              socialLinks={socialLinks}
+              emailCopied={emailCopied}
+              handleEmailClick={handleEmailClick}
+            />
+            <HotBarCell techStack={techStack} />
+            <InventoryCell frameworks={frameworks} />
           </div>
 
-          {/* Quote */}
-          <div className="flex flex-col rounded-[--radius] border bg-white/80 p-6 shadow-sm md:col-span-1">
-            <span className="text-lg font-medium text-zinc-800">
-              "A day without sunshine is like, you know, night."
-            </span>
-            <span className="mt-4 self-end text-lg text-zinc-800">
-              - Steve Martin
-            </span>
-          </div>
-
-          {/* Learning fourney */}
-          <div className="rounded-[--radius] border bg-card p-6 shadow-sm md:col-span-1">
-            <h3 className="mb-4 font-semibold leading-none tracking-tight">
-              Learning Journey
-            </h3>
-            <div className="space-y-3">
-              <div className="relative">
-                <div className="absolute left-0 h-full w-1 bg-gradient-to-b from-teal-500 via-red-500 via-yellow-500 to-blue-500"></div>
-                <div className="space-y-2 pl-4">
-                  <div className="flex items-center gap-2 rounded-md border-2 bg-gradient-to-r from-[#1E90FF] to-[#20B2AA] px-2 py-1 text-white">
-                    <i className="devicon-go-plain text-xl"></i>
-                    <h3 className="font-medium">Golang</h3>
-                    <p className="text-sm text-zinc-200">
-                      - learning & building apis
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 rounded-md border-2 border-blue-500 px-2 py-1">
-                    <i className="devicon-python-plain text-xl text-blue-500"></i>
-                    <h3 className="font-medium text-blue-500">Python</h3>
-                    <p className="text-sm text-zinc-500">
-                      - some scripting and ML testing
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 rounded-md border-2 border-yellow-500 px-2 py-1">
-                    <i className="devicon-javascript-plain text-xl text-yellow-500"></i>
-                    <h3 className="font-medium text-yellow-500">JavaScript</h3>
-                    <p className="text-sm text-zinc-500">
-                      - made apps & discord bots
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 rounded-md border-2 border-red-500 px-2 py-1">
-                    <i className="devicon-java-plain text-xl text-red-500"></i>
-                    <h3 className="font-medium text-red-500">Java</h3>
-                    <p className="text-sm text-zinc-500">
-                      - started off with minecraft plugins
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Currently Building (moved down) */}
-          <div className="rounded-[--radius] border bg-card p-6 shadow-sm md:col-span-1">
-            <h3 className="mb-4 font-semibold leading-none tracking-tight">
-              Currently Building
-            </h3>
-            <div className="space-y-3">
-              <div className="flex flex-row items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-lg font-semibold">Laksh</h3>
-                  <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
-                  <span className="text-sm text-muted-foreground">
-                    Active Project
-                  </span>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Laksh is an AI-equipped all in one manager & resource library
-                for all your academic needs. From routine management using
-                automatic task sorting and scheduling to a comprehensive
-                resource library with AI-powered research and study notes, Laksh
-                is here to simplify your academic journey.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+          <QuoteCell />
+          <LearningJourneyCell />
+          <CurrentlyBuildingCell />
+        </motion.div>
+      </motion.div>
     </TooltipProvider>
   );
 }
