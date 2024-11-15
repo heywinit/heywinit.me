@@ -1,6 +1,6 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useCallback } from "react";
-import LocationCard from "./LocationCard";
+import LocationCard from "./components/LocationCard";
 import { motion, useInView } from "framer-motion";
 import AboutMeCell from "./components/AboutMeCell";
 import ExperienceCell from "./components/ExperienceCell";

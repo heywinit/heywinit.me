@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 import NavBar from "@/components/NavBar";
-import Hero from "./Home/Hero";
-import AboutGrid from "./Home/AboutGrid/AboutGrid";
+import Hero from "./Hero";
+import AboutGrid from "./AboutGrid";
 // import ProjectsGrid from "./Home/ProjectsGrid/ProjectsGrid";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import Footer from "@/components/Footer";
-import ProjectsGrid from "./Home/ProjectsGrid/ProjectsGrid";
+import ProjectsGrid from "./ProjectsGrid";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);

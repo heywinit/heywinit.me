@@ -1,7 +1,7 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import ProjectCard from "./components/ProjectCard";
+import ProjectCard from "./ProjectCard";
 import { Project } from "@/types/Project";
 import { Link } from "react-router-dom";
 

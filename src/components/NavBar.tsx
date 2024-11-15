@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 
 const navigationLinks = [
   { href: "/about", label: "About" },
@@ -16,6 +17,8 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +69,8 @@ export default function NavBar() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="font-mono text-2xl font-bold tracking-tight"
+              className="flex cursor-pointer select-none items-center font-mono text-2xl font-bold tracking-tight"
+              onClick={() => navigate("/")}
             >
               Winit.
             </motion.div>
@@ -123,13 +127,12 @@ function NavLink({
   children: React.ReactNode;
 }) {
   return (
-    <motion.a
+    <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      href={href}
       className="text-base font-medium text-foreground/70 transition-colors hover:text-foreground/90"
     >
-      {children}
-    </motion.a>
+      <Link to={href}>{children}</Link>
+    </motion.div>
   );
 }
