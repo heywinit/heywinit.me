@@ -50,18 +50,19 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
     return () => window.removeEventListener("resize", checkOverflow);
   }, []);
 
-  const inventoryVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+        when: "beforeChildren",
       },
     },
   };
 
-  const chipVariants = {
+  const techItemVariants = {
     hidden: { scale: 0, opacity: 0 },
     visible: {
       scale: 1,
@@ -75,17 +76,20 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
   };
 
   return (
-    <div className="flex-grow cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm">
+    <motion.div
+      ref={inventoryRef}
+      variants={containerVariants}
+      className="flex-grow cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm"
+    >
       <h3 className="mb-4 font-semibold leading-none tracking-tight">
         Inventory
       </h3>
       <motion.div
         ref={containerRef}
         className="flex flex-wrap gap-1"
-        variants={inventoryVariants}
         initial="hidden"
         animate={isInventoryInView ? "visible" : "hidden"}
-        whileInView="visible"
+        variants={containerVariants}
         viewport={{ once: true }}
       >
         {frameworks
@@ -93,7 +97,7 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
           .map((framework, index) => (
             <motion.div
               key={index}
-              variants={chipVariants}
+              variants={techItemVariants}
               whileHover={{ scale: 1.1 }}
               className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${framework.color}`}
             >
@@ -103,7 +107,7 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
           ))}
         {hasOverflow && (
           <motion.div
-            variants={chipVariants}
+            variants={techItemVariants}
             whileHover={{ scale: 1.1 }}
             className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary"
           >
@@ -111,6 +115,6 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
           </motion.div>
         )}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
