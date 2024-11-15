@@ -5,12 +5,14 @@ interface HoverTypewriterProps {
   defaultText: string;
   hoverText: string;
   className?: string;
+  onClick?: () => void;
 }
 
 export function HoverTypewriter({
   defaultText,
   hoverText,
   className = "",
+  onClick,
 }: HoverTypewriterProps) {
   const [isActive, setIsActive] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -20,6 +22,7 @@ export function HoverTypewriter({
 
   // Handle click animation
   const handleClick = () => {
+    onClick?.();
     //should only happen on mobile
     if (window.innerWidth > 768) return;
     setIsAnimating(true);

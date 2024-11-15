@@ -4,6 +4,7 @@ import Hero from "./Home/Hero";
 import AboutGrid from "./Home/AboutGrid/AboutGrid";
 // import ProjectsGrid from "./Home/ProjectsGrid/ProjectsGrid";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -73,6 +74,7 @@ export default function Home() {
         <AboutGrid />
       </div>
       <div ref={projectsRef}>{/* <ProjectsGrid /> */}</div>
+      <Footer />
     </div>
   );
 }

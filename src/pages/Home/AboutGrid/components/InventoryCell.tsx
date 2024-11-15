@@ -81,7 +81,7 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
       variants={containerVariants}
       className="flex-grow cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm"
     >
-      <h3 className="mb-4 font-semibold leading-none tracking-tight">
+      <h3 className="mb-4 font-mono font-semibold leading-none tracking-tight">
         Inventory
       </h3>
       <motion.div

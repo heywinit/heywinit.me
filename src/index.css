@@ -22,6 +22,11 @@
   --logo-ring: 197 89% 50%;
 }
 
+code,
+pre {
+  font-family: "Geist Mono", monospace;
+}
+
 @layer base {
   :root {
     --background: 240 10% 3.9%;

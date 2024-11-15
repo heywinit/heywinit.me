@@ -19,7 +19,7 @@ export default function LearningJourneyCell() {
       className="rounded-[--radius] border bg-card p-6 shadow-sm md:col-span-1"
       whileHover={{ scale: 1.02 }}
     >
-      <h3 className="mb-4 font-semibold leading-none tracking-tight">
+      <h3 className="mb-4 font-mono font-semibold leading-none tracking-tight">
         Learning Journey
       </h3>
       <motion.div className="space-y-3" variants={containerVariants}>

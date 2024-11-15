@@ -1,7 +1,9 @@
 export default function ExperienceCell() {
   return (
     <div className="rounded-[--radius] border bg-card p-6 shadow-sm">
-      <h3 className="font-semibold leading-none tracking-tight">Experience</h3>
+      <h3 className="font-mono font-semibold leading-none tracking-tight">
+        Experience
+      </h3>
       <div className="group relative overflow-hidden rounded-lg p-2">
         <div className="relative z-10 space-y-2">
           <div className="text-center">

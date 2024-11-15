@@ -12,7 +12,7 @@ export default function CurrentlyBuildingCell() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <h3 className="mb-4 font-semibold leading-none tracking-tight">
+        <h3 className="mb-4 font-mono font-semibold leading-none tracking-tight">
           Currently Building
         </h3>
         <div className="space-y-3">

@@ -48,9 +48,9 @@ export default function HotBarCell({ techStack }: HotBarCellProps) {
     <motion.div
       ref={hotBarRef}
       variants={containerVariants}
-      className="cursor-default select-none rounded-[--radius] border bg-card p-6 shadow-sm"
+      className="cursor-default select-none rounded-[--radius] border bg-card p-6 font-mono shadow-sm"
     >
-      <h3 className="mb-2 font-semibold leading-none tracking-tight">
+      <h3 className="mb-4 font-semibold leading-none tracking-tight">
         Hot Bar
       </h3>
       <motion.div

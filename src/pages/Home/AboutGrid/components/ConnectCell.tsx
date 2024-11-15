@@ -24,7 +24,7 @@ export default function ConnectCell({
 }: ConnectCellProps) {
   return (
     <div className="rounded-[--radius] border bg-card p-6 shadow-sm">
-      <h3 className="mb-4 font-semibold leading-none tracking-tight">
+      <h3 className="mb-4 font-mono font-semibold leading-none tracking-tight">
         Connect
       </h3>
       <div className="flex flex-grow flex-col justify-center">
