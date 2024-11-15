@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects/Projects";
 import AvionicsAviation from "./pages/AvionicsAviation";
 import Blog from "./pages/Blog";
+import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
+    <Analytics />
     <Loader />
     <RouterProvider router={router} />
   </ThemeProvider>,
