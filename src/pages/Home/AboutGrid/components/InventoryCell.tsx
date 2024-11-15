@@ -16,7 +16,7 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
   const [visibleCount, setVisibleCount] = useState(frameworks.length);
-  const [isMobile, setIsMobile] = useState(false);
+  const [, setIsMobile] = useState(false);
 
   const inventoryRef = useRef(null);
   const isInventoryInView = useInView(inventoryRef, {
