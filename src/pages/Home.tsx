@@ -65,19 +65,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex h-screen w-screen flex-col overflow-auto">
+    <div className="flex h-screen w-screen snap-y snap-mandatory flex-col overflow-auto scroll-smooth">
       <BackgroundBeams className="-z-1 fixed inset-0 opacity-50" />
       <NavBar />
-      <div ref={heroRef}>
+      <div ref={heroRef} className="snap-start">
         <Hero />
       </div>
-      <div ref={aboutRef}>
+      <div ref={aboutRef} className="snap-start">
         <AboutGrid />
       </div>
-      <div ref={projectsRef}>
+      <div ref={projectsRef} className="snap-start">
         <ProjectsGrid />
       </div>
-      <Footer />
+      <div className="snap-start">
+        <Footer />
+      </div>
     </div>
   );
 }
