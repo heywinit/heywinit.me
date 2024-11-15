@@ -29,7 +29,7 @@ export default function ProjectsGrid() {
       title: "Laksh",
       chip: "Work in Progress",
       description:
-        "Laksh is an AI-equipped all in one manager & resource library for all your academic needs.",
+        "Laksh is a student-focused social media app with AI-powered task management and a resource library. It simplifies academics and enhances social connections.",
       technologies: [
         "React",
         "TypeScript",
@@ -54,7 +54,7 @@ export default function ProjectsGrid() {
       title: "Jesensi",
       description:
         "A wikipedia like defence technology encyclopedia storing a wide range of data about fighter jets, missiles, ships, and much more",
-      githubUrl: "https://github.com/heywinit/Jesensi",
+      githubUrl: "https://github.com/heywinit/Jesensi-web",
       technologies: [
         "React",
         "TypeScript",

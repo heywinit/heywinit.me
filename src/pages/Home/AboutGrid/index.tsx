@@ -28,19 +28,19 @@ export default function AboutGrid() {
     {
       platform: "GitHub",
       icon: "devicon-github-original",
-      url: "#",
+      url: "https://github.com/heywinit",
       color: "hover:text-[#333]",
     },
     {
       platform: "Twitter",
       icon: "devicon-twitter-original",
-      url: "#",
+      url: "https://twitter.com/hiwinit",
       color: "hover:text-[#1DA1F2]",
     },
     {
       platform: "LinkedIn",
       icon: "devicon-linkedin-plain",
-      url: "#",
+      url: "https://www.linkedin.com/in/vinesh=rajpurohit/",
       color: "hover:text-[#0A66C2]",
     },
   ];

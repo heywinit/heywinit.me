@@ -45,7 +45,7 @@ export default function Footer() {
                 },
                 {
                   name: "Twitter",
-                  url: "https://twitter.com/heywinit",
+                  url: "https://twitter.com/hiwinit",
                   color: "bg-blue-500 text-white",
                 },
                 {

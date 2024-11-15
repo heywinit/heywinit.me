@@ -26,11 +26,9 @@ export default function CurrentlyBuildingCell() {
             </div>
           </div>
           <p className="text-md text-foreground/70">
-            Laksh is an AI-equipped all in one manager & resource library for
-            all your academic needs. From routine management using automatic
-            task sorting and scheduling to a comprehensive resource library with
-            AI-powered research and study notes, Laksh is here to simplify your
-            academic journey.
+            Laksh is a student-focused social media app with AI-powered task
+            management and a resource library. It simplifies academics and
+            enhances social connections.
           </p>
         </div>
       </motion.div>
