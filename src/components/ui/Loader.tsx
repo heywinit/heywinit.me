@@ -24,10 +24,10 @@ export const Loader = () => {
       {/* Flickering Grid Background */}
       <div className="absolute inset-0">
         <FlickeringGrid
-          squareSize={6}
-          gridGap={8}
+          squareSize={10}
+          gridGap={12}
           flickerChance={0.4}
-          color="white"
+          color="#0eb1f1"
           maxOpacity={0.2}
         />
       </div>

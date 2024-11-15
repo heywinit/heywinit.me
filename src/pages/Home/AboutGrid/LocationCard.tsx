@@ -157,9 +157,9 @@ export default function LocationCard() {
       diffuse: 2,
       mapSamples: 12000,
       mapBrightness: 2,
-      baseColor: [0.3, 0.3, 0.3],
-      markerColor: [1, 1, 1],
-      glowColor: [0.5, 0.5, 0.5],
+      baseColor: [0.3, 0.5, 0.5],
+      markerColor: [0.014, 0.177, 0.241],
+      glowColor: [0.014, 0.177, 0.241],
       markers,
       scale: 1.05,
       onRender: (state) => {

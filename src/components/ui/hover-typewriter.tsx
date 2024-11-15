@@ -20,6 +20,8 @@ export function HoverTypewriter({
 
   // Handle click animation
   const handleClick = () => {
+    //should only happen on mobile
+    if (window.innerWidth > 768) return;
     setIsAnimating(true);
     setIsActive(true);
 
