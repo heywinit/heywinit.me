@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const navigationLinks = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
-  { href: "/aviation", label: "Aviation/Avionics" },
+  { href: "/avionics-aviation", label: "Aviation/Avionics" },
   { href: "/blog", label: "Blog" },
   { href: "/arsenal", label: "Arsenal" },
 ];
