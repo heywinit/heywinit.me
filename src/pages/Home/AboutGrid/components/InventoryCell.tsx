@@ -16,6 +16,7 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
   const [visibleCount, setVisibleCount] = useState(frameworks.length);
+  const [isMobile, setIsMobile] = useState(false);
 
   const inventoryRef = useRef(null);
   const isInventoryInView = useInView(inventoryRef, {
@@ -27,15 +28,23 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const checkOverflow = () => {
+    const checkOverflowAndDevice = () => {
+      const mobile = window.innerWidth <= 768; // Standard mobile breakpoint
+      setIsMobile(mobile);
+
+      if (mobile) {
+        setHasOverflow(false);
+        setVisibleCount(frameworks.length);
+        return;
+      }
+
       const items = Array.from(container.children) as HTMLElement[];
       let totalWidth = 0;
       let visibleItems = items.length;
 
       for (let i = 0; i < items.length; i++) {
-        totalWidth += items[i].offsetWidth + 4; // 4px for gap
+        totalWidth += items[i].offsetWidth + 4;
         if (totalWidth > container.offsetWidth - 100) {
-          // Leave space for "much more"
           visibleItems = i;
           break;
         }
@@ -45,10 +54,10 @@ export default function InventoryCell({ frameworks }: InventoryCellProps) {
       setVisibleCount(visibleItems);
     };
 
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    return () => window.removeEventListener("resize", checkOverflow);
-  }, []);
+    checkOverflowAndDevice();
+    window.addEventListener("resize", checkOverflowAndDevice);
+    return () => window.removeEventListener("resize", checkOverflowAndDevice);
+  }, [frameworks.length]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
