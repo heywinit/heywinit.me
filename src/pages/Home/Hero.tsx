@@ -48,10 +48,10 @@ export default function Hero() {
 
   return (
     <div className="relative flex min-h-[90vh] flex-col justify-between bg-background/30 px-4 sm:px-8 lg:px-32 lg:pt-28">
-      <div className="flex h-full flex-col items-center justify-between lg:flex-row lg:pl-8 lg:pt-16">
-        <div className="flex h-full max-w-2xl flex-col justify-between space-y-12 pb-24 text-center lg:text-left">
-          <div className="space-y-6">
-            <div className="font-mono text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl">
+      <div className="flex h-full flex-col items-center justify-between pt-32 sm:pt-36 lg:flex-row lg:pl-8 lg:pt-16">
+        <div className="flex h-full max-w-2xl flex-col justify-between space-y-8 pb-24 text-center sm:space-y-12 lg:text-left">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="font-mono text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               <WordPullUp delay={isLoading ? 3.2 : 0}>
                 <h1>Writing code that</h1>
               </WordPullUp>
@@ -60,7 +60,7 @@ export default function Hero() {
               </WordPullUp>
             </div>
 
-            <div className="font-mono text-base text-muted-foreground sm:text-xl md:text-2xl">
+            <div className="font-mono text-base text-muted-foreground sm:text-lg md:text-xl lg:text-2xl">
               <p className="mt-4 leading-relaxed">
                 Usually writing code for{" "}
                 <HoverTypewriter defaultText="screens" hoverText="(software)" />
@@ -89,7 +89,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: isLoading ? 4.4 : 1.2, duration: 0.5 }}
-              className="flex gap-6 pt-8"
+              className="flex flex-col gap-6 pt-8 sm:flex-row"
             >
               <Button
                 asChild
@@ -98,12 +98,14 @@ export default function Hero() {
                 variant="default"
                 onClick={handleLearnMoreClick}
               >
-                <Link to="/projects">Learn More</Link>
+                <Link to="/projects" className="py-2">
+                  Learn More
+                </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="flex-1 font-mono sm:flex-none"
+                className="flex-1 py-2 font-mono sm:flex-none"
                 onClick={handleViewProjectsClick}
               >
                 View Projects
