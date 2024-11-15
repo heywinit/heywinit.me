@@ -26,7 +26,7 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-3xl font-bold text-transparent sm:text-4xl lg:text-5xl"
             >
-              I know the chemistry
+              I know the chemistry.
             </motion.h2>
           </div>
 
