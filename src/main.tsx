@@ -7,6 +7,8 @@ import "./index.css";
 import Arsenal from "./pages/Arsenal";
 import About from "./pages/About";
 import Projects from "./pages/Projects/Projects";
+import AvionicsAviation from "./pages/AvionicsAviation";
+import Blog from "./pages/Blog";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
   {
     path: "/arsenal",
     element: <Arsenal />,
+  },
+  {
+    path: "/avionics-aviation",
+    element: <AvionicsAviation />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
   },
 ]);
 
