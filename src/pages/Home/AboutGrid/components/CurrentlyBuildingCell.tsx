@@ -25,7 +25,7 @@ export default function CurrentlyBuildingCell() {
               </span>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-md text-foreground/70">
             Laksh is an AI-equipped all in one manager & resource library for
             all your academic needs. From routine management using automatic
             task sorting and scheduling to a comprehensive resource library with

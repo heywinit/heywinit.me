@@ -46,7 +46,7 @@ export default function ConnectCell({
               </TooltipContent>
             </Tooltip>
           ))}
-          <Tooltip open={emailCopied}>
+          <Tooltip>
             <TooltipTrigger asChild>
               <button
                 onClick={handleEmailClick}

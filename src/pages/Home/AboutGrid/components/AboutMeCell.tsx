@@ -1,3 +1,4 @@
+import { HoverTypewriter } from "@/components/ui/hover-typewriter";
 import { motion } from "framer-motion";
 
 interface AboutMeCellProps {
@@ -74,8 +75,19 @@ export default function AboutMeCell({
           </p>
           <p>
             My days are filled with coding and researching defence tech like
-            fighter jets and missiles. If you're a fan of the F-117 Nighthawk or
-            the Ilyushin IL-76, we're homies.
+            fighter jets and missiles. If you're a fan of the{" "}
+            <HoverTypewriter
+              defaultText="F-117 Nighthawk"
+              hoverText="Favourite Fighter/Attacker"
+              className="font-mono"
+            />{" "}
+            or the{" "}
+            <HoverTypewriter
+              defaultText="Ilyushin IL-76 Candid"
+              hoverText="Favourite Cargo Plane"
+              className="font-mono"
+            />
+            , we're homies.
           </p>
           <p>
             Beyond tech and aviation, I'm an avid music enthusiast. You'll often

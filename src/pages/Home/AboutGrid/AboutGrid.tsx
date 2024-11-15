@@ -210,7 +210,7 @@ export default function AboutGrid() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={containerVariants}
-        className="relative min-h-screen w-full bg-background px-4 pt-28 sm:px-8 lg:px-32"
+        className="relative min-h-screen w-full bg-background px-4 pt-24 sm:px-8 lg:px-32"
       >
         <motion.div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-3">
           <AboutMeCell logoKey={logoKey} handleLogoHover={handleLogoHover} />
