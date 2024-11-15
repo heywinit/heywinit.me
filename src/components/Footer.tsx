@@ -16,7 +16,7 @@ export default function Footer() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-3xl font-bold text-transparent sm:text-4xl lg:text-5xl"
+              className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-3xl font-bold text-transparent sm:text-4xl lg:text-6xl"
             >
               You know the business,
             </motion.h2>
@@ -24,7 +24,7 @@ export default function Footer() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-3xl font-bold text-transparent sm:text-4xl lg:text-5xl"
+              className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-3xl font-bold text-transparent sm:text-4xl lg:text-6xl"
             >
               I know the chemistry.
             </motion.h2>

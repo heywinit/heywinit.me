@@ -1,16 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { WordPullUp } from "@/components/ui/word-pull-up";
 import { PinIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLoaderStore } from "@/store/loader";
 import { motion } from "framer-motion";
+import { WordPullUp } from "@/components/ui/word-pull-up";
 import { HoverTypewriter } from "@/components/ui/hover-typewriter";
 
-export default function Hero({
-  ref,
-}: {
-  ref?: React.RefObject<HTMLDivElement>;
-}) {
+export default function Hero() {
   const { isLoading } = useLoaderStore();
 
   const handleLearnMoreClick = (e: React.MouseEvent) => {
@@ -19,14 +15,20 @@ export default function Hero({
     aboutSection?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleViewProjectsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const projectsSection = document.getElementById("projects-section");
+    projectsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const rollInAnimation = {
-    rotate: [720, 0], // Make 2 full rotations and stop
-    scale: [0.2, 1], // Start small and scale up
+    rotate: [720, 0],
+    scale: [0.2, 1],
     opacity: [0, 1],
     transition: {
       duration: 2,
       delay: isLoading ? 3.8 : 0.6,
-      ease: [0.19, 1, 0.22, 1], // Custom easing for natural motion
+      ease: [0.19, 1, 0.22, 1],
     },
   };
 
@@ -45,10 +47,7 @@ export default function Hero({
   };
 
   return (
-    <div
-      ref={ref}
-      className="relative flex min-h-[90vh] flex-col justify-between bg-background/30 px-4 sm:px-8 lg:px-32 lg:pt-28"
-    >
+    <div className="relative flex min-h-[90vh] flex-col justify-between bg-background/30 px-4 sm:px-8 lg:px-32 lg:pt-28">
       <div className="flex h-full flex-col items-center justify-between lg:flex-row lg:pl-8 lg:pt-16">
         <div className="flex h-full max-w-2xl flex-col justify-between space-y-12 pb-24 text-center lg:text-left">
           <div className="space-y-6">
@@ -95,18 +94,19 @@ export default function Hero({
               <Button
                 asChild
                 size="lg"
-                variant="default"
                 className="flex-1 bg-primary font-mono text-primary-foreground hover:bg-primary/90 sm:flex-none"
+                variant="default"
+                onClick={handleLearnMoreClick}
               >
-                <Link to="/projects">View Projects</Link>
+                <Link to="/projects">Learn More</Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="flex-1 font-mono sm:flex-none"
-                onClick={handleLearnMoreClick}
+                onClick={handleViewProjectsClick}
               >
-                Learn More
+                View Projects
               </Button>
             </motion.div>
           </div>

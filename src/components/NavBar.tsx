@@ -3,6 +3,14 @@ import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
+const navigationLinks = [
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/aviation", label: "Aviation/Avionics" },
+  { href: "/blog", label: "Blog" },
+  { href: "/arsenal", label: "Arsenal" },
+];
+
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,11 +82,11 @@ export default function NavBar() {
 
             <div className="hidden items-center gap-6 lg:flex">
               <div className="flex items-center gap-6">
-                <NavLink href="/about">About</NavLink>
-                <NavLink href="/projects">Projects</NavLink>
-                <NavLink href="/blog">Blog</NavLink>
-                <NavLink href="/guestbook">Guestbook</NavLink>
-                <NavLink href="/arsenal">Arsenal</NavLink>
+                {navigationLinks.map((link) => (
+                  <NavLink key={link.href} href={link.href}>
+                    {link.label}
+                  </NavLink>
+                ))}
               </div>
             </div>
           </div>
@@ -92,11 +100,11 @@ export default function NavBar() {
                 className="overflow-hidden border-t lg:hidden"
               >
                 <div className="flex flex-col space-y-5 py-6">
-                  <NavLink href="/about">About</NavLink>
-                  <NavLink href="/projects">Projects</NavLink>
-                  <NavLink href="/blog">Blog</NavLink>
-                  <NavLink href="/guestbook">Guestbook</NavLink>
-                  <NavLink href="/arsenal">Arsenal</NavLink>
+                  {navigationLinks.map((link) => (
+                    <NavLink key={link.href} href={link.href}>
+                      {link.label}
+                    </NavLink>
+                  ))}
                 </div>
               </motion.div>
             )}
