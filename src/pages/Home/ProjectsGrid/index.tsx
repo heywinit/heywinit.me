@@ -3,7 +3,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import { Project } from "@/types/Project";
-import { Link } from "react-router-dom";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -111,7 +110,7 @@ export default function ProjectsGrid() {
               ))}
 
             {/* View All Projects Card */}
-            <Link to="/projects" className="group">
+            {/* <Link to="/projects" className="group">
               <motion.div
                 className="flex h-full min-h-[200px] flex-col justify-center rounded-xl border border-border bg-card p-6 transition-colors hover:bg-accent"
                 variants={containerVariants}
@@ -123,7 +122,15 @@ export default function ProjectsGrid() {
                   Click to see all my projects and experiments
                 </p>
               </motion.div>
-            </Link>
+            </Link> */}
+            <div className="flex h-full min-h-[200px] flex-col justify-center rounded-xl border border-border bg-card p-6">
+              <h3 className="text-xl font-semibold">
+                More projects coming soon, cooking something cool!
+              </h3>
+              <p className="mt-2 text-muted-foreground">
+                Stay tuned for more exciting projects and experiments.
+              </p>
+            </div>
           </motion.div>
         </div>
       </motion.div>

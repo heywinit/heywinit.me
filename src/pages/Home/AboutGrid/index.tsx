@@ -40,7 +40,7 @@ export default function AboutGrid() {
     {
       platform: "LinkedIn",
       icon: "devicon-linkedin-plain",
-      url: "https://www.linkedin.com/in/vinesh=rajpurohit/",
+      url: "https://www.linkedin.com/in/vinesh-rajpurohit/",
       color: "hover:text-[#0A66C2]",
     },
   ];
