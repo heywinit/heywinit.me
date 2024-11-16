@@ -97,19 +97,22 @@ pre {
     0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-* {
+.hide-scrollbar {
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
 }
 
-*::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar {
   display: none !important;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .transition-opacity {
@@ -117,11 +120,11 @@ body {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow: hidden;
+.snap-scroll-page {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
-body {
-  overflow: hidden;
+.snap-scroll-page::-webkit-scrollbar {
+  display: none !important;
 }

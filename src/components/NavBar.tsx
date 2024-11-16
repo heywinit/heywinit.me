@@ -5,11 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
 const navigationLinks = [
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/avionics-aviation", label: "Aviation/Avionics" },
-  { href: "/blog", label: "Blog" },
-  { href: "/arsenal", label: "Arsenal" },
+  { href: "about-section", label: "About", isSection: true },
+  { href: "projects-section", label: "Projects", isSection: true },
+  { href: "/avionics-aviation", label: "Aviation/Avionics", isSection: false },
 ];
 
 export default function NavBar() {
@@ -39,6 +37,19 @@ export default function NavBar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const handleNavigation = (href: string, isSection: boolean) => {
+    setIsMenuOpen(false); // Close mobile menu when navigating
+
+    if (isSection) {
+      const element = document.getElementById(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(href);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -87,7 +98,12 @@ export default function NavBar() {
             <div className="hidden items-center gap-6 lg:flex">
               <div className="flex items-center gap-6">
                 {navigationLinks.map((link) => (
-                  <NavLink key={link.href} href={link.href}>
+                  <NavLink
+                    key={link.href}
+                    href={link.href}
+                    isSection={link.isSection}
+                    onClick={() => handleNavigation(link.href, link.isSection)}
+                  >
                     {link.label}
                   </NavLink>
                 ))}
@@ -105,7 +121,14 @@ export default function NavBar() {
               >
                 <div className="flex flex-col space-y-5 py-6">
                   {navigationLinks.map((link) => (
-                    <NavLink key={link.href} href={link.href}>
+                    <NavLink
+                      key={link.href}
+                      href={link.href}
+                      isSection={link.isSection}
+                      onClick={() =>
+                        handleNavigation(link.href, link.isSection)
+                      }
+                    >
                       {link.label}
                     </NavLink>
                   ))}
@@ -122,17 +145,22 @@ export default function NavBar() {
 function NavLink({
   href,
   children,
+  isSection,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
+  isSection: boolean;
+  onClick: () => void;
 }) {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="text-base font-medium text-foreground/70 transition-colors hover:text-foreground/90"
+      className="cursor-pointer text-base font-medium text-foreground/70 transition-colors hover:text-foreground/90"
+      onClick={onClick}
     >
-      <Link to={href}>{children}</Link>
+      {isSection ? <span>{children}</span> : <Link to={href}>{children}</Link>}
     </motion.div>
   );
 }
