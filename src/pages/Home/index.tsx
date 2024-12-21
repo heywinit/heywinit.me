@@ -65,7 +65,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="snap-scroll-page flex h-screen w-screen snap-y snap-mandatory flex-col overflow-auto scroll-smooth">
+    <div className="snap-scroll-page flex h-screen w-screen snap-y snap-mandatory flex-col overflow-auto overflow-x-hidden scroll-smooth">
       <BackgroundBeams className="-z-1 fixed inset-0 opacity-50" />
       <NavBar />
       <div ref={heroRef} className="snap-start">
