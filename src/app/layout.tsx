@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Cinzel, Crimson_Text } from "next/font/google";
+import { IBM_Plex_Mono, Sora, Crimson_Text, Cinzel } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -9,16 +8,22 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-terminal",
 });
 
-const cinzel = Cinzel({
+const sora = Sora({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-ancient",
+  weight: ["400", "500", "600"],
+  variable: "--font-sora",
 });
 
 const crimsonText = Crimson_Text({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-ancient-body",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-ancient",
 });
 
 export const metadata: Metadata = {
@@ -34,9 +39,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexMono.variable} ${cinzel.variable} ${crimsonText.variable}`}
+      className={`${ibmPlexMono.variable} ${sora.variable} ${crimsonText.variable} ${cinzel.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background text-foreground">
+      <body
+        className="min-h-screen bg-background text-foreground"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>

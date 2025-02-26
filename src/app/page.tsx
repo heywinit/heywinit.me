@@ -1,20 +1,22 @@
-import { TerminalContainer } from "@/components/terminal-container";
+import Container from "@/components/container";
 
 export default function Home() {
   return (
-    <TerminalContainer>
+    <Container>
       {/* First Viewport - Terminal Content */}
-      <section className="min-h-screen flex items-center justify-center p-8">
+      <section className="min-h-screen flex items-center justify-center">
         <div className="max-w-4xl w-full space-y-6">
           <div className="space-y-4">
-            <p className="text-4xl font-bold mb-8">{">"} WINIT.INIT()</p>
-            <p className="text-xl opacity-80">
+            <p className="text-4xl font-bold font-terminal mb-8">
+              {">"} WINIT.INIT()
+            </p>
+            <p className="text-xl font-terminal opacity-80">
               {">"} Loading neural pathways...
             </p>
-            <p className="text-xl opacity-60">
+            <p className="text-xl font-terminal opacity-60">
               {">"} Accessing the digital realm...
             </p>
-            <p className="text-xl opacity-40">
+            <p className="text-xl font-terminal opacity-40">
               {">"} Bridging ancient wisdom with modern tech...
             </p>
           </div>
@@ -25,9 +27,11 @@ export default function Home() {
       </section>
 
       {/* Second Viewport - Ancient Content */}
-      <section className="min-h-screen flex items-center justify-center p-8">
+      <section className="min-h-screen flex items-center justify-center">
         <div className="max-w-4xl w-full">
-          <h1 className="text-5xl font-semibold mb-8">The Digital Scrolls</h1>
+          <h1 className="text-5xl font-ancient font-semibold mb-8">
+            The Digital Scrolls
+          </h1>
           <div className="font-ancient-body text-xl leading-relaxed space-y-6">
             <p>
               In the realm where silicon meets soul, there exists a bridge
@@ -46,6 +50,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </TerminalContainer>
+    </Container>
   );
 }
