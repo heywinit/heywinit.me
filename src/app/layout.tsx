@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Sora, Crimson_Text, Cinzel } from "next/font/google";
+import { IBM_Plex_Mono, Sora, Crimson_Text } from "next/font/google";
 import "./globals.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -17,15 +17,8 @@ const sora = Sora({
 const crimsonText = Crimson_Text({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
-  variable: "--font-ancient-body",
-});
-
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
   variable: "--font-ancient",
 });
-
 export const metadata: Metadata = {
   title: "Winit's Portfolio",
   description: "A fusion of ancient wisdom and modern technology",
@@ -39,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexMono.variable} ${sora.variable} ${crimsonText.variable} ${cinzel.variable}`}
+      className={`${ibmPlexMono.variable} ${sora.variable} ${crimsonText.variable} `}
       suppressHydrationWarning
     >
       <body

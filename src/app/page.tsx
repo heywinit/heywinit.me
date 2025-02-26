@@ -3,53 +3,108 @@ import Container from "@/components/container";
 export default function Home() {
   return (
     <Container>
-      {/* First Viewport - Terminal Content */}
-      <section className="min-h-screen flex items-center justify-center">
-        <div className="max-w-4xl w-full space-y-6 backdrop-blur-sm bg-stone-900/30 p-8 rounded-lg border border-amber-800/20">
-          <div className="space-y-4">
-            <p className="text-4xl font-bold font-terminal mb-8 text-amber-400">
-              {">"} WINIT.INIT()
-            </p>
-            <p className="text-xl font-terminal opacity-80 text-amber-400/80">
-              {">"} Loading neural pathways...
-            </p>
-            <p className="text-xl font-terminal opacity-60 text-amber-400/60">
-              {">"} Accessing the digital realm...
-            </p>
-            <p className="text-xl font-terminal opacity-40 text-amber-400/40">
-              {">"} Bridging ancient wisdom with modern tech...
-            </p>
-          </div>
-          <div className="mt-12 text-sm opacity-70 animate-pulse text-amber-400/70">
-            <p>Scroll to unlock the ancient knowledge...</p>
-          </div>
+      <div className="relative min-h-screen">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 grid grid-cols-[1fr,2px,1fr] opacity-20 pointer-events-none">
+          <div className="border-r border-[#1E1E1E]" />
+          <div className="bg-[#1E1E1E]" />
+          <div className="border-l border-[#1E1E1E]" />
         </div>
-      </section>
 
-      {/* Second Viewport - Ancient Content */}
-      <section className="min-h-screen flex items-center justify-center">
-        <div className="max-w-4xl w-full backdrop-blur-sm bg-stone-900/40 p-8 rounded-lg border border-amber-900/40">
-          <h1 className="text-5xl font-ancient font-semibold mb-8 text-amber-200">
-            The Digital Scrolls
-          </h1>
-          <div className="font-ancient-body text-xl leading-relaxed space-y-6 text-amber-200/80">
-            <p>
-              In the realm where silicon meets soul, there exists a bridge
-              between the ancient and the digital. Here, algorithms dance with
-              philosophical truths, and code becomes poetry.
-            </p>
-            <p>
-              As the binary flows through the veins of our machines, it carries
-              with it the wisdom of ages past, transformed into a new language
-              of creation.
-            </p>
-            <blockquote className="border-l-4 border-amber-900/50 pl-6 my-8 italic text-amber-200/70">
-              &ldquo;For in the beginning was the Algorithm, and the Algorithm
-              was with the Machine, and the Algorithm was the Machine.&rdquo;
-            </blockquote>
+        {/* Main content */}
+        <div className="relative z-10 p-8">
+          {/* Header section with asymmetric design */}
+          <header className="grid grid-cols-[2fr,1fr] gap-12 mb-24">
+            <div className="pt-24">
+              <div className="space-y-6">
+                <h1 className="text-7xl font-terminal text-white tracking-tight">
+                  <span className="text-[#4A4A4A]">&gt;</span> w
+                  <span className="text-[#FFA657]">.</span>
+                  <span className="text-[#4A4A4A]">init()</span>
+                </h1>
+                <p className="font-ancient text-lg pl-8 border-l-2 border-[#1E1E1E] text-[#8B8B8B] italic">
+                  crafting digital experiences at the intersection of retro and
+                  modern
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col justify-end pb-12 text-right">
+              <div className="inline-flex flex-col items-end gap-2 p-4 bg-[#111111] border border-[#1E1E1E]">
+                <span className="text-[#4A4A4A] font-terminal text-sm">
+                  location
+                </span>
+                <span className="text-[#8B8B8B]">ahmedabad, india</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Content sections with creative layout */}
+          <div className="grid grid-cols-12 gap-8">
+            {/* Left column */}
+            <div className="col-span-8 space-y-12">
+              <div className="space-y-6">
+                <h2 className="font-terminal text-2xl text-white flex items-center gap-3">
+                  <span className="text-[#4A4A4A]">~/</span>about
+                </h2>
+                <div className="font-ancient text-lg leading-relaxed pl-6 text-[#8B8B8B]">
+                  a 19 y/o undergraduate student majoring in computer science.
+                  i&apos;m a big enthusiast of all things old school and{" "}
+                  <span className="text-[#FFA657]">retro</span>. i find joy in
+                  learning low level technology and delving into new tech.
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h2 className="font-terminal text-2xl text-white flex items-center gap-3">
+                  <span className="text-[#4A4A4A]">~/</span>experience
+                </h2>
+                <div className="pl-6 space-y-8">
+                  <div className="group relative">
+                    <div className="absolute -left-6 top-0 h-full w-px bg-[#1E1E1E] group-hover:bg-[#FFA657] transition-colors" />
+                    <h3 className="text-xl text-white font-terminal">
+                      devknit
+                    </h3>
+                    <p className="text-[#4A4A4A] mt-1 font-ancient">
+                      cofounder and cto | (aug 2024 - present)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right column - Navigation */}
+            <div className="col-span-4 relative">
+              <div className="sticky top-8 space-y-4 p-4 bg-[#111111] border border-[#1E1E1E]">
+                <h2 className="font-terminal text-xl text-white mb-6">
+                  <span className="text-[#4A4A4A]">~/</span>navigation
+                </h2>
+                <nav className="space-y-3 font-terminal">
+                  {["Home", "Projects", "Blogs", "Socials"].map((item) => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="block text-[#8B8B8B] hover:text-white hover:bg-[#1E1E1E] p-2 transition-all"
+                    >
+                      <span className="text-[#4A4A4A]">$</span>{" "}
+                      {item.toLowerCase()}
+                    </a>
+                  ))}
+                  <div className="h-px bg-[#1E1E1E] my-4" />
+                  {["x.com", "github", "linkedin"].map((item) => (
+                    <a
+                      key={item}
+                      href="#"
+                      className="block text-[#8B8B8B] hover:text-white hover:bg-[#1E1E1E] p-2 transition-all"
+                    >
+                      <span className="text-[#4A4A4A]">&gt;</span> {item}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </Container>
   );
 }

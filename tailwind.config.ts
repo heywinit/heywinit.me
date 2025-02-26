@@ -22,8 +22,7 @@ const config = {
       fontFamily: {
         terminal: ["var(--font-terminal)"],
         sora: ["var(--font-sora)"],
-        ancient: ["var(--font-ancient)"],
-        "ancient-body": ["var(--font-ancient-body)"],
+        "ancient-body": ["var(--font-ancient)"],
       },
       colors: {
         border: "hsl(var(--border))",
