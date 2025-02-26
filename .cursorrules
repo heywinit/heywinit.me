@@ -1,0 +1,47 @@
+project:
+  name: "Winit's Portfolio"
+  type: "web"
+  purpose: "Personal portfolio website that is so addictive viewers keep coming back."
+  aesthetic: "A fusion of ancient mysticism and modern technology."
+  themes:
+    - "Orange-stone desert: Represents warmth, history, and spiritual grounding."
+    - "Dark green cyber theme: Represents knowledge, logic, and digital enlightenment."
+  vibe: "A modern-day monk who codes reality—a mix of wit, philosophy, and deep tech."
+
+design:
+  style: 
+    - "Witty, humorous, and philosophical."
+    - "A work of art, blending spirituality and technology."
+    - "Niche references to religion, philosophy, and AI."
+  visuals: 
+    - "Cryptic ASCII representation of 'The Creation of Adam' with hands forming something symbolic."
+    - "A seamless back-and-forth transition between the dual themes."
+    - "Subtle yet powerful animations to create an immersive experience."
+  loader:
+    concept: "A spiritual-tech ritual that deciphers sacred code."
+    ideas:
+      - "An ancient manuscript glitching into terminal output."
+      - "An ASCII monk meditating with circuits forming behind him."
+      - "A recursive digital mandala drawing itself in Fibonacci sequence."
+      - "A cryptic Matrix-like 'Simulation is Loading...' message."
+
+UX:
+  interactivity:
+    - "Hover effects that let users 'decode' hidden messages."
+    - "Subtle sound effects or haptic feedback to enhance immersion."
+  engagement:
+    - "Users should feel a deep connection to the site, like entering a cyber-temple."
+    - "Encourage repeated visits through hidden messages, evolving elements, and easter eggs."
+  philosophy:
+    - "The site itself should be an enigma, revealing deeper layers over time."
+    - "Balance between wisdom and humor—serious concepts, but never taking itself too seriously."
+
+technology:
+  frontend:
+    - "Next.js + TailwindCSS + ShadCN"
+  backend:
+    - "Golang + PostgreSQL (if needed for interactions or user tracking)"
+  special elements:
+    - "Custom shaders or WebGL effects for a mystical touch."
+    - "Dynamic ASCII art rendering."
+    - "AI-powered interactive elements (if feasible)."

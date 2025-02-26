@@ -1,51 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Cinzel, Crimson_Text } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-terminal",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cinzel = Cinzel({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-ancient",
+});
+
+const crimsonText = Crimson_Text({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-ancient-body",
 });
 
 export const metadata: Metadata = {
-  title: "Winit",
-  description:
-    "Full Stack Developer from Ahmedabad, India, crafting digital experiences where code meets philosophy.",
-  keywords: [
-    "Winit",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Ahmedabad",
-    "India",
-  ],
+  title: "Winit's Portfolio",
+  description: "A fusion of ancient wisdom and modern technology",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html
+      lang="en"
+      className={`${ibmPlexMono.variable} ${cinzel.variable} ${crimsonText.variable}`}
+    >
+      <body className="min-h-screen bg-background text-foreground">
+        {children}
       </body>
     </html>
   );
