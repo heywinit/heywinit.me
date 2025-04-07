@@ -16,7 +16,7 @@ export function ThemeToggle() {
 		<Button
 			type="button"
 			onClick={toggleTheme}
-			className="fixed top-4 right-4 transition-colors"
+			className="transition-colors"
 			size="icon"
 		>
 			{theme === "light" ? "D" : "L"}
