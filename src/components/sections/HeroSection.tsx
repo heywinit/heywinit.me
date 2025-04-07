@@ -1,9 +1,10 @@
 import PokemonCard from "../PokemonCard";
 import { StarsBackground } from "../ui/stars-background";
+import { Github, Twitter } from "lucide-react";
 
 export default function HeroSection() {
 	return (
-		<div className="relative flex flex-col items-center justify-center h-[60%] w-full bg-black overflow-hidden border border-white">
+		<div className="relative flex flex-col items-center justify-center h-[50%] w-full bg-black overflow-hidden border border-white">
 			<StarsBackground starDensity={0.0001} />
 			<div className="w-full h-full p-8 flex flex-row relative z-10">
 				<div className="w-2/3 relative">
@@ -21,9 +22,8 @@ export default function HeroSection() {
 							like missiles soaring, we won't forget, the beauty in chaos, a
 							fleeting petal.
 							<br />
-							
 						</div>
-						<h1>
+						<h1 className="w-[80%]">
 							hey! i'm winit. i{" "}
 							<span className="underline hover:bg-white hover:text-black">
 								code
@@ -42,14 +42,26 @@ export default function HeroSection() {
 							learning.
 						</h1>
 						<div className="flex items-center gap-4 font-normal">
-							<a
-								href="https://github.com/heywinit"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-white/70 hover:text-white transition-colors"
-							>
-								GitHub
-							</a>
+							<div className="flex items-center gap-4 font-normal">
+								<a
+									href="https://github.com/heywinit"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+								>
+									<Github size={16} />
+									GitHub
+								</a>
+								<a
+									href="https://twitter.com/heywinit"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+								>
+									<Twitter size={16} />
+									Twitter
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -58,13 +70,6 @@ export default function HeroSection() {
 						name="winit"
 						type="Full Stack Developer"
 						imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
-						description="A passionate developer with expertise in modern web technologies and a keen interest in defense technology."
-						stats={{
-							code: 95,
-							debug: 90,
-							design: 85,
-							agility: 88,
-						}}
 						abilities={[
 							"Full Stack Dev",
 							"Tech Enthusiast",
