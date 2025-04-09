@@ -18,7 +18,7 @@ if (!root) {
 }
 
 createRoot(root).render(
-	<ThemeProvider>
+	<ThemeProvider defaultTheme="dark">
 		<RouterProvider router={router} />
 	</ThemeProvider>,
 );
