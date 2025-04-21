@@ -43,7 +43,6 @@ export default function Globe() {
 	const [userLocation, setUserLocation] = useState<Location | null>(null);
 	const fadeMask =
 		"radial-gradient(circle at 50% 50%, rgb(0, 0, 0) 60%, rgb(0, 0, 0, 0) 70%)";
-	const [distance, setDistance] = useState<number | null>(null);
 	const WINIT_LOCATION = { latitude: 23.0225, longitude: 72.5714 };
 	const [distanceText, setDistanceText] = useState<string>("");
 	const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -137,7 +136,6 @@ export default function Globe() {
 						mockLocation.latitude,
 						mockLocation.longitude,
 					);
-					setDistance(dist);
 
 					// Set a random distance message
 					const randomIndex = Math.floor(
@@ -168,7 +166,6 @@ export default function Globe() {
 					userLoc.latitude,
 					userLoc.longitude,
 				);
-				setDistance(dist);
 
 				// Set a random distance message
 				const randomIndex = Math.floor(Math.random() * distanceMessages.length);
