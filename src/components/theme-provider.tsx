@@ -71,3 +71,30 @@ export const useTheme = () => {
 
 	return context;
 };
+
+// Hook for global theme toggle keyboard shortcut (Alt+D)
+export function useThemeKeyboardShortcut() {
+	const { theme, setTheme } = useTheme();
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			// Alt+D to toggle dark/light mode
+			const isInTextInput =
+				document.activeElement instanceof HTMLInputElement ||
+				document.activeElement instanceof HTMLTextAreaElement;
+			if (
+				(event.key === "D" || event.key === "d" || event.key === " ") &&
+				!isInTextInput &&
+				!event.shiftKey
+			) {
+				setTheme(theme === "light" ? "dark" : "light");
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [theme, setTheme]);
+}

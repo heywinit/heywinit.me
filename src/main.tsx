@@ -2,7 +2,18 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
-import { ThemeProvider } from "./components/theme-provider.tsx";
+import {
+	ThemeProvider,
+	useThemeKeyboardShortcut,
+} from "./components/theme-provider.tsx";
+
+// Wrapper component that enables the global keyboard shortcut
+function ThemeKeyboardShortcutProvider({
+	children,
+}: { children: React.ReactNode }) {
+	useThemeKeyboardShortcut();
+	return <>{children}</>;
+}
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +30,8 @@ if (!root) {
 
 createRoot(root).render(
 	<ThemeProvider defaultTheme="dark">
-		<RouterProvider router={router} />
+		<ThemeKeyboardShortcutProvider>
+			<RouterProvider router={router} />
+		</ThemeKeyboardShortcutProvider>
 	</ThemeProvider>,
 );

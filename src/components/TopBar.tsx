@@ -3,6 +3,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTheme } from "./theme-provider";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function TopBar() {
 	const [copied, setCopied] = useState(false);
@@ -49,9 +55,18 @@ export default function TopBar() {
 								{path.slice(2)}
 							</Link>
 						))}
-						<Button variant="solana" size="sm" onClick={toggleTheme}>
-							{theme === "light" ? "D" : "L"}
-						</Button>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button variant="solana" size="sm" onClick={toggleTheme}>
+										{theme === "light" ? "D" : "L"}
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>Toggle theme (Alt+D)</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</nav>
 				</div>
 			</div>
