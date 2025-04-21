@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { HoverTypewriter } from "@/components/hover-typewriter";
+import Globe from "@/components/cobe";
 export default function HeroSection() {
 	return (
 		<motion.div
@@ -16,7 +17,11 @@ export default function HeroSection() {
 						transition={{ delay: 0.1, duration: 0.3 }}
 					>
 						<h1 className="text-4xl font-bold text-foreground-accent mb-2">
-							Win Thurein
+							hey, i'm{" "}
+							<HoverTypewriter
+								defaultText="winit."
+								hoverText="Software Engineer"
+							/>
 						</h1>
 						<h2 className="text-2xl text-foreground-secondary mb-6">
 							{/* Software Architect */}
@@ -36,50 +41,8 @@ export default function HeroSection() {
 					</motion.div>
 				</div>
 
-				<div className="flex-1 p-6 h-full flex flex-col justify-center bg-background-secondary">
-					<motion.div
-						initial={{ opacity: 0, x: 20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.2, duration: 0.3 }}
-						className="font-mono"
-					>
-						<div className="border border-border p-4 bg-background-muted">
-							<p className="text-primary mb-2">
-								{/* Core competencies */}
-								Core competencies
-							</p>
-							<ul className="space-y-1 text-foreground-secondary">
-								<li>
-									<span className="text-foreground-accent">const</span>{" "}
-									fullstack ={" "}
-									<span className="text-primary">
-										"React | Node | TypeScript"
-									</span>
-									;
-								</li>
-								<li>
-									<span className="text-foreground-accent">const</span>{" "}
-									architect ={" "}
-									<span className="text-primary">
-										"System Design | Optimization"
-									</span>
-									;
-								</li>
-								<li>
-									<span className="text-foreground-accent">const</span>{" "}
-									innovation ={" "}
-									<span className="text-primary">
-										"Always learning | Ever evolving"
-									</span>
-									;
-								</li>
-							</ul>
-							<p className="text-foreground-tertiary mt-4">
-								<span className="text-primary">&gt;</span> Ready to build
-								something legendary together
-							</p>
-						</div>
-					</motion.div>
+				<div className="flex-1 h-full flex flex-col justify-center items-center bg-background-secondary">
+					<Globe />
 				</div>
 			</div>
 		</motion.div>
