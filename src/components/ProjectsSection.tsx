@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { CollapsibleCard } from "./ui/collapsible-card";
 
-// Define project type
 interface Project {
 	id: string;
 	title: string;
@@ -14,35 +14,18 @@ interface Project {
 	siteUrl?: string;
 }
 
-// Sample projects data - personal projects only now
 const projects: Project[] = [
 	{
 		id: "portfolio",
 		title: "heywinit.me",
 		description:
-			"My personal portfolio website built with modern web technologies.",
+			"my personal portfolio website built with modern web technologies.",
 		techs: ["typescript", "react", "tailwind", "vite"],
-		githubUrl: "https://github.com/heywinit/portfolio",
+		githubUrl: "https://github.com/heywinit/heywinit.me",
 		siteUrl: "https://heywinit.me",
-	},
-	{
-		id: "mlproject",
-		title: "NLP Classifier",
-		description:
-			"Machine learning model for text classification and sentiment analysis.",
-		techs: ["python", "machine learning", "nlp"],
-		githubUrl: "https://github.com/heywinit/nlp-classifier",
-	},
-	{
-		id: "goapi",
-		title: "GoAPI",
-		description: "A high-performance REST API service built with Go.",
-		techs: ["golang", "postgres", "rest", "api"],
-		githubUrl: "https://github.com/heywinit/goapi",
 	},
 ];
 
-// Tech stack color mapping
 const techColors: Record<string, string> = {
 	typescript: "text-sky-500 dark:text-sky-400",
 	javascript: "text-amber-500 dark:text-amber-400",
@@ -93,98 +76,97 @@ export function ProjectsSection() {
 	}, [selectedTech, searchQuery]);
 
 	return (
-		<Card className="mb-6 border-border bg-background">
-			<CardHeader className="pb-2">
-				<CardTitle className="text-lg">/projects</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div className="mb-6 space-y-4">
-					<div className="flex flex-col gap-2">
-						<label htmlFor="search-projects" className="text-sm">
-							search projects:
-						</label>
-						<Input
-							id="search-projects"
-							type="text"
-							placeholder="Search by name, description, or tech..."
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
-							className="max-w-md"
-						/>
-					</div>
-
-					<div>
-						<div className="text-sm mb-2">filter by tech:</div>
-						<div className="flex flex-wrap gap-2">
-							{allTechs.map((tech) => (
-								<Badge
-									key={tech}
-									variant={selectedTech === tech ? "default" : "outline"}
-									className={`cursor-pointer hover:opacity-80 ${selectedTech === tech ? "" : techColors[tech] || ""}`}
-									onClick={() =>
-										setSelectedTech(selectedTech === tech ? null : tech)
-									}
-								>
-									{tech}
-								</Badge>
-							))}
-						</div>
-					</div>
+		<CollapsibleCard
+			title="/projects"
+			className="mb-6 border-border bg-background"
+			defaultOpen={false}
+		>
+			<div className="mb-6 space-y-4">
+				<div className="flex flex-col gap-2">
+					<label htmlFor="search-projects" className="text-sm">
+						search projects:
+					</label>
+					<Input
+						id="search-projects"
+						type="text"
+						placeholder="Search by name, description, or tech..."
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						className="max-w-md"
+					/>
 				</div>
 
-				{filteredProjects.length === 0 ? (
-					<div className="text-center py-8 text-muted-foreground">
-						No projects match your filters. Try adjusting your search or filter
-						criteria.
-					</div>
-				) : (
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						{filteredProjects.map((project) => (
-							<Card
-								key={project.id}
-								className="border-border bg-card hover:shadow-md transition-all"
+				<div>
+					<div className="text-sm mb-2">filter by tech:</div>
+					<div className="flex flex-wrap gap-2">
+						{allTechs.map((tech) => (
+							<Badge
+								key={tech}
+								variant={selectedTech === tech ? "default" : "outline"}
+								className={`cursor-pointer hover:opacity-80 ${selectedTech === tech ? "" : techColors[tech] || ""}`}
+								onClick={() =>
+									setSelectedTech(selectedTech === tech ? null : tech)
+								}
 							>
-								<CardHeader className="pb-2">
-									<CardTitle className="text-md">{project.title}</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<p className="text-sm mb-4">{project.description}</p>
-									<div className="flex flex-wrap gap-1 mb-4">
-										{project.techs.map((tech) => (
-											<span
-												key={tech}
-												className={`text-xs px-2 py-0.5 rounded-full border border-border ${techColors[tech] || ""}`}
-											>
-												{tech}
-											</span>
-										))}
-									</div>
-									<div className="flex gap-2 mt-2">
+								{tech}
+							</Badge>
+						))}
+					</div>
+				</div>
+			</div>
+
+			{filteredProjects.length === 0 ? (
+				<div className="text-center py-8 text-muted-foreground">
+					No projects match your filters. Try adjusting your search or filter
+					criteria.
+				</div>
+			) : (
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{filteredProjects.map((project) => (
+						<Card
+							key={project.id}
+							className="border-border bg-card hover:shadow-md transition-all"
+						>
+							<CardHeader className="pb-2">
+								<CardTitle className="text-md">{project.title}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<p className="text-sm mb-4">{project.description}</p>
+								<div className="flex flex-wrap gap-1 mb-4">
+									{project.techs.map((tech) => (
+										<span
+											key={tech}
+											className={`text-xs px-2 py-0.5 rounded-full border border-border ${techColors[tech] || ""}`}
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+								<div className="flex gap-2 mt-2">
+									<Button
+										variant="outline"
+										size="sm"
+										className="text-xs"
+										onClick={() => window.open(project.githubUrl, "_blank")}
+									>
+										github
+									</Button>
+									{project.siteUrl && (
 										<Button
 											variant="outline"
 											size="sm"
 											className="text-xs"
-											onClick={() => window.open(project.githubUrl, "_blank")}
+											onClick={() => window.open(project.siteUrl, "_blank")}
 										>
-											github
+											visit site
 										</Button>
-										{project.siteUrl && (
-											<Button
-												variant="outline"
-												size="sm"
-												className="text-xs"
-												onClick={() => window.open(project.siteUrl, "_blank")}
-											>
-												visit site
-											</Button>
-										)}
-									</div>
-								</CardContent>
-							</Card>
-						))}
-					</div>
-				)}
-			</CardContent>
-		</Card>
+									)}
+								</div>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			)}
+		</CollapsibleCard>
 	);
 }

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import { CollapsibleCard } from "./ui/collapsible-card";
 
 // Define work project type
 interface WorkProject {
@@ -45,45 +46,44 @@ const techColors: Record<string, string> = {
 
 export function WorkSection() {
 	return (
-		<Card className="mb-6 border-border bg-background">
-			<CardHeader className="pb-2">
-				<CardTitle className="text-lg">/work</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div className="space-y-6">
-					{workProjects.map((project) => (
-						<div
-							key={project.id}
-							className="border-b border-border pb-6 last:border-0 last:pb-0"
-						>
-							<div className="flex flex-col md:flex-row justify-between mb-2">
-								<h3 className="text-lg font-medium">{project.title}</h3>
-								<span className="text-sm text-muted-foreground">
-									{project.role}
-								</span>
-							</div>
-							<p className="mb-3">{project.description}</p>
-							<div className="flex flex-wrap gap-2 mb-3">
-								{project.techs.map((tech) => (
-									<span
-										key={tech}
-										className={`text-xs px-2 py-1 rounded-md border border-border ${techColors[tech] || ""}`}
-									>
-										{tech}
-									</span>
-								))}
-							</div>
-							<Button
-								variant="outline"
-								size="sm"
-								onClick={() => window.open(project.siteUrl, "_blank")}
-							>
-								visit site
-							</Button>
+		<CollapsibleCard
+			title="/work"
+			className="mb-6 border-border bg-background"
+			defaultOpen={false}
+		>
+			<div className="space-y-6">
+				{workProjects.map((project) => (
+					<div
+						key={project.id}
+						className="border-b border-border pb-6 last:border-0 last:pb-0"
+					>
+						<div className="flex flex-col md:flex-row justify-between mb-2">
+							<h3 className="text-lg font-medium">{project.title}</h3>
+							<span className="text-sm text-muted-foreground">
+								{project.role}
+							</span>
 						</div>
-					))}
-				</div>
-			</CardContent>
-		</Card>
+						<p className="mb-3">{project.description}</p>
+						<div className="flex flex-wrap gap-2 mb-3">
+							{project.techs.map((tech) => (
+								<span
+									key={tech}
+									className={`text-xs px-2 py-1 rounded-md border border-border ${techColors[tech] || ""}`}
+								>
+									{tech}
+								</span>
+							))}
+						</div>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={() => window.open(project.siteUrl, "_blank")}
+						>
+							visit site
+						</Button>
+					</div>
+				))}
+			</div>
+		</CollapsibleCard>
 	);
 }

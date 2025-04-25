@@ -10,6 +10,17 @@
 	font-weight: 400;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+}
+
 @layer base {
 	:root {
 		--background: 40.0 60.00% 98.04%;
