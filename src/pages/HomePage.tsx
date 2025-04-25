@@ -5,6 +5,8 @@ import {
 	CardTitle,
 } from "../components/ui/card";
 import { ThemeToggle } from "../components/theme-toggle";
+import { ProjectsSection } from "../components/ProjectsSection";
+import { WorkSection } from "../components/WorkSection";
 
 const Header = () => (
 	<h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -15,7 +17,7 @@ const Header = () => (
 );
 
 const AboutSection = () => (
-	<Card className="mb-6 border-border/50 bg-background">
+	<Card className="mb-6 border-border bg-background">
 		<CardHeader className="pb-2">
 			<CardTitle className="text-lg">/about</CardTitle>
 		</CardHeader>
@@ -50,7 +52,7 @@ const AboutSection = () => (
 );
 
 const ContactSection = () => (
-	<Card className="mb-6 border-border/50 bg-background">
+	<Card className="mb-6 border-border bg-background">
 		<CardHeader className="pb-2">
 			<CardTitle className="text-lg">/contact</CardTitle>
 		</CardHeader>
@@ -88,7 +90,7 @@ const ContactSection = () => (
 );
 
 const TechStackSection = () => (
-	<Card className="mb-6 border-border/50 bg-background">
+	<Card className="mb-6 border-border bg-background">
 		<CardHeader className="pb-2">
 			<CardTitle className="text-lg">/techstack</CardTitle>
 		</CardHeader>
@@ -120,7 +122,7 @@ const TechStackSection = () => (
 );
 
 const SiteStackSection = () => (
-	<Card className="mb-6 border-border/50 bg-background">
+	<Card className="mb-6 border-border bg-background">
 		<CardHeader className="pb-2">
 			<CardTitle className="text-lg">/site/stack</CardTitle>
 		</CardHeader>
@@ -142,6 +144,8 @@ export default function HomePage() {
 			<div className="max-w-3xl mx-auto w-full">
 				<Header />
 				<AboutSection />
+				<WorkSection />
+				<ProjectsSection />
 				<ContactSection />
 				<TechStackSection />
 				<SiteStackSection />
