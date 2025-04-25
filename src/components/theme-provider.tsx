@@ -78,15 +78,16 @@ export function useThemeKeyboardShortcut() {
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			// Alt+D to toggle dark/light mode
+			// Check if the user is in a text input or textarea
 			const isInTextInput =
 				document.activeElement instanceof HTMLInputElement ||
-				document.activeElement instanceof HTMLTextAreaElement;
-			if (
-				(event.key === "D" || event.key === "d" || event.key === " ") &&
-				!isInTextInput &&
-				!event.shiftKey
-			) {
+				document.activeElement instanceof HTMLTextAreaElement ||
+				document.activeElement instanceof HTMLSelectElement ||
+				document.activeElement?.hasAttribute("contenteditable");
+
+			// Toggle theme when space is pressed, unless user is in a text input
+			if (event.key === " " && !isInTextInput) {
+				event.preventDefault(); // Prevent default space behavior (scrolling)
 				setTheme(theme === "light" ? "dark" : "light");
 			}
 		};
