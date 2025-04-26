@@ -9,7 +9,11 @@ export default function HeroSection() {
 	const [ribbonText, setRibbonText] = useState("--");
 	const ribbonRef = useRef<HTMLDivElement>(null);
 	const [terminal, setTerminal] = useState(">");
-	const [volume, setVolume] = useState(0.8); // Default volume at 80%
+	const [volume, setVolume] = useState(() => {
+		// Initialize from localStorage if available, otherwise use default value 0.8
+		const savedVolume = localStorage.getItem("drumpad-volume");
+		return savedVolume ? Number.parseFloat(savedVolume) : 0.8;
+	});
 
 	// Define the text segments for the ribbon with unique IDs
 	const ribbonTexts = Array(50)
@@ -63,6 +67,11 @@ export default function HeroSection() {
 
 		return () => clearInterval(interval);
 	}, []);
+
+	// Save volume to localStorage whenever it changes
+	useEffect(() => {
+		localStorage.setItem("drumpad-volume", volume.toString());
+	}, [volume]);
 
 	const handleSoundPlay = (soundName: string) => {
 		// Update ribbon text with the sound name

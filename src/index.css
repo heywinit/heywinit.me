@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +8,7 @@
 	font-family: "IBM Plex Mono", monospace;
 	line-height: 1.5;
 	font-weight: 400;
+	text-transform: lowercase;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -55,9 +56,9 @@ html {
 		--sidebar-accent-foreground: 0 0% 9.02%;
 		--sidebar-border: 0 0% 89.80%;
 		--sidebar-ring: 0 0% 63.14%;
-		--font-sans: Geist Mono, monospace;
-		--font-serif: Geist Mono, monospace;
-		--font-mono: Geist Mono, monospace;
+		--font-sans: var(--font-family);
+		--font-serif: var(--font-family);
+		--font-mono: var(--font-family);
 		--radius: 0rem;
 		--shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
 		--shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
@@ -107,9 +108,9 @@ html {
 		--sidebar-accent-foreground: 0 0% 98.04%;
 		--sidebar-border: 0 0% 100%;
 		--sidebar-ring: 0 0% 32.16%;
-		--font-sans: Geist Mono, monospace;
-		--font-serif: Geist Mono, monospace;
-		--font-mono: Geist Mono, monospace;
+		--font-sans: var(--font-family);
+		--font-serif: var(--font-family);
+		--font-mono: var(--font-family);
 		--radius: 0rem;
 		--shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
 		--shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);

@@ -1,88 +1,110 @@
-import { Button } from "@/components/ui/button";
-import { CollapsibleCard } from "@/components/ui/collapsible-card";
+import { Card, CardContent } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 
-// Define work project type
-interface WorkProject {
-	id: string;
-	title: string;
-	description: string;
-	role: string;
-	techs: string[];
-	siteUrl: string;
-}
+export default function WorkSection() {
+	const [currentWork, setCurrentWork] = useState(0);
+	const workExperiences = [
+		{
+			company: "metf.in",
+			position: "founder",
+			period: "2025 - present",
+			description:
+				"creating meteora's swissknife, a suite of tools that fills the needs of the best lps.",
+		},
+		{
+			company: "soldecoder",
+			position: "full stack engineer",
+			period: "2025 - present",
+			description:
+				"i build and maintain tools that make money. usually around the solana and ethereum blockchains.",
+		},
+	];
 
-// Work projects data
-const workProjects: WorkProject[] = [
-	{
-		id: "metfin",
-		title: "metf.in",
-		description:
-			"A fintech startup focused on making financial tools accessible.",
-		role: "Founder",
-		techs: ["TypeScript", "React", "PostgreSQL", "Prisma"],
-		siteUrl: "https://metf.in",
-	},
-	{
-		id: "soldecoder",
-		title: "SolDecoder",
-		description: "Tools for decoding and analyzing Solana transactions.",
-		role: "Developer",
-		techs: ["TypeScript", "React", "Solana", "Web3"],
-		siteUrl: "https://soldecoder.app",
-	},
-];
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentWork((prev) => (prev + 1) % workExperiences.length);
+		}, 5000);
 
-// Tech stack color mapping
-const techColors: Record<string, string> = {
-	TypeScript: "text-sky-500 dark:text-sky-400",
-	JavaScript: "text-amber-500 dark:text-amber-400",
-	React: "text-sky-500 dark:text-sky-400",
-	PostgreSQL: "text-teal-600 dark:text-teal-400",
-	Prisma: "text-primary dark:text-primary",
-	Solana: "text-purple-600 dark:text-purple-500",
-	Web3: "text-blue-500 dark:text-blue-400",
-};
+		return () => clearInterval(interval);
+	}, []);
 
-export function WorkSection() {
 	return (
-		<CollapsibleCard
-			title="/work"
-			className="mb-6 border-border bg-background"
-			defaultOpen={false}
-		>
-			<div className="space-y-6">
-				{workProjects.map((project) => (
-					<div
-						key={project.id}
-						className="border-b border-border pb-6 last:border-0 last:pb-0"
-					>
-						<div className="flex flex-col md:flex-row justify-between mb-2">
-							<h3 className="text-lg font-medium">{project.title}</h3>
-							<span className="text-sm text-muted-foreground">
-								{project.role}
-							</span>
+		<div className="flex flex-col min-h-screen py-20">
+			<div className="mx-auto w-full max-w-6xl">
+				<Card className="mb-6 h-16 flex">
+					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
+						PROFESSIONAL_LORE
+					</div>
+					<div className="flex w-[20%] border-l h-full items-center justify-center p-4 font-mono bg-black/20">
+						<span className="">
+							[{currentWork + 1}/{workExperiences.length}]
+						</span>
+					</div>
+				</Card>
+
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<Card className="md:row-span-2 p-6">
+						<div className="text-4xl font-bold mb-2">
+							<span className="text-white">work</span>
+							<span>.</span>
 						</div>
-						<p className="mb-3">{project.description}</p>
-						<div className="flex flex-wrap gap-2 mb-3">
-							{project.techs.map((tech) => (
-								<span
-									key={tech}
-									className={`text-xs px-2 py-1 rounded-md border border-border ${techColors[tech] || ""}`}
+						<div className="text-lg opacity-70 mb-6">
+							a glimpse into my professional journey
+						</div>
+						<div className="flex flex-col space-y-4">
+							{workExperiences.map((work, index) => (
+								<button
+									key={`work-${work.company}-${index}`}
+									type="button"
+									className={`cursor-pointer py-2 border-l-4 pl-4 transition-all hover:border-white text-left
+										${index === currentWork ? "border-white" : "border-gray-700"}`}
+									onClick={() => setCurrentWork(index)}
+									aria-pressed={index === currentWork}
 								>
-									{tech}
-								</span>
+									<div className="font-bold">{work.company}</div>
+									<div className="text-sm opacity-70">{work.period}</div>
+								</button>
 							))}
 						</div>
-						<Button
-							variant="outline"
-							size="sm"
-							onClick={() => window.open(project.siteUrl, "_blank")}
-						>
-							visit site
-						</Button>
-					</div>
-				))}
+					</Card>
+
+					<Card className="md:col-span-2 md:row-span-2 p-6">
+						<CardContent className="p-0 h-full flex flex-col">
+							<div className="text-2xl font-bold mb-2">
+								{workExperiences[currentWork].position}
+							</div>
+							<div className="text-lg text-white mb-4">
+								{workExperiences[currentWork].company}
+							</div>
+							<div className="prose prose-invert text-xl max-w-none">
+								<p>{workExperiences[currentWork].description}</p>
+							</div>
+							<div className="mt-auto grid grid-cols-2 gap-4 pt-6">
+								<Card className="p-4 bg-black/30">
+									<div className="text-sm opacity-70">Technologies</div>
+									<div className="flex flex-wrap gap-2 mt-2">
+										<span className="text-cyan-400 text-sm bg-cyan-900/30 px-2 py-1 rounded">
+											React
+										</span>
+										<span className="text-emerald-400 text-sm bg-emerald-900/30 px-2 py-1 rounded">
+											Node.js
+										</span>
+										<span className="text-amber-400 text-sm bg-amber-900/30 px-2 py-1 rounded">
+											AWS
+										</span>
+									</div>
+								</Card>
+								<Card className="p-4 bg-black/30">
+									<div className="text-sm opacity-70">Duration</div>
+									<div className="text-lg font-mono mt-2">
+										{workExperiences[currentWork].period}
+									</div>
+								</Card>
+							</div>
+						</CardContent>
+					</Card>
+				</div>
 			</div>
-		</CollapsibleCard>
+		</div>
 	);
 }
