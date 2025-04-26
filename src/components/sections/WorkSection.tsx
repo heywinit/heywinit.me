@@ -1,5 +1,5 @@
-import { Button } from "./ui/button";
-import { CollapsibleCard } from "./ui/collapsible-card";
+import { Button } from "@/components/ui/button";
+import { CollapsibleCard } from "@/components/ui/collapsible-card";
 
 // Define work project type
 interface WorkProject {
