@@ -16,7 +16,7 @@ export default function BlogListPage() {
 							className="block group"
 						>
 							<div className="bg-muted rounded-lg overflow-hidden transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg">
-								<div className="aspect-video bg-primary/10 relative overflow-hidden">
+								{/* <div className="aspect-video bg-primary/10 relative overflow-hidden">
 									{post.image && (
 										<img
 											src={post.image}
@@ -24,7 +24,7 @@ export default function BlogListPage() {
 											className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
 										/>
 									)}
-								</div>
+								</div> */}
 								<div className="p-6">
 									<h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
 										{post.title}

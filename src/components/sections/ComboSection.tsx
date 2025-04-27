@@ -262,7 +262,7 @@ export default function ComboSection() {
 							<div>
 								<h2 className="text-2xl font-bold mb-6">What People Say</h2>
 								<div className="grid grid-cols-1 gap-6">
-									{testimonials.map((testimonial, index) => (
+									{testimonials.map((testimonial) => (
 										<Card
 											key={`testimonial-${testimonial.author.toLowerCase().replace(/\s+/g, "-")}`}
 											className="p-0 overflow-hidden transition-transform hover:transform hover:scale-[1.01]"
