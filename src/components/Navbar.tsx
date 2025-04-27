@@ -3,12 +3,12 @@ import { Card } from "@/components/ui/card";
 
 // Define the sections based on the HomePage component
 const sections = [
-	{ id: "hero", name: "home", label: "home" },
-	{ id: "work", name: "work", label: "work" },
-	{ id: "projects", name: "projects", label: "projects" },
-	{ id: "blogs", name: "blogs", label: "blogs" },
-	{ id: "combo", name: "combo", label: "combo" },
-	{ id: "contact", name: "contact", label: "contact" },
+	{ id: "hero", name: "home", label: "home", shortcut: "1" },
+	{ id: "work", name: "work", label: "work", shortcut: "2" },
+	{ id: "projects", name: "projects", label: "projects", shortcut: "3" },
+	{ id: "blogs", name: "blogs", label: "blogs", shortcut: "4" },
+	{ id: "combo", name: "combo", label: "combo", shortcut: "5" },
+	{ id: "contact", name: "contact", label: "contact", shortcut: "6" },
 ];
 
 export default function Navbar() {
@@ -40,6 +40,28 @@ export default function Navbar() {
 
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
+	// Handle keyboard shortcuts
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			// Check if pressed key is a number between 1-6
+			const key = event.key;
+			const section = sections.find((s) => s.shortcut === key);
+
+			// Only trigger if not inside input field or textarea
+			const activeElement = document.activeElement;
+			const isInputActive =
+				activeElement instanceof HTMLInputElement ||
+				activeElement instanceof HTMLTextAreaElement;
+
+			if (section && !isInputActive) {
+				scrollToSection(section.id);
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, []);
 
 	// Scroll to section when clicking nav item
@@ -123,30 +145,33 @@ export default function Navbar() {
 								}`}
 							>
 								{isMinimized ? (
-									// Minimized view - just show first letter
-									<div className="text-center w-full">
-										{section.name.charAt(0)}
-									</div>
+									// Minimized view - just show shortcut key
+									<div className="text-center w-full">{section.shortcut}</div>
 								) : (
-									// Full view - show with prefix
-									<div className="flex items-center overflow-hidden">
-										<span className="text-muted-foreground mr-2">$</span>
-										<span className="mr-2">cd</span>
-										<span className="text-primary-foreground">
-											{activeSection === section.id ? (
-												<>
-													<span className="text-primary">{section.name}</span>
-													<span
-														className={
-															terminalCursor ? "opacity-100" : "opacity-0"
-														}
-													>
-														_
-													</span>
-												</>
-											) : (
-												section.name
-											)}
+									// Full view - show with prefix and shortcut
+									<div className="flex items-center overflow-hidden justify-between w-full">
+										<div className="flex items-center">
+											<span className="text-muted-foreground mr-2">$</span>
+											<span className="mr-2">cd</span>
+											<span className="text-primary-foreground">
+												{activeSection === section.id ? (
+													<>
+														<span className="text-primary">{section.name}</span>
+														<span
+															className={
+																terminalCursor ? "opacity-100" : "opacity-0"
+															}
+														>
+															_
+														</span>
+													</>
+												) : (
+													section.name
+												)}
+											</span>
+										</div>
+										<span className="text-xs bg-black/30 px-1.5 py-0.5 rounded ml-2 opacity-70">
+											{section.shortcut}
 										</span>
 									</div>
 								)}
@@ -157,6 +182,7 @@ export default function Navbar() {
 					{!isMinimized && (
 						<div className="mt-4 text-xs opacity-60 border-t pt-2">
 							<div>v1.0.0 | © 2023 winit</div>
+							<div className="mt-1">tip: use number keys 1-6 to navigate</div>
 						</div>
 					)}
 				</div>
