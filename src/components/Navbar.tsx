@@ -15,13 +15,13 @@ export default function Navbar() {
 	const [activeSection, setActiveSection] = useState("hero");
 	const [isNavOpen, setIsNavOpen] = useState(false);
 	const [isMinimized, setIsMinimized] = useState(false);
-	const [terminalCursor, setTerminalCursor] = useState(true);
+	const [pulseActive, setPulseActive] = useState(true);
 
-	// Blink the terminal cursor
+	// Create pulsing effect for active node
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setTerminalCursor((prev) => !prev);
-		}, 530);
+			setPulseActive((prev) => !prev);
+		}, 1500);
 		return () => clearInterval(interval);
 	}, []);
 
@@ -45,8 +45,11 @@ export default function Navbar() {
 	// Handle keyboard shortcuts
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			// Check if pressed key is a number between 1-6
+			// Get the pressed key
 			const key = event.key;
+
+			// Handle both regular number keys and numpad keys
+			// event.code would show "Numpad1" but event.key gives "1" for both number row and numpad
 			const section = sections.find((s) => s.shortcut === key);
 
 			// Only trigger if not inside input field or textarea
@@ -100,77 +103,129 @@ export default function Navbar() {
 				</div>
 			</button>
 
-			{/* Right side vertical terminal-style navbar */}
+			{/* Right side circuit/data vis navbar */}
 			<Card
-				className={`fixed top-6 right-6 z-40 transform transition-all duration-300 border overflow-hidden ${
+				className={`fixed top-6 right-6 z-40 transform transition-all duration-300 border overflow-hidden backdrop-blur-sm bg-black/20 ${
 					isNavOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"
 				} ${isMinimized ? "w-16 md:w-16" : "w-64 md:w-72"}`}
 			>
-				{/* Terminal header */}
-				<div className="h-10 bg-black/30 flex items-center justify-between px-3 border-b">
-					<div className="text-xs font-mono text-muted-foreground">
-						{isMinimized ? "nav" : "terminal: navigation.sh"}
+				{/* Header */}
+				<div className="h-10 bg-black/40 flex items-center justify-between px-3 border-b border-primary/30">
+					<div className="text-xs font-mono text-primary/80 flex items-center">
+						{isMinimized ? (
+							<div className="flex items-center justify-center w-10 h-6">
+								<div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+							</div>
+						) : (
+							<>
+								<div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse mr-2" />
+								<span>navigation matrix</span>
+							</>
+						)}
 					</div>
 					<div className="flex gap-2">
 						<button
 							type="button"
 							onClick={() => setIsMinimized(!isMinimized)}
-							className="text-xs hover:text-primary transition-colors"
+							className="text-xs text-primary/80 hover:text-primary transition-colors"
 							aria-label={isMinimized ? "Expand" : "Minimize"}
 						>
-							{isMinimized ? "+" : "-"}
+							{isMinimized ? "+" : "−"}
 						</button>
 					</div>
 				</div>
 
-				{/* Terminal content */}
-				<div className="p-3 font-mono text-sm">
+				{/* Content */}
+				<div className="font-mono text-sm">
 					{!isMinimized && (
-						<div className="mb-4 opacity-70">
-							<div>$ welcome to navigation terminal</div>
-							<div>$ select page to navigate:</div>
+						<div className="px-3 pt-3 text-xs text-primary/60">
+							<div className="flex items-center">
+								<div className="w-1 h-1 bg-primary/40 rounded-full mr-1.5" />
+								<span>connect to section</span>
+							</div>
 						</div>
 					)}
 
-					<div className="flex flex-col gap-1">
+					<div className="flex flex-col mt-2 relative">
+						{/* Vertical "circuit line" */}
+						{!isMinimized && (
+							<div className="absolute left-7 top-2 bottom-2 w-px bg-primary/30" />
+						)}
+
 						{sections.map((section) => (
 							<button
 								type="button"
 								key={section.id}
 								onClick={() => scrollToSection(section.id)}
-								className={`text-left transition-colors py-1.5 px-2 hover:bg-black/20 flex items-center ${
-									activeSection === section.id
-										? "text-primary bg-black/20"
-										: "text-muted-foreground"
-								}`}
+								className={`text-left transition-colors py-2.5 relative
+									${isMinimized ? "px-0" : "px-3"}
+									${
+										activeSection === section.id
+											? "text-primary"
+											: "text-muted-foreground hover:text-primary/70"
+									}`}
 							>
 								{isMinimized ? (
-									// Minimized view - just show shortcut key
-									<div className="text-center w-full">{section.shortcut}</div>
-								) : (
-									// Full view - show with prefix and shortcut
-									<div className="flex items-center overflow-hidden justify-between w-full">
-										<div className="flex items-center">
-											<span className="text-muted-foreground mr-2">$</span>
-											<span className="mr-2">cd</span>
-											<span className="text-primary-foreground">
-												{activeSection === section.id ? (
-													<>
-														<span className="text-primary">{section.name}</span>
-														<span
-															className={
-																terminalCursor ? "opacity-100" : "opacity-0"
-															}
-														>
-															_
-														</span>
-													</>
-												) : (
-													section.name
-												)}
-											</span>
+									// Minimized view - just show node
+									<div className="flex items-center justify-center">
+										<div
+											className={`w-3 h-3 rounded-full border-2
+												${
+													activeSection === section.id
+														? "border-primary bg-primary/20"
+														: "border-primary/30"
+												}`}
+										>
+											{activeSection === section.id && (
+												<div
+													className={`w-full h-full rounded-full bg-primary ${pulseActive ? "opacity-40" : "opacity-0"} transition-opacity duration-1000`}
+												/>
+											)}
 										</div>
-										<span className="text-xs bg-black/30 px-1.5 py-0.5 rounded ml-2 opacity-70">
+									</div>
+								) : (
+									// Full view with horizontal connectors
+									<div className="flex items-center justify-between">
+										<div className="flex items-center">
+											{/* Node */}
+											<div
+												className={`w-3 h-3 rounded-full border-2 z-10 relative
+													${
+														activeSection === section.id
+															? "border-primary"
+															: "border-primary/30"
+													}`}
+											>
+												{activeSection === section.id && (
+													<div
+														className={`w-full h-full rounded-full bg-primary ${pulseActive ? "opacity-40" : "opacity-0"} transition-opacity duration-1000`}
+													/>
+												)}
+											</div>
+
+											{/* Horizontal connector */}
+											<div
+												className={`h-px w-3 
+												${
+													activeSection === section.id
+														? "bg-primary"
+														: "bg-primary/30"
+												}`}
+											/>
+
+											{/* Section label */}
+											<span className="ml-2">{section.name}</span>
+										</div>
+
+										{/* Shortcut indicator */}
+										<span
+											className={`text-[10px] px-1.5 py-0.5 rounded-sm 
+											${
+												activeSection === section.id
+													? "border border-primary/40 text-primary"
+													: "bg-black/20 text-primary/50"
+											}`}
+										>
 											{section.shortcut}
 										</span>
 									</div>
@@ -180,9 +235,11 @@ export default function Navbar() {
 					</div>
 
 					{!isMinimized && (
-						<div className="mt-4 text-xs opacity-60 border-t pt-2">
-							<div>v1.0.0 | © 2023 winit</div>
-							<div className="mt-1">tip: use number keys 1-6 to navigate</div>
+						<div className="p-3 text-xs text-primary/60 border-t border-primary/20 mt-2">
+							<div className="flex items-center">
+								<div className="w-1 h-1 bg-primary/40 rounded-full mr-1.5" />
+								<span>keypad 1-6 to navigate</span>
+							</div>
 						</div>
 					)}
 				</div>
