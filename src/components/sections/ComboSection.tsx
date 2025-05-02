@@ -5,9 +5,9 @@ type TabType = "skills" | "testimonials" | "tools";
 
 interface Skill {
 	name: string;
-	level: number;
 	category: "frontend" | "backend" | "tools" | "languages" | "other";
 	color: string;
+	icon?: string;
 }
 
 interface Testimonial {
@@ -30,35 +30,117 @@ export default function ComboSection() {
 	const skills: Skill[] = [
 		{
 			name: "JavaScript",
-			level: 90,
 			category: "languages",
 			color: "bg-yellow-400",
+			icon: "⚡",
 		},
 		{
 			name: "TypeScript",
-			level: 85,
 			category: "languages",
 			color: "bg-blue-400",
+			icon: "🛡️",
 		},
-		{ name: "React", level: 92, category: "frontend", color: "bg-cyan-400" },
-		{ name: "Node.js", level: 88, category: "backend", color: "bg-green-500" },
-		{ name: "Python", level: 75, category: "languages", color: "bg-blue-600" },
-		{ name: "SQL", level: 80, category: "backend", color: "bg-orange-500" },
-		{ name: "GraphQL", level: 78, category: "backend", color: "bg-pink-500" },
-		{ name: "Docker", level: 72, category: "tools", color: "bg-blue-500" },
-		{ name: "AWS", level: 70, category: "tools", color: "bg-yellow-600" },
 		{
-			name: "TensorFlow",
-			level: 65,
-			category: "other",
-			color: "bg-orange-400",
+			name: "Java",
+			category: "languages",
+			color: "bg-red-500",
+			icon: "☕",
 		},
-		{ name: "Git", level: 95, category: "tools", color: "bg-red-500" },
+		{
+			name: "Golang",
+			category: "languages",
+			color: "bg-blue-600",
+			icon: "🐹",
+		},
+		{
+			name: "Kotlin",
+			category: "languages",
+			color: "bg-purple-500",
+			icon: "🦙",
+		},
+		{
+			name: "React",
+			category: "frontend",
+			color: "bg-cyan-400",
+			icon: "⚛️",
+		},
+		{
+			name: "Next.js",
+			category: "frontend",
+			color: "bg-gray-800",
+			icon: "📦",
+		},
+		{
+			name: "Angular",
+			category: "frontend",
+			color: "bg-red-600",
+			icon: "🔺",
+		},
+		{
+			name: "Node.js",
+			category: "backend",
+			color: "bg-green-500",
+			icon: "🔄",
+		},
+		{
+			name: "Python",
+			category: "languages",
+			color: "bg-blue-600",
+			icon: "🐍",
+		},
+		{
+			name: "SQL",
+			category: "backend",
+			color: "bg-orange-500",
+			icon: "🗃️",
+		},
+		{
+			name: "GraphQL",
+			category: "backend",
+			color: "bg-pink-500",
+			icon: "📊",
+		},
+		{
+			name: "Docker",
+			category: "tools",
+			color: "bg-blue-500",
+			icon: "🐳",
+		},
+		{
+			name: "AWS",
+			category: "tools",
+			color: "bg-yellow-600",
+			icon: "☁️",
+		},
+		{
+			name: "PostgreSQL",
+			category: "backend",
+			color: "bg-blue-700",
+			icon: "🗄️",
+		},
+		{
+			name: "Git",
+			category: "tools",
+			color: "bg-red-500",
+			icon: "📦",
+		},
 		{
 			name: "CSS/SCSS",
-			level: 85,
 			category: "frontend",
 			color: "bg-purple-500",
+			icon: "🎨",
+		},
+		{
+			name: "Tailwind CSS",
+			category: "frontend",
+			color: "bg-teal-400",
+			icon: "🌊",
+		},
+		{
+			name: "Bun",
+			category: "backend",
+			color: "bg-gray-500",
+			icon: "🍔",
 		},
 	];
 
@@ -161,6 +243,14 @@ export default function ComboSection() {
 		productivity: "text-green-400",
 	};
 
+	const categoryBgColors = {
+		frontend: "bg-cyan-400/10 border-cyan-400/30",
+		backend: "bg-emerald-400/10 border-emerald-400/30",
+		tools: "bg-amber-400/10 border-amber-400/30",
+		languages: "bg-purple-400/10 border-purple-400/30",
+		other: "bg-rose-400/10 border-rose-400/30",
+	};
+
 	return (
 		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl h-full flex flex-col">
@@ -197,11 +287,11 @@ export default function ComboSection() {
 												: "border-white/10 hover:border-white/30"
 										}`}
 								>
-									<div className="font-bold mb-1 capitalize">{tab}</div>
+									<div className="font-bold mb-1">{tab}</div>
 									<div className="text-xs opacity-70">
-										{tab === "skills" && "What I'm good at"}
-										{tab === "testimonials" && "What others say"}
-										{tab === "tools" && "What I use daily"}
+										{tab === "skills" && "what I'm good at"}
+										{tab === "testimonials" && "what others say"}
+										{tab === "tools" && "what I use daily"}
 									</div>
 								</button>
 							))}
@@ -220,39 +310,57 @@ export default function ComboSection() {
 						{/* Skills Tab */}
 						{activeTab === "skills" && (
 							<div>
-								<h2 className="text-2xl font-bold mb-6">
-									Technical Proficiency
-								</h2>
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-									{skills.map((skill) => (
-										<div key={skill.name} className="bg-black/20 p-4 rounded">
-											<div className="flex justify-between items-center mb-2">
-												<div className="font-bold">{skill.name}</div>
-												<div
-													className={`text-xs ${categoryColors[skill.category]}`}
-												>
-													{skill.category}
+								<h2 className="text-2xl font-bold mb-6">Technical Expertise</h2>
+
+								<div className="mb-6 grid grid-cols-1 gap-8">
+									{["languages", "frontend", "backend", "tools", "other"].map(
+										(category) => {
+											const categorySkills = skills.filter(
+												(skill) => skill.category === category,
+											);
+											if (categorySkills.length === 0) return null;
+
+											return (
+												<div key={category} className="mb-2">
+													<div
+														className={`text-lg font-semibold mb-3 ${categoryColors[category as keyof typeof categoryColors]}`}
+													>
+														{category.charAt(0).toUpperCase() +
+															category.slice(1)}
+													</div>
+													<div className="flex flex-wrap gap-3">
+														{categorySkills.map((skill) => (
+															<div
+																key={skill.name}
+																className={`px-4 py-2 rounded-lg border ${categoryBgColors[skill.category as keyof typeof categoryBgColors]} hover:bg-black/30 transition-all`}
+															>
+																<div className="flex items-center gap-2">
+																	{skill.icon && <span>{skill.icon}</span>}
+																	<span>{skill.name}</span>
+																</div>
+															</div>
+														))}
+													</div>
 												</div>
-											</div>
-											<div className="h-3 bg-black/30 rounded-full overflow-hidden">
-												<div
-													className={`h-full ${skill.color} transition-all duration-1000`}
-													style={{ width: `${skill.level}%` }}
-												/>
-											</div>
-											<div className="mt-1 text-right text-xs opacity-70">
-												{skill.level}%
-											</div>
-										</div>
-									))}
+											);
+										},
+									)}
 								</div>
 
-								<div className="bg-black/10 p-4 rounded border border-white/5">
-									<p className="italic text-sm opacity-80">
-										"The capacity to learn is a gift; the ability to learn is a
-										skill; the willingness to learn is a choice." — Brian
-										Herbert
-									</p>
+								<div className="bg-black/10 p-5 rounded border border-white/5">
+									<div className="flex items-center gap-3">
+										<div className="text-xl">💭</div>
+										<p className="italic text-sm opacity-80">
+											<a
+												href="https://www.youtube.com/watch?v=2_O5YHX4urE"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												"i don't do if, buts and maybes. i do absolutes." - a
+												legendary liverpool fan.
+											</a>
+										</p>
+									</div>
 								</div>
 							</div>
 						)}

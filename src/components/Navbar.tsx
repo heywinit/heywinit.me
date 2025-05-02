@@ -7,8 +7,8 @@ const sections = [
 	{ id: "work", name: "work", label: "work", shortcut: "2" },
 	{ id: "projects", name: "projects", label: "projects", shortcut: "3" },
 	{ id: "blogs", name: "blogs", label: "blogs", shortcut: "4" },
-	{ id: "combo", name: "combo", label: "combo", shortcut: "5" },
-	{ id: "contact", name: "contact", label: "contact", shortcut: "6" },
+	// { id: "combo", name: "combo", label: "combo", shortcut: "5" },
+	{ id: "contact", name: "contact", label: "contact", shortcut: "5" },
 ];
 
 export default function Navbar() {
@@ -255,7 +255,7 @@ export default function Navbar() {
 						<div className="p-3 text-xs text-primary/60 border-t border-primary/20 mt-2">
 							<div className="flex items-center">
 								<div className="w-1 h-1 bg-primary/40 rounded-full mr-1.5" />
-								<span>keypad 1-6 to navigate</span>
+								<span>keypad 1-5 to navigate</span>
 							</div>
 						</div>
 					)}

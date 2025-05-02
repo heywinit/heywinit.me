@@ -16,7 +16,7 @@ This is my personal portfolio website
   - [x] better visual hierarchy
     - [x] move technologies next to CTA buttons
     - [x] add github CTA 
-- blogs
+- blogs // LATER
   - [ ] de-clutter blog cards
     - [ ] remove description
   - [ ] simplify sidebar
