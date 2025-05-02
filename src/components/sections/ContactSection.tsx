@@ -68,9 +68,9 @@ export default function ContactSection() {
 	};
 
 	return (
-		<div className="flex flex-col min-h-screen py-20">
+		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl">
-				<Card className="mb-6 h-16 flex">
+				<Card className="mb-4 h-16 flex">
 					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
 						SAY_HELLO_OR_WHATEVER
 					</div>
@@ -79,8 +79,8 @@ export default function ContactSection() {
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
-					<Card className="lg:col-span-3 lg:row-span-3 p-0 overflow-hidden flex flex-col">
+				<div className="grid grid-cols-1 lg:grid-cols-7 gap-4 max-h-[calc(100vh-10rem)] overflow-hidden">
+					<Card className="lg:col-span-3 lg:row-span-3 p-0 overflow-auto flex flex-col">
 						{/* Left Panel */}
 						<div className="h-16 flex border-b border-white/10 font-mono">
 							{(["message", "links", "availability"] as const).map((tab) => (

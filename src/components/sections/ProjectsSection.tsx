@@ -38,9 +38,9 @@ export default function ProjectsSection() {
 	};
 
 	return (
-		<div className="flex flex-col min-h-screen py-20">
+		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl">
-				<Card className="mb-6 h-16 flex">
+				<Card className="mb-4 h-16 flex">
 					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
 						STUFF_I_SHIP
 					</div>
@@ -51,7 +51,7 @@ export default function ProjectsSection() {
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+				<div className="grid grid-cols-1 lg:grid-cols-4 gap-4 max-h-[calc(100vh-10rem)] overflow-auto">
 					<Card className="lg:col-span-2 lg:row-span-1 p-6">
 						<div className="text-4xl font-bold mb-2">
 							<span className="text-white">projects</span>

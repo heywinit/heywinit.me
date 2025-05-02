@@ -88,8 +88,8 @@ export default function HeroSection() {
 	};
 
 	return (
-		<div className="flex flex-col h-screen">
-			<div className="h-[55%] max-h-[55%] w-full grid grid-cols-5 grid-rows-4">
+		<div className="flex flex-col h-full">
+			<div className="h-[55%] w-full grid grid-cols-5 grid-rows-4">
 				<div className="col-start-2 col-span-3 row-start-2 row-span-3 flex flex-col">
 					<Card className="h-20 flex">
 						<div className="flex w-[80%] h-full items-center p-4 text-white/50">
@@ -156,7 +156,7 @@ export default function HeroSection() {
 								<span className="text-amber-400">machine learning</span>. or in
 								recruiter-speak: "
 								<span className="italic">
-									an F-117 NightHawk, stealthily delivering cutting-edge
+									an F-117 Nighthawk, stealthily delivering cutting-edge
 									solutions.
 								</span>
 								"

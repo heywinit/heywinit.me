@@ -86,9 +86,9 @@ export default function BlogsSection() {
 			: blogPosts.filter((post) => post.category === activeCategory);
 
 	return (
-		<div className="flex flex-col min-h-screen py-20">
+		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl">
-				<Card className="mb-6 h-16 flex">
+				<Card className="mb-4 h-16 flex">
 					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
 						THOUGHTS_AND_RAMBLINGS
 					</div>
@@ -100,8 +100,8 @@ export default function BlogsSection() {
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-					<Card className="lg:col-span-2 p-6">
+				<div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-h-[calc(100vh-10rem)] overflow-hidden">
+					<Card className="lg:col-span-2 p-4 overflow-auto">
 						<div className="text-4xl font-bold mb-2">
 							<span className="text-white">blogs</span>
 							<span>.</span>
@@ -156,7 +156,7 @@ export default function BlogsSection() {
 						</div>
 					</Card>
 
-					<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto pr-2">
 						{filteredPosts.map((post) => (
 							<Card
 								key={post.slug}

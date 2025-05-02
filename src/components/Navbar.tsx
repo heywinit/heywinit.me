@@ -25,21 +25,43 @@ export default function Navbar() {
 		return () => clearInterval(interval);
 	}, []);
 
-	// Track scroll position to highlight active section
+	// Track active section using Intersection Observer
 	useEffect(() => {
-		const handleScroll = () => {
-			const scrollPosition = window.scrollY;
-			const windowHeight = window.innerHeight;
+		const observerOptions = {
+			threshold: 0.5, // Trigger when 50% of the section is visible
+			rootMargin: "0px",
+		};
 
-			// Get the section that occupies most of the screen
-			const currentSectionIndex = Math.floor(scrollPosition / windowHeight);
-			if (currentSectionIndex >= 0 && currentSectionIndex < sections.length) {
-				setActiveSection(sections[currentSectionIndex].id);
+		const observerCallback = (entries: IntersectionObserverEntry[]) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					setActiveSection(entry.target.id);
+				}
 			}
 		};
 
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
+		const observer = new IntersectionObserver(
+			observerCallback,
+			observerOptions,
+		);
+
+		// Observe all sections
+		for (const section of sections) {
+			const element = document.getElementById(section.id);
+			if (element) {
+				observer.observe(element);
+			}
+		}
+
+		return () => {
+			// Clean up observers
+			for (const section of sections) {
+				const element = document.getElementById(section.id);
+				if (element) {
+					observer.unobserve(element);
+				}
+			}
+		};
 	}, []);
 
 	// Handle keyboard shortcuts
@@ -69,14 +91,9 @@ export default function Navbar() {
 
 	// Scroll to section when clicking nav item
 	const scrollToSection = (sectionId: string) => {
-		const sectionIndex = sections.findIndex(
-			(section) => section.id === sectionId,
-		);
-		if (sectionIndex !== -1) {
-			window.scrollTo({
-				top: sectionIndex * window.innerHeight,
-				behavior: "smooth",
-			});
+		const section = document.getElementById(sectionId);
+		if (section) {
+			section.scrollIntoView({ behavior: "smooth" });
 		}
 		setIsNavOpen(false);
 	};

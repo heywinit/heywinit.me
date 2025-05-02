@@ -162,9 +162,9 @@ export default function ComboSection() {
 	};
 
 	return (
-		<div className="flex flex-col min-h-screen justify-center py-20">
+		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl h-full flex flex-col">
-				<Card className="mb-6 h-16 flex">
+				<Card className="mb-4 h-16 flex">
 					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
 						TOOLS_SKILLS_AND_KUDOS
 					</div>
@@ -173,9 +173,9 @@ export default function ComboSection() {
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
+				<div className="grid grid-cols-1 lg:grid-cols-4 gap-4 flex-grow overflow-hidden">
 					{/* Sidebar */}
-					<Card className="lg:col-span-1 p-6">
+					<Card className="lg:col-span-1 p-4 overflow-auto">
 						<div className="text-4xl font-bold mb-2">
 							<span className="text-white">combo</span>
 							<span>.</span>
@@ -216,7 +216,7 @@ export default function ComboSection() {
 					</Card>
 
 					{/* Main Content */}
-					<Card className="lg:col-span-3 p-6 overflow-auto">
+					<Card className="lg:col-span-3 p-4 overflow-auto max-h-[calc(100vh-10rem)]">
 						{/* Skills Tab */}
 						{activeTab === "skills" && (
 							<div>

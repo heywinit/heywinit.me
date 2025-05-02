@@ -10,22 +10,22 @@ export default function HomePage() {
 	return (
 		<div className="flex flex-col">
 			<Navbar />
-			<section className="min-h-screen" id="hero">
+			<section className="h-screen" id="hero">
 				<HeroSection />
 			</section>
-			<section className="min-h-screen" id="work">
+			<section className="h-screen" id="work">
 				<WorkSection />
 			</section>
-			<section className="min-h-screen" id="projects">
+			<section className="h-screen" id="projects">
 				<ProjectsSection />
 			</section>
-			<section className="min-h-screen" id="blogs">
+			<section className="h-screen" id="blogs">
 				<BlogsSection />
 			</section>
-			<section className="min-h-screen" id="combo">
+			<section className="h-screen" id="combo">
 				<ComboSection />
 			</section>
-			<section className="min-h-screen" id="contact">
+			<section className="h-screen" id="contact">
 				<ContactSection />
 			</section>
 		</div>
