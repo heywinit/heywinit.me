@@ -12,10 +12,10 @@ This is my personal portfolio website
 - hero
   - [x] figure out what goes in the two boxes at the bottom of the grid
 - projects
-  - [ ] add all my projects there. 
-  - [ ] better visual hierarchy
-    - [ ] move technologies next to CTA buttons
-    - [ ] add github CTA 
+  - [x] add all my projects there. 
+  - [x] better visual hierarchy
+    - [x] move technologies next to CTA buttons
+    - [x] add github CTA 
 - blogs
   - [ ] de-clutter blog cards
     - [ ] remove description

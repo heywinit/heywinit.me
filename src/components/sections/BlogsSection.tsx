@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+const COMING_SOON = true;
+
 type BlogCategory = "all" | "programming" | "philosophy" | "life";
 
 interface BlogPost {
@@ -94,104 +96,95 @@ export default function BlogsSection() {
 					</div>
 					<div className="flex w-[20%] border-l h-full items-center justify-center p-4 font-mono bg-black/20">
 						<span className="">
-							[{filteredPosts.length} post
-							{filteredPosts.length !== 1 ? "s" : ""}]
+							{COMING_SOON
+								? "SOON"
+								: `[${filteredPosts.length} post${filteredPosts.length !== 1 ? "s" : ""}]`}
 						</span>
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-h-[calc(100vh-10rem)] overflow-hidden">
-					<Card className="lg:col-span-2 p-4 overflow-auto">
-						<div className="text-4xl font-bold mb-2">
-							<span className="text-white">blogs</span>
-							<span>.</span>
+				{COMING_SOON ? (
+					<Card className="p-8 flex flex-col items-center justify-center text-center min-h-[50vh]">
+						<div className="text-5xl font-bold mb-4 animate-pulse">
+							Coming Soon
 						</div>
-						<div className="text-lg opacity-70 mb-8">
-							where i think out loud to the void of the internet
+						<div className="text-xl opacity-70 max-w-lg mb-8">
+							I'm currently brewing some interesting thoughts. The blog section
+							will be available shortly.
 						</div>
+						<div className="flex items-center gap-2 text-sm opacity-50 font-mono border border-white/10 p-3 rounded-lg bg-black/20">
+							<div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+							<span>Development in progress...</span>
+						</div>
+					</Card>
+				) : (
+					<div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-h-[calc(100vh-10rem)] overflow-hidden">
+						<Card className="lg:col-span-2 p-4 overflow-auto">
+							<div className="text-4xl font-bold mb-2">
+								<span className="text-white">blogs</span>
+								<span>.</span>
+							</div>
+							<div className="text-lg opacity-70 mb-8">
+								where i think out loud to the void of the internet
+							</div>
 
-						<div className="flex flex-wrap gap-3 mb-6">
-							{(
-								["all", "programming", "philosophy", "life"] as BlogCategory[]
-							).map((category) => (
-								<button
-									key={category}
-									type="button"
-									onClick={() => setActiveCategory(category)}
-									className={`px-4 py-2 border rounded-full text-sm transition-all
+							<div className="flex flex-wrap gap-3 mb-6">
+								{(
+									["all", "programming", "philosophy", "life"] as BlogCategory[]
+								).map((category) => (
+									<button
+										key={category}
+										type="button"
+										onClick={() => setActiveCategory(category)}
+										className={`px-4 py-2 border rounded-full text-sm transition-all
                    					${
 															activeCategory === category
 																? `${categoryColors[category]} border-opacity-100 bg-black/30`
 																: "border-white/10 hover:border-white/30"
 														}`}
+									>
+										{category}
+									</button>
+								))}
+							</div>
+						</Card>
+
+						<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto pr-2">
+							{filteredPosts.map((post) => (
+								<Card
+									key={post.slug}
+									className="flex flex-col p-0 overflow-hidden transition-all hover:transform hover:scale-[1.02]"
 								>
-									{category}
-								</button>
+									<div
+										className={`h-1 w-full ${categoryColors[post.category].split(" ")[0].replace("text", "bg")}`}
+									/>
+									<CardContent className="p-6 flex flex-col flex-grow">
+										<div className="flex justify-between items-start mb-3">
+											<div
+												className={`text-xs px-2 py-1 rounded ${categoryColors[post.category].split(" ")[0]} bg-black/30`}
+											>
+												{post.category}
+											</div>
+											<div className="text-xs opacity-60">{post.date}</div>
+										</div>
+										<h3 className="text-xl font-bold mb-2">{post.title}</h3>
+										<div className="mt-auto flex justify-between items-center">
+											<span className="text-xs opacity-60">
+												{post.readTime} read
+											</span>
+											<Link
+												to={`/blog/${post.slug}`}
+												className="text-sm underline hover:text-white transition-colors"
+											>
+												read post →
+											</Link>
+										</div>
+									</CardContent>
+								</Card>
 							))}
 						</div>
-
-						<div className="prose prose-invert max-w-none mt-8">
-							<p>
-								a collection of <span className="text-cyan-400">thoughts</span>,
-								<span className="text-amber-400"> reflections</span>, and
-								<span className="text-emerald-400"> experiences</span> that
-								don't fit neatly into 280 characters.
-							</p>
-						</div>
-
-						<div className="mt-8 font-mono text-xs opacity-70 bg-black/20 p-3 rounded">
-							<div className="mb-2">$ cat ~/stats/blog_info.txt</div>
-							<div className="ml-2">- total posts: {blogPosts.length}</div>
-							<div className="ml-2">
-								- programming:{" "}
-								{blogPosts.filter((p) => p.category === "programming").length}
-							</div>
-							<div className="ml-2">
-								- philosophy:{" "}
-								{blogPosts.filter((p) => p.category === "philosophy").length}
-							</div>
-							<div className="ml-2">
-								- life: {blogPosts.filter((p) => p.category === "life").length}
-							</div>
-						</div>
-					</Card>
-
-					<div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto pr-2">
-						{filteredPosts.map((post) => (
-							<Card
-								key={post.slug}
-								className="flex flex-col p-0 overflow-hidden transition-all hover:transform hover:scale-[1.02]"
-							>
-								<div
-									className={`h-1 w-full ${categoryColors[post.category].split(" ")[0].replace("text", "bg")}`}
-								/>
-								<CardContent className="p-6 flex flex-col flex-grow">
-									<div className="flex justify-between items-start mb-3">
-										<div
-											className={`text-xs px-2 py-1 rounded ${categoryColors[post.category].split(" ")[0]} bg-black/30`}
-										>
-											{post.category}
-										</div>
-										<div className="text-xs opacity-60">{post.date}</div>
-									</div>
-									<h3 className="text-xl font-bold mb-2">{post.title}</h3>
-									<p className="text-sm opacity-80 mb-4">{post.excerpt}</p>
-									<div className="mt-auto flex justify-between items-center">
-										<span className="text-xs opacity-60">
-											{post.readTime} read
-										</span>
-										<Link
-											to={`/blog/${post.slug}`}
-											className="text-sm underline hover:text-white transition-colors"
-										>
-											read post →
-										</Link>
-									</div>
-								</CardContent>
-							</Card>
-						))}
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

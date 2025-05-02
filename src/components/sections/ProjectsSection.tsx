@@ -1,32 +1,39 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
+import { Github } from "lucide-react";
 
 export default function ProjectsSection() {
 	const [selectedProject, setSelectedProject] = useState(0);
 
 	const projects = [
 		{
-			title: "Neural Synth",
+			title: "baylag",
 			description:
-				"AI-powered music generation tool that creates unique compositions based on user input parameters.",
-			technologies: ["TensorFlow", "React", "WebAudio API"],
-			link: "https://github.com/example/neural-synth",
-			type: "ml",
+				"A minimal, offline-first personal finance app built for students, freelancers, and anyone who wants full control over their money.",
+			technologies: ["React", "Dexie.js"],
+			link: "https://github.com/heywinit/baylag",
+			type: "webdev",
 		},
 		{
-			title: "DeFi Dashboard",
+			title: "mercon",
 			description:
-				"Comprehensive dashboard for tracking DeFi investments across multiple blockchains with real-time data visualization.",
-			technologies: ["Ethers.js", "Next.js", "The Graph"],
-			link: "https://github.com/example/defi-dashboard",
+				"An all in one library for downloading data related to Meteora Transactions, Positions and Pools. Inspired by @GeekLad's meteora-dlmm-db.",
+			technologies: ["Bun", "TypeScript", "SQLite", "PostgreSQL"],
+			link: "https://github.com/heywinit/mercon",
 			type: "web3",
 		},
 		{
-			title: "Collab Space",
-			description:
-				"Real-time collaborative workspace with document editing, video chat, and project management tools.",
-			technologies: ["Socket.io", "MongoDB", "Redux"],
-			link: "https://github.com/example/collab-space",
+			title: "discodb",
+			description: "A database that stores data in Discord channels.",
+			technologies: ["GoLang"],
+			link: "https://github.com/heywinit/discodb",
+			type: "databases",
+		},
+		{
+			title: "jalalabad",
+			description: "My defence technology yapping spot.",
+			technologies: ["NextJS"],
+			link: "https://github.com/heywinit/jalalabad",
 			type: "fullstack",
 		},
 	];
@@ -34,17 +41,30 @@ export default function ProjectsSection() {
 	const projectTypes = {
 		ml: "text-amber-400",
 		web3: "text-emerald-400",
+		webdev: "text-cyan-400",
 		fullstack: "text-cyan-400",
+		databases: "text-blue-400",
 	};
 
 	return (
 		<div className="h-full flex flex-col py-10">
 			<div className="mx-auto w-full max-w-6xl">
 				<Card className="mb-4 h-16 flex">
-					<div className="flex w-[80%] h-full items-center p-4 text-white/50">
+					<div className="flex w-[70%] h-full items-center p-4 text-white/50">
 						STUFF_I_SHIP
 					</div>
-					<div className="flex w-[20%] border-l h-full items-center justify-center p-4 font-mono bg-black/20">
+					<div className="flex w-[15%] border-l h-full items-center justify-center p-4 font-mono">
+						<a
+							href="https://github.com/heywinit"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+						>
+							<Github size={18} />
+							<span>GitHub</span>
+						</a>
+					</div>
+					<div className="flex w-[15%] border-l h-full items-center justify-center p-4 font-mono bg-black/20">
 						<span className="">
 							[{selectedProject + 1}/{projects.length}]
 						</span>
@@ -102,35 +122,45 @@ export default function ProjectsSection() {
 								</p>
 							</div>
 
-							<div className="mt-auto">
-								<div className="text-sm opacity-70 mb-2">Technologies used</div>
-								<div className="flex flex-wrap gap-2 mb-6">
-									{projects[selectedProject].technologies.map((tech) => (
-										<span
-											key={`tech-${tech}`}
-											className={`text-sm px-2 py-1 rounded
+							<div className="mt-auto flex justify-between items-end">
+								<div className="flex flex-col">
+									<div className="text-sm opacity-70 mb-2">
+										Technologies used
+									</div>
+									<div className="flex flex-wrap gap-2">
+										{projects[selectedProject].technologies.map((tech) => (
+											<span
+												key={`tech-${tech}`}
+												className={`text-sm px-2 py-1 rounded
 												${
 													projects[selectedProject].type === "machine learning"
 														? "bg-amber-900/30 text-amber-400"
 														: projects[selectedProject].type === "web3"
 															? "bg-emerald-900/30 text-emerald-400"
-															: "bg-cyan-900/30 text-cyan-400"
+															: projects[selectedProject].type === "fullstack"
+																? "bg-cyan-900/30 text-cyan-400"
+																: projects[selectedProject].type === "databases"
+																	? "bg-blue-900/30 text-blue-400"
+																	: "bg-cyan-900/30 text-cyan-400"
 												}`}
-										>
-											{tech}
-										</span>
-									))}
+											>
+												{tech}
+											</span>
+										))}
+									</div>
 								</div>
 
-								<a
-									href={projects[selectedProject].link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 rounded transition-colors"
-								>
-									<span className="mr-2">View project</span>
-									<span className="text-xs">→</span>
-								</a>
+								<div>
+									<a
+										href={projects[selectedProject].link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 rounded transition-colors"
+									>
+										<span className="mr-2">View project</span>
+										<span className="text-xs">→</span>
+									</a>
+								</div>
 							</div>
 						</CardContent>
 					</Card>
@@ -146,17 +176,6 @@ export default function ProjectsSection() {
 								</span>{" "}
 								and learning.
 							</p>
-						</div>
-						<div className="mt-auto p-4 bg-black/30 rounded flex justify-between items-center">
-							<div className="text-sm opacity-70">more on github</div>
-							<a
-								href="https://github.com/heywinit"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-sm underline hover:text-white"
-							>
-								github.com/heywinit
-							</a>
 						</div>
 					</Card>
 				</div>
