@@ -170,8 +170,11 @@ export default function HeroSection() {
 							</p>
 						</div>
 					</Card>
-					<div className="border border-border col-start-3" />
-					<div className="border border-border col-start-4" />
+					<div className="border border-border col-start-3 col-span-2 flex items-center justify-center p-4 font-mono text-sm overflow-hidden">
+						<div className="ml-1 typing-effect overflow-hidden whitespace-nowrap border-r-2 animate-cursor pr-1">
+							glory to none, just velocity and metal.
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
