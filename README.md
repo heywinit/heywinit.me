@@ -6,6 +6,7 @@ This is my personal portfolio website
 
 ## TODO
 - [ ] make all sections have a set height
+- [ ] add /discord redirect
 - nav
   - [ ] make it look less like a terminal and more like something else idk bruh 
 - hero
