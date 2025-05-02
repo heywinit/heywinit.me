@@ -1,1 +1,10 @@
-{ "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }] }
+{
+	"routes": [
+		{
+			"src": "/discord",
+			"status": 307,
+			"headers": { "Location": "https://discord.com/users/1272156033896153113" }
+		},
+		{ "src": "/[^.]+", "dest": "/", "status": 200 }
+	]
+}

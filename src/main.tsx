@@ -1,5 +1,9 @@
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+	createBrowserRouter,
+	RouterProvider,
+	Navigate,
+} from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
 import BlogListPage from "./pages/BlogListPage.tsx";
@@ -29,6 +33,12 @@ const router = createBrowserRouter([
 	{
 		path: "/blog/:slug",
 		element: <BlogPage />,
+	},
+	{
+		path: "/discord",
+		element: (
+			<Navigate to="https://discord.com/users/1272156033896153113" replace />
+		),
 	},
 ]);
 
