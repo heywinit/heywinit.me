@@ -12,6 +12,7 @@ import {
 	ThemeProvider,
 	useThemeKeyboardShortcut,
 } from "./components/theme-provider.tsx";
+import { FormspreeProviderWrapper } from "./lib/formspree-provider.tsx";
 
 // Wrapper component that enables the global keyboard shortcut
 function ThemeKeyboardShortcutProvider({
@@ -51,7 +52,9 @@ if (!root) {
 createRoot(root).render(
 	<ThemeProvider defaultTheme="dark">
 		<ThemeKeyboardShortcutProvider>
-			<RouterProvider router={router} />
+			<FormspreeProviderWrapper>
+				<RouterProvider router={router} />
+			</FormspreeProviderWrapper>
 		</ThemeKeyboardShortcutProvider>
 	</ThemeProvider>,
 );

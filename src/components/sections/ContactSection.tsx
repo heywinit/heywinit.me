@@ -1,14 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function ContactSection() {
-	const [activeTab, setActiveTab] = useState<
-		"message" | "links" | "availability"
-	>("message");
 	const [copied, setCopied] = useState(false);
-
-	// Mock form state
-	const [formState, setFormState] = useState({
+	// To configure Formspree:
+	// 1. Go to https://formspree.io and sign up
+	// 2. Create a new form and get the form ID (it looks like "abcdefgh")
+	// 3. Replace "YOUR_FORMSPREE_FORM_ID" below with your form ID
+	const [formState, handleSubmit] = useForm("mblogogg");
+	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		message: "",
@@ -18,20 +19,18 @@ export default function ContactSection() {
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
 		const { name, value } = e.target;
-		setFormState((prev) => ({ ...prev, [name]: value }));
+		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// Handle form submission (e.g., send to API)
-		console.log("Form submitted:", formState);
-		// Reset form
-		setFormState({ name: "", email: "", message: "" });
-		// Show success message or transition
-	};
+	// Reset form when submission is successful
+	if (formState.succeeded) {
+		setTimeout(() => {
+			setFormData({ name: "", email: "", message: "" });
+		}, 500);
+	}
 
 	const copyEmail = () => {
-		navigator.clipboard.writeText("hello@winit.dev");
+		navigator.clipboard.writeText("mail@heywinit.me");
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
 	};
@@ -40,31 +39,35 @@ export default function ContactSection() {
 		{ name: "github", url: "https://github.com/heywinit", icon: "github.svg" },
 		{
 			name: "twitter",
-			url: "https://twitter.com/heywinit",
+			url: "https://twitter.com/hiwinit",
 			icon: "twitter.svg",
 		},
 		{
-			name: "linkedin",
-			url: "https://linkedin.com/in/winit",
-			icon: "linkedin.svg",
+			name: "discord",
+			url: "https://discord.com/users/1272156033896153113",
+			icon: "discord.svg",
 		},
 		{
-			name: "dribbble",
-			url: "https://dribbble.com/winit",
-			icon: "dribbble.svg",
+			name: "youtube",
+			url: "https://youtube.com/@heywinit",
+			icon: "youtube.svg",
 		},
 	];
 
 	const availabilityStatus = {
 		status: "limited",
 		message: "limited availability for new projects",
-		nextAvailable: "January 2024",
+		nextAvailable: "December 2025",
 	};
 
 	const statusColors = {
 		available: "text-emerald-400",
 		limited: "text-amber-400",
 		unavailable: "text-rose-400",
+	};
+
+	const handleReset = () => {
+		setFormData({ name: "", email: "", message: "" });
 	};
 
 	return (
@@ -79,270 +82,246 @@ export default function ContactSection() {
 					</div>
 				</Card>
 
-				<div className="grid grid-cols-1 lg:grid-cols-7 gap-4 max-h-[calc(100vh-10rem)] overflow-hidden">
-					<Card className="lg:col-span-3 lg:row-span-3 p-0 overflow-auto flex flex-col">
-						{/* Left Panel */}
-						<div className="h-16 flex border-b border-white/10 font-mono">
-							{(["message", "links", "availability"] as const).map((tab) => (
+				<div className="grid grid-cols-1 lg:grid-cols-12 gap-4 max-h-[calc(100vh-10rem)] overflow-auto">
+					{/* Contact Form */}
+					<Card className="lg:col-span-6 p-6">
+						<div className="text-4xl font-bold mb-2">
+							<span className="text-white">contact</span>
+							<span>.</span>
+						</div>
+						<div className="text-lg opacity-70 mb-8">
+							let's connect and make something cool
+						</div>
+
+						{formState.succeeded ? (
+							<div className="bg-emerald-500/20 border border-emerald-500/30 rounded p-6 mb-8">
+								<div className="text-xl font-bold mb-2 text-emerald-400">
+									Message sent successfully!
+								</div>
+								<p className="opacity-70">
+									Thanks for reaching out. I'll get back to you as soon as
+									possible.
+								</p>
 								<button
-									key={tab}
 									type="button"
-									className={`flex-1 h-full border-r border-white/10 transition-colors text-sm
-                    ${activeTab === tab ? "bg-white/5" : "hover:bg-white/5"}`}
-									onClick={() => setActiveTab(tab)}
+									onClick={handleReset}
+									className="mt-4 bg-white/10 hover:bg-white/20 px-6 py-3 rounded transition-colors"
 								>
-									{tab}.sh
+									Send another message
 								</button>
-							))}
-						</div>
-
-						<div className="flex-grow p-6">
-							{activeTab === "message" && (
-								<div className="h-full">
-									<div className="text-4xl font-bold mb-2">
-										<span className="text-white">contact</span>
-										<span>.</span>
-									</div>
-									<div className="text-lg opacity-70 mb-8">
-										let's connect and make something cool
-									</div>
-
-									<form onSubmit={handleSubmit} className="flex flex-col gap-4">
-										<div>
-											<label
-												htmlFor="name"
-												className="block text-sm opacity-70 mb-1"
-											>
-												your name
-											</label>
-											<input
-												type="text"
-												id="name"
-												name="name"
-												value={formState.name}
-												onChange={handleInputChange}
-												className="w-full bg-black/30 border border-white/10 rounded p-3 focus:border-white/30 focus:outline-none transition-colors"
-												required
-											/>
-										</div>
-
-										<div>
-											<label
-												htmlFor="email"
-												className="block text-sm opacity-70 mb-1"
-											>
-												your email
-											</label>
-											<input
-												type="email"
-												id="email"
-												name="email"
-												value={formState.email}
-												onChange={handleInputChange}
-												className="w-full bg-black/30 border border-white/10 rounded p-3 focus:border-white/30 focus:outline-none transition-colors"
-												required
-											/>
-										</div>
-
-										<div>
-											<label
-												htmlFor="message"
-												className="block text-sm opacity-70 mb-1"
-											>
-												message
-											</label>
-											<textarea
-												id="message"
-												name="message"
-												value={formState.message}
-												onChange={handleInputChange}
-												className="w-full bg-black/30 border border-white/10 rounded p-3 min-h-[120px] focus:border-white/30 focus:outline-none transition-colors"
-												required
-											/>
-										</div>
-
-										<button
-											type="submit"
-											className="self-start mt-2 bg-white/10 hover:bg-white/20 px-6 py-3 rounded transition-colors"
-										>
-											send message
-										</button>
-									</form>
+							</div>
+						) : (
+							<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+								<div>
+									<label
+										htmlFor="name"
+										className="block text-sm opacity-70 mb-1"
+									>
+										your name
+									</label>
+									<input
+										type="text"
+										id="name"
+										name="name"
+										value={formData.name}
+										onChange={handleInputChange}
+										className="w-full bg-black/30 border border-white/10 rounded p-3 focus:border-white/30 focus:outline-none transition-colors"
+										required
+									/>
+									<ValidationError
+										prefix="Name"
+										field="name"
+										errors={formState.errors}
+									/>
 								</div>
-							)}
 
-							{activeTab === "links" && (
-								<div className="h-full">
-									<div className="text-4xl font-bold mb-2">
-										<span className="text-white">links</span>
-										<span>.</span>
-									</div>
-									<div className="text-lg opacity-70 mb-8">
-										find me around the web
-									</div>
-
-									<div className="grid grid-cols-2 gap-4">
-										{socialLinks.map((link) => (
-											<a
-												key={link.name}
-												href={link.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="flex items-center p-4 rounded bg-black/30 hover:bg-black/50 transition-colors"
-											>
-												<div className="w-8 h-8 mr-3 flex items-center justify-center">
-													<div className="w-5 h-5 bg-white/70" />
-												</div>
-												<span>{link.name}</span>
-											</a>
-										))}
-									</div>
-
-									<div className="mt-8">
-										<div className="text-lg mb-2">direct email</div>
-										<button
-											type="button"
-											className="flex items-center justify-between w-full p-4 rounded bg-black/20 cursor-pointer text-left"
-											onClick={copyEmail}
-											aria-pressed={copied}
-										>
-											<span className="font-mono">hello@winit.dev</span>
-											<span className="text-xs">
-												{copied ? "copied!" : "click to copy"}
-											</span>
-										</button>
-									</div>
+								<div>
+									<label
+										htmlFor="email"
+										className="block text-sm opacity-70 mb-1"
+									>
+										your email
+									</label>
+									<input
+										type="email"
+										id="email"
+										name="email"
+										value={formData.email}
+										onChange={handleInputChange}
+										className="w-full bg-black/30 border border-white/10 rounded p-3 focus:border-white/30 focus:outline-none transition-colors"
+										required
+									/>
+									<ValidationError
+										prefix="Email"
+										field="email"
+										errors={formState.errors}
+									/>
 								</div>
-							)}
 
-							{activeTab === "availability" && (
-								<div className="h-full">
-									<div className="text-4xl font-bold mb-2">
-										<span className="text-white">status</span>
-										<span>.</span>
-									</div>
-
-									<div className="flex flex-col gap-6 mt-8">
-										<Card className="p-6 bg-black/20">
-											<div className="text-lg mb-1">current availability</div>
-											<div
-												className={`text-2xl font-bold ${statusColors[availabilityStatus.status as keyof typeof statusColors]}`}
-											>
-												{availabilityStatus.message}
-											</div>
-											<div className="mt-4 text-sm opacity-70">
-												next opening: {availabilityStatus.nextAvailable}
-											</div>
-										</Card>
-
-										<Card className="p-6 bg-black/20">
-											<div className="text-lg mb-3">project types</div>
-											<div className="space-y-3">
-												<div className="flex items-center">
-													<span className="w-3 h-3 bg-emerald-400 mr-2 rounded-full" />
-													<span>fullstack development</span>
-												</div>
-												<div className="flex items-center">
-													<span className="w-3 h-3 bg-amber-400 mr-2 rounded-full" />
-													<span>web3 applications</span>
-												</div>
-												<div className="flex items-center">
-													<span className="w-3 h-3 bg-cyan-400 mr-2 rounded-full" />
-													<span>machine learning integration</span>
-												</div>
-											</div>
-										</Card>
-
-										<Card className="p-6 bg-black/20">
-											<div className="text-lg mb-3">preferred tech stack</div>
-											<div className="flex flex-wrap gap-2">
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													TypeScript
-												</span>
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													React
-												</span>
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													Node.js
-												</span>
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													Python
-												</span>
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													TensorFlow
-												</span>
-												<span className="text-xs bg-white/10 px-2 py-1 rounded">
-													Solidity
-												</span>
-											</div>
-										</Card>
-									</div>
+								<div>
+									<label
+										htmlFor="message"
+										className="block text-sm opacity-70 mb-1"
+									>
+										message
+									</label>
+									<textarea
+										id="message"
+										name="message"
+										value={formData.message}
+										onChange={handleInputChange}
+										className="w-full bg-black/30 border border-white/10 rounded p-3 min-h-[120px] focus:border-white/30 focus:outline-none transition-colors"
+										required
+									/>
+									<ValidationError
+										prefix="Message"
+										field="message"
+										errors={formState.errors}
+									/>
 								</div>
-							)}
-						</div>
+
+								{formState.errors && (
+									<div className="text-rose-400 text-sm mt-2">
+										There was an error with your submission. Please try again.
+									</div>
+								)}
+
+								<button
+									type="submit"
+									disabled={formState.submitting}
+									className="self-start mt-2 bg-white/10 hover:bg-white/20 px-6 py-3 rounded transition-colors flex items-center disabled:opacity-50"
+								>
+									{formState.submitting ? (
+										<>
+											<svg
+												className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+											>
+												<circle
+													className="opacity-25"
+													cx="12"
+													cy="12"
+													r="10"
+													stroke="currentColor"
+													strokeWidth="4"
+												/>
+												<path
+													className="opacity-75"
+													fill="currentColor"
+													d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+												/>
+											</svg>
+											sending...
+										</>
+									) : (
+										"send message"
+									)}
+								</button>
+							</form>
+						)}
 					</Card>
 
-					<Card className="lg:col-span-4 lg:row-span-2 p-6 flex flex-col">
-						<div className="flex-grow flex items-center justify-center h-full">
-							<div className="w-full max-w-lg">
-								<div className="font-mono text-xs opacity-70 mb-4">
-									$ ./render_ascii_art.sh
-								</div>
-								<div className="font-mono text-xs leading-5 whitespace-pre">
-									{`
-  __      __.__       .__  __   
- /  \\    /  \\__| ____ |__|/  |_ 
- \\   \\/\\/   /  |/    \\|  \\   __\\
-  \\        /|  |   |  \\  ||  |  
-   \\__/\\  / |__|___|  /__||__|  
-        \\/          \\/          
-                               
- let's make something awesome.
-`}
-								</div>
-								<div className="font-mono text-xs opacity-70 mt-8">
-									$ echo "I'm always open to discussing interesting projects and
-									ideas."
-								</div>
+					{/* Social Links and Info */}
+					<div className="lg:col-span-6 flex flex-col gap-4">
+						{/* Social Links */}
+						<Card className="p-6">
+							<div className="text-2xl font-bold mb-4">
+								<span className="text-white">connect</span>
+								<span>.</span>
 							</div>
-						</div>
 
-						<div className="grid grid-cols-2 gap-4 mt-6">
-							<div className="bg-black/20 rounded p-4">
-								<div className="text-sm opacity-70 mb-1">location</div>
-								<div className="font-mono">earth.tech_hub</div>
+							<div className="grid grid-cols-2 gap-4 mb-6">
+								{socialLinks.map((link) => (
+									<a
+										key={link.name}
+										href={link.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="flex items-center p-3 rounded bg-black/30 hover:bg-black/50 transition-colors"
+									>
+										<div className="w-6 h-6 mr-3 flex items-center justify-center">
+											<div className="w-4 h-4 bg-white/70" aria-hidden="true" />
+										</div>
+										<span>{link.name}</span>
+									</a>
+								))}
 							</div>
-							<div className="bg-black/20 rounded p-4">
-								<div className="text-sm opacity-70 mb-1">timezone</div>
-								<div className="font-mono">UTC+[redacted]</div>
-							</div>
-						</div>
-					</Card>
 
-					<Card className="lg:col-span-4 lg:row-span-1 p-6">
-						<div className="flex h-full items-center space-x-8">
-							<div className="flex-1">
-								<div className="text-lg font-bold mb-1">response time</div>
-								<div className="text-sm opacity-70">
-									usually within 24-48 hours
+							<div className="mt-4">
+								<div className="text-lg mb-2">direct email</div>
+								<button
+									type="button"
+									className="flex items-center justify-between w-full p-3 rounded bg-black/20 hover:bg-black/30 cursor-pointer text-left transition-colors"
+									onClick={copyEmail}
+									aria-pressed={copied}
+								>
+									<span className="font-mono">mail@heywinit.me</span>
+									<span className="text-xs">
+										{copied ? "copied!" : "click to copy"}
+									</span>
+								</button>
+							</div>
+						</Card>
+
+						{/* Availability */}
+						<Card className="p-6">
+							<div className="text-2xl font-bold mb-4">
+								<span className="text-white">availability</span>
+								<span>.</span>
+							</div>
+
+							<div
+								className={`text-xl font-bold mb-2 ${statusColors[availabilityStatus.status as keyof typeof statusColors]}`}
+							>
+								{availabilityStatus.message}
+							</div>
+							<div className="mb-4 text-sm opacity-70">
+								next opening: {availabilityStatus.nextAvailable}
+							</div>
+
+							<div className="grid grid-cols-2 gap-4 mt-4">
+								<div className="bg-black/20 rounded p-3">
+									<div className="text-sm opacity-70 mb-1">
+										location (one day)
+									</div>
+									<div className="font-mono">skunk works</div>
+								</div>
+								<div className="bg-black/20 rounded p-3">
+									<div className="text-sm opacity-70 mb-1">timezone</div>
+									<div className="font-mono">GMT+5:30</div>
 								</div>
 							</div>
-							<div className="w-px h-12 bg-white/10" />
-							<div className="flex-1">
-								<div className="text-lg font-bold mb-1">preferred contact</div>
-								<div className="text-sm opacity-70">
-									email or form submission
+						</Card>
+
+						{/* Response Info */}
+						<Card className="p-4">
+							<div className="flex items-center space-x-6">
+								<div className="flex-1">
+									<div className="text-sm font-bold mb-1">response time</div>
+									<div className="text-xs opacity-70">12-24 hours</div>
+								</div>
+								<div className="w-px h-10 bg-white/10" />
+								<div className="flex-1">
+									<div className="text-sm font-bold mb-1">
+										preferred contact
+									</div>
+									<div className="text-xs opacity-70">
+										discord, twitter, mail
+									</div>
+								</div>
+								<div className="w-px h-10 bg-white/10" />
+								<div className="flex-1">
+									<div className="text-sm font-bold mb-1">languages</div>
+									<div className="text-xs opacity-70">
+										english, hindi, russian, french
+									</div>
 								</div>
 							</div>
-							<div className="w-px h-12 bg-white/10" />
-							<div className="flex-1">
-								<div className="text-lg font-bold mb-1">languages</div>
-								<div className="text-sm opacity-70">
-									english, javascript, python
-								</div>
-							</div>
-						</div>
-					</Card>
+						</Card>
+					</div>
 				</div>
 			</div>
 		</div>
