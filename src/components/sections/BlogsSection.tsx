@@ -105,16 +105,10 @@ export default function BlogsSection() {
 
 				{COMING_SOON ? (
 					<Card className="p-8 flex flex-col items-center justify-center text-center min-h-[50vh]">
-						<div className="text-5xl font-bold mb-4 animate-pulse">
-							Coming Soon
-						</div>
+						<div className="text-5xl font-bold mb-4">Coming Soon</div>
 						<div className="text-xl opacity-70 max-w-lg mb-8">
 							I'm currently brewing some interesting thoughts. The blog section
 							will be available shortly.
-						</div>
-						<div className="flex items-center gap-2 text-sm opacity-50 font-mono border border-white/10 p-3 rounded-lg bg-black/20">
-							<div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
-							<span>Development in progress...</span>
 						</div>
 					</Card>
 				) : (
