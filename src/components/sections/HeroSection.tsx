@@ -95,10 +95,10 @@ export default function HeroSection() {
 						className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10"
 					>
 						{/* Top box - Background */}
-						<div className="space-y-4 sm:space-y-5 backdrop-blur-sm bg-white/20 dark:bg-black/20 p-4 sm:p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
+						<div className="space-y-2 sm:space-y-2 backdrop-blur-sm bg-white/20 dark:bg-black/20 p-4 sm:p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
 							<div className="flex items-center gap-2">
 								<Terminal size={18} className="text-neutral-500" />
-								<h2 className="text-sm uppercase tracking-wider text-neutral-500">
+								<h2 className="text-sm tracking-wider text-neutral-500">
 									Background
 								</h2>
 							</div>
