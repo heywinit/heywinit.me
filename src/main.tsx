@@ -6,13 +6,10 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
-import BlogListPage from "./pages/BlogListPage.tsx";
-import BlogPage from "./pages/BlogPage.tsx";
 import {
 	ThemeProvider,
 	useThemeKeyboardShortcut,
 } from "./components/theme-provider.tsx";
-import { FormspreeProviderWrapper } from "./lib/formspree-provider.tsx";
 
 // Wrapper component that enables the global keyboard shortcut
 function ThemeKeyboardShortcutProvider({
@@ -26,14 +23,6 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <HomePage />,
-	},
-	{
-		path: "/blog",
-		element: <BlogListPage />,
-	},
-	{
-		path: "/blog/:slug",
-		element: <BlogPage />,
 	},
 	{
 		path: "/discord",
@@ -52,9 +41,7 @@ if (!root) {
 createRoot(root).render(
 	<ThemeProvider defaultTheme="dark">
 		<ThemeKeyboardShortcutProvider>
-			<FormspreeProviderWrapper>
-				<RouterProvider router={router} />
-			</FormspreeProviderWrapper>
+			<RouterProvider router={router} />
 		</ThemeKeyboardShortcutProvider>
 	</ThemeProvider>,
 );
