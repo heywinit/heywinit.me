@@ -162,7 +162,7 @@ export default function HeroSection() {
 									</h3>
 									<div className="grid grid-cols-2 gap-y-3 gap-x-2">
 										<a
-											href="https://github.com/heywint"
+											href="https://github.com/heywinit"
 											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
 										>
 											<Github size={16} className="mr-2 flex-shrink-0" />
@@ -183,7 +183,7 @@ export default function HeroSection() {
 											<span className="text-sm sm:text-base">Discord</span>
 										</a>
 										<a
-											href="mailto:hello@winit.me"
+											href="mailto:heywinit@gmail.com"
 											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
 										>
 											<Mail size={16} className="mr-2 flex-shrink-0" />
