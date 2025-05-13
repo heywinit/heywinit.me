@@ -80,10 +80,11 @@ export default function HeroSection() {
 
 						<div className="relative pl-4 border-l-2 border-neutral-300 dark:border-neutral-700 mb-6 sm:mb-8">
 							<p className="text-lg sm:text-xl italic text-neutral-700 dark:text-neutral-300">
-								"God's temple is finished. Now God needs helpers."
+								"Be curious. Read widely. Try new things. What people call
+								intelligence just boils down to curiosity."
 							</p>
 							<span className="text-sm text-neutral-500 mt-2 block">
-								— Terry A. Davis
+								— Aaron Swartz
 							</span>
 						</div>
 					</motion.div>
@@ -143,11 +144,13 @@ export default function HeroSection() {
 										</div>
 										<div className="flex items-center">
 											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">Node.js</span>
+											<span className="text-sm sm:text-base">
+												Java & Kotlin
+											</span>
 										</div>
 										<div className="flex items-center">
 											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">Solidity</span>
+											<span className="text-sm sm:text-base">Python</span>
 										</div>
 									</div>
 								</div>
