@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-	Github,
-	Twitter,
-	ChevronDown,
-	Mail,
-	MessageSquare,
-	Terminal,
-} from "lucide-react";
+import { Github, Twitter, Mail, MessageSquare, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
@@ -220,22 +213,6 @@ export default function HeroSection() {
 					</motion.div>
 				</div>
 			</div>
-
-			{/* Scroll indicator */}
-			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 0.5 }}
-				transition={{ delay: 1, duration: 0.5 }}
-				className="flex justify-center pb-6 sm:pb-8"
-			>
-				<motion.div
-					animate={{ y: [0, 10, 0] }}
-					transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-					className="bg-white/50 dark:bg-black/50 rounded-full p-2 backdrop-blur-sm"
-				>
-					<ChevronDown size={20} className="text-neutral-400" />
-				</motion.div>
-			</motion.div>
 		</div>
 	);
 }
