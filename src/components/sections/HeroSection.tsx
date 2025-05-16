@@ -1,220 +1,295 @@
 import { useState, useEffect } from "react";
-import { Github, Twitter, Mail, MessageSquare, Terminal } from "lucide-react";
-import { motion } from "framer-motion";
+import { Github, Twitter, Mail, ChevronDown, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function HeroSection() {
-	const greetings = ["hello", "bonjour", "مرحبا", "привет", "ciao", "नमस्ते"];
-	const [greetingIndex, setGreetingIndex] = useState(0);
-	const [isHovering, setIsHovering] = useState(false);
+	const [currentTime, setCurrentTime] = useState(new Date());
+	const [expandedSection, setExpandedSection] = useState<string>("about");
 
-	// Cycle through greetings
 	useEffect(() => {
-		if (!isHovering) {
-			const interval = setInterval(() => {
-				setGreetingIndex((prev) => (prev + 1) % greetings.length);
-			}, 3000);
-			return () => clearInterval(interval);
+		const timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 1000);
+
+		return () => clearInterval(timer);
+	}, []);
+
+	const toggleSection = (section: string) => {
+		if (expandedSection === section) {
+			setExpandedSection("");
+		} else {
+			setExpandedSection(section);
 		}
-	}, [isHovering]);
+	};
+
+	const skills = {
+		TypeScript:
+			"My primary language for web development and frontend applications.",
+		Golang: "When I want to build fast and efficient backend services.",
+		React: "Framework of choice for creating interactive user interfaces.",
+		Solana: "Specialized in building dApps and tools for the Solana ecosystem.",
+		Ethereum: "Experience with smart contracts and DeFi applications.",
+	};
 
 	return (
-		<div className="min-h-screen flex flex-col px-4 sm:px-8 md:px-16 lg:px-32 relative overflow-hidden">
-			{/* Background elements - Made responsive */}
-			<div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-blue-300/10 to-purple-300/10 rounded-full blur-3xl" />
-			<div className="absolute top-1/3 -left-20 sm:-left-40 w-60 sm:w-80 h-60 sm:h-80 bg-gradient-to-tr from-amber-300/10 to-pink-300/10 rounded-full blur-3xl" />
-
-			{/* Top Section */}
-			<div className="flex-1 flex items-center justify-center z-10 py-8 sm:px-4 sm:py-0">
-				<div className="max-w-3xl w-full">
+		<div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white">
+			<div className="max-w-2xl w-full space-y-12">
+				{/* Header */}
+				<motion.div
+					initial={{ opacity: 0, y: 15 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className="space-y-2"
+				>
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5 }}
-						className="mb-6 sm:mb-12"
+						className="flex items-center gap-2 text-sm text-neutral-500"
+						whileHover={{ scale: 1.01 }}
 					>
-						<div className="flex items-center mb-3">
-							<div
-								className="flex overflow-hidden"
-								onMouseEnter={() => setIsHovering(true)}
-								onMouseLeave={() => setIsHovering(false)}
+						<div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+						<span>
+							{currentTime.toLocaleTimeString([], {
+								hour: "2-digit",
+								minute: "2-digit",
+							})}
+						</span>
+						<span className="text-neutral-300 dark:text-neutral-700">|</span>
+						<span>India (GMT+5:30)</span>
+					</motion.div>
+
+					<motion.h1 className="text-5xl sm:text-6xl font-bold">
+						winit.
+					</motion.h1>
+
+					<p className="text-lg text-neutral-600 dark:text-neutral-400 pt-2">
+						Software developer focused on Golang, TypeScript, and blockchain
+						technologies.
+					</p>
+				</motion.div>
+
+				{/* About */}
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					className="space-y-4"
+				>
+					<button
+						className="flex items-center justify-between w-full text-left"
+						onClick={() => toggleSection("about")}
+						aria-expanded={expandedSection === "about"}
+						type="button"
+					>
+						<h2 className="text-xl font-semibold">About</h2>
+						<motion.div
+							animate={{ rotate: expandedSection === "about" ? 180 : 0 }}
+							transition={{ duration: 0.3 }}
+						>
+							<ChevronDown size={18} className="text-neutral-500" />
+						</motion.div>
+					</button>
+
+					<AnimatePresence>
+						{expandedSection === "about" && (
+							<motion.div
+								initial={{ height: 0, opacity: 0 }}
+								animate={{ height: "auto", opacity: 1 }}
+								exit={{ height: 0, opacity: 0 }}
+								transition={{ duration: 0.3 }}
+								className="overflow-hidden"
 							>
-								<motion.span
-									key={greetingIndex}
-									initial={{ opacity: 0, y: 10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0 }}
-									className="text-base sm:text-lg text-neutral-500 mr-2"
-								>
-									{greetings[greetingIndex]}
-								</motion.span>
+								<p className="text-neutral-700 dark:text-neutral-300">
+									Started with QBASIC {new Date().getFullYear() - 2013} years
+									ago, dabbled in Unity, then shifted to Java for Minecraft
+									modding in high school. Ventured into web3 through Solana and
+									Ethereum ecosystems.
+								</p>
 
-								{isHovering && (
-									<div className="hidden sm:flex">
-										{greetings
-											.filter((_, i) => i !== greetingIndex)
-											.map((greeting) => (
-												<motion.span
-													key={greeting}
-													initial={{ opacity: 0, x: -10 }}
-													animate={{ opacity: 1, x: 0 }}
-													transition={{
-														duration: 0.3,
-														delay: greetings.indexOf(greeting) * 0.1,
-													}}
-													className="text-lg text-neutral-500 mr-2"
-												>
-													{greeting}
-												</motion.span>
-											))}
-									</div>
-								)}
-							</div>
-							<div className="h-[1px] flex-grow bg-gradient-to-r from-neutral-300 to-transparent dark:from-neutral-700" />
-						</div>
+								<p className="text-neutral-700 dark:text-neutral-300 mt-4">
+									Currently at SOLDecoder as a software dev and co-founding
+									Metfin, working with Golang and TypeScript to create robust
+									developer tools.
+								</p>
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</motion.div>
 
-						<h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4 sm:mb-6">
-							<span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-600 dark:from-neutral-100 dark:to-neutral-400">
-								winit.
-							</span>
-						</h1>
-
-						<div className="relative pl-4 border-l-2 border-neutral-300 dark:border-neutral-700 mb-6 sm:mb-8">
-							<p className="text-lg sm:text-xl italic text-neutral-700 dark:text-neutral-300">
-								"Be curious. Read widely. Try new things. What people call
-								intelligence just boils down to curiosity."
-							</p>
-							<span className="text-sm text-neutral-500 mt-2 block">
-								— Aaron Swartz
-							</span>
-						</div>
-					</motion.div>
-
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.5, delay: 0.3 }}
-						className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10"
+				{/* Projects */}
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5, delay: 0.3 }}
+					className="space-y-4"
+				>
+					<button
+						className="flex items-center justify-between w-full text-left"
+						onClick={() => toggleSection("projects")}
+						aria-expanded={expandedSection === "projects"}
+						type="button"
 					>
-						{/* Top box - Background */}
-						<div className="space-y-2 sm:space-y-2 backdrop-blur-sm bg-white/20 dark:bg-black/20 p-4 sm:p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
-							<div className="flex items-center gap-2">
-								<Terminal size={18} className="text-neutral-500" />
-								<h2 className="text-sm tracking-wider text-neutral-500">
-									Background
-								</h2>
-							</div>
-							<p className="text-sm sm:text-base leading-relaxed">
-								got into this rabbit hole when I wrote QBASIC{" "}
-								{new Date().getFullYear() - 2013} years ago. spent time in unity
-								without knowing what C# is, then started off as a Java +
-								Minecraft Mod Dev in high school. shifted to web3 with solana
-								and eth.
-							</p>
-							<p className="text-sm sm:text-base leading-relaxed">
-								now I work at SOLDecoder as a software dev and I cofound Metfin.
-								I'm found writing either golang or typescript.
-							</p>
-						</div>
+						<h2 className="text-xl font-semibold">Projects</h2>
+						<motion.div
+							animate={{ rotate: expandedSection === "projects" ? 180 : 0 }}
+							transition={{ duration: 0.3 }}
+						>
+							<ChevronDown size={18} className="text-neutral-500" />
+						</motion.div>
+					</button>
 
-						{/* Bottom box - Skills & Contact */}
-						<div className="space-y-4 sm:space-y-5 backdrop-blur-sm bg-white/20 dark:bg-black/20 p-4 sm:p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
-							{/* Content */}
-							<div className="space-y-5 sm:space-y-6">
-								{/* Tech Stack Section */}
-								<div>
-									<h3 className="text-neutral-600 dark:text-neutral-400 mb-2 text-sm font-medium">
-										tech stack
-									</h3>
-									<div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-2 gap-2">
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">TypeScript</span>
-										</div>
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">Golang</span>
-										</div>
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">React</span>
-										</div>
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">Web3</span>
-										</div>
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">
-												Java & Kotlin
-											</span>
-										</div>
-										<div className="flex items-center">
-											<span className="text-neutral-500 mr-2">-</span>
-											<span className="text-sm sm:text-base">Python</span>
-										</div>
+					<AnimatePresence>
+						{expandedSection === "projects" && (
+							<motion.div
+								initial={{ height: 0, opacity: 0 }}
+								animate={{ height: "auto", opacity: 1 }}
+								exit={{ height: 0, opacity: 0 }}
+								transition={{ duration: 0.3 }}
+								className="overflow-hidden space-y-6"
+							>
+								<motion.div className="p-4 border border-transparent rounded-lg hover:border-neutral-200 dark:hover:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300">
+									<div className="flex justify-between">
+										<h3 className="font-medium">Project Alpha</h3>
+										<ExternalLink
+											size={16}
+											className="text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
+										/>
 									</div>
+									<p className="text-neutral-600 dark:text-neutral-400 mt-1">
+										A Solana-based NFT marketplace focused on minimal gas fees.
+									</p>
+									<div className="text-sm text-neutral-500 mt-2">
+										TypeScript • React • Solana
+									</div>
+								</motion.div>
+
+								<motion.div className="p-4 border border-transparent rounded-lg hover:border-neutral-200 dark:hover:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300">
+									<div className="flex justify-between">
+										<h3 className="font-medium">DeFi Dashboard</h3>
+										<ExternalLink
+											size={16}
+											className="text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
+										/>
+									</div>
+									<p className="text-neutral-600 dark:text-neutral-400 mt-1">
+										Analytics dashboard for tracking DeFi investments across
+										chains.
+									</p>
+									<div className="text-sm text-neutral-500 mt-2">
+										Go • Next.js • Ethereum
+									</div>
+								</motion.div>
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</motion.div>
+
+				{/* Skills */}
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5, delay: 0.4 }}
+					className="space-y-4"
+				>
+					<button
+						className="flex items-center justify-between w-full text-left"
+						onClick={() => toggleSection("skills")}
+						aria-expanded={expandedSection === "skills"}
+						type="button"
+					>
+						<h2 className="text-xl font-semibold">Skills</h2>
+						<motion.div
+							animate={{ rotate: expandedSection === "skills" ? 180 : 0 }}
+							transition={{ duration: 0.3 }}
+						>
+							<ChevronDown size={18} className="text-neutral-500" />
+						</motion.div>
+					</button>
+
+					<AnimatePresence>
+						{expandedSection === "skills" && (
+							<motion.div
+								initial={{ height: 0, opacity: 0 }}
+								animate={{ height: "auto", opacity: 1 }}
+								exit={{ height: 0, opacity: 0 }}
+								transition={{ duration: 0.3 }}
+								className="overflow-hidden"
+							>
+								<div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-4">
+									{Object.entries(skills).map(([skill, description]) => (
+										<TooltipProvider key={skill}>
+											<Tooltip>
+												<TooltipTrigger asChild>
+													<motion.p
+														className="text-neutral-700 dark:text-neutral-300 font-medium cursor-pointer"
+														whileHover={{ color: "#3b82f6" }}
+													>
+														{skill}
+													</motion.p>
+												</TooltipTrigger>
+												<TooltipContent>
+													<p>{description}</p>
+												</TooltipContent>
+											</Tooltip>
+										</TooltipProvider>
+									))}
 								</div>
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</motion.div>
 
-								{/* Get In Touch Section */}
-								<div>
-									<h3 className="text-neutral-600 dark:text-neutral-400 mb-2 text-sm font-medium">
-										get in touch
-									</h3>
-									<div className="grid grid-cols-2 gap-y-3 gap-x-2">
-										<a
-											href="https://github.com/heywinit"
-											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
-										>
-											<Github size={16} className="mr-2 flex-shrink-0" />
-											<span className="text-sm sm:text-base">GitHub</span>
-										</a>
-										<a
-											href="https://twitter.com/hiwinit"
-											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
-										>
-											<Twitter size={16} className="mr-2 flex-shrink-0" />
-											<span className="text-sm sm:text-base">Twitter</span>
-										</a>
-										<a
-											href="https://discord.com/users/1272156033896153113"
-											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
-										>
-											<MessageSquare size={16} className="mr-2 flex-shrink-0" />
-											<span className="text-sm sm:text-base">Discord</span>
-										</a>
-										<a
-											href="mailto:heywinit@gmail.com"
-											className="flex items-center group hover:text-blue-500 transition-colors duration-200"
-										>
-											<Mail size={16} className="mr-2 flex-shrink-0" />
-											<span className="text-sm sm:text-base">Email</span>
-										</a>
-									</div>
-
-									{/* Additional contact options */}
-									<div className="mt-4 grid grid-cols-1 gap-2">
-										<div className="flex flex-col">
-											<span className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm">
-												Location
-											</span>
-											<span className="text-xs sm:text-sm">
-												India - GMT+5:30
-											</span>
-											<span className="text-xs sm:text-sm">
-												right now, it's{" "}
-												{new Date().toLocaleTimeString("in", {
-													hour: "2-digit",
-													minute: "2-digit",
-												})}{" "}
-												for me
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</motion.div>
-				</div>
+				{/* Contact */}
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5, delay: 0.5 }}
+					className="flex gap-5 pt-4"
+				>
+					<TooltipProvider>
+						{[
+							{
+								id: "github",
+								icon: <Github size={20} />,
+								href: "https://github.com/heywinit",
+								label: "GitHub",
+							},
+							{
+								id: "twitter",
+								icon: <Twitter size={20} />,
+								href: "https://twitter.com/hiwinit",
+								label: "Twitter",
+							},
+							{
+								id: "email",
+								icon: <Mail size={20} />,
+								href: "mailto:heywinit@gmail.com",
+								label: "Email",
+							},
+						].map((item) => (
+							<Tooltip key={item.id}>
+								<TooltipTrigger asChild>
+									<motion.a
+										href={item.href}
+										className="text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors"
+										aria-label={item.label}
+										whileHover={{ scale: 1.2 }}
+										whileTap={{ scale: 0.9 }}
+									>
+										{item.icon}
+									</motion.a>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>{item.label}</p>
+								</TooltipContent>
+							</Tooltip>
+						))}
+					</TooltipProvider>
+				</motion.div>
 			</div>
 		</div>
 	);
