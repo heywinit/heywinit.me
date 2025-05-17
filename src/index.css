@@ -5,134 +5,134 @@
 @tailwind utilities;
 
 :root {
-	font-family: "IBM Plex Mono", monospace;
-	line-height: 1.5;
-	font-weight: 400;
-	text-transform: lowercase;
+  font-family: "IBM Plex Mono", monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  text-transform: lowercase;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 html {
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 @layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 0 0% 3.92%;
-		--card: 0 0% 100%;
-		--card-foreground: 0 0% 3.92%;
-		--popover: 0 0% 100%;
-		--popover-foreground: 0 0% 3.92%;
-		--primary: 0 0% 45.10%;
-		--primary-foreground: 0 0% 98.04%;
-		--secondary: 0 0% 96.08%;
-		--secondary-foreground: 0 0% 9.02%;
-		--muted: 0 0% 96.08%;
-		--muted-foreground: 0 0% 44.31%;
-		--accent: 0 0% 96.08%;
-		--accent-foreground: 0 0% 9.02%;
-		--destructive: 357.14 100% 45.29%;
-		--destructive-foreground: 0 0% 96.08%;
-		--border: 0 0% 89.80%;
-		--input: 0 0% 89.80%;
-		--ring: 0 0% 63.14%;
-		--chart-1: 0 0% 45.10%;
-		--chart-2: 0 0% 45.10%;
-		--chart-3: 0 0% 45.10%;
-		--chart-4: 0 0% 45.10%;
-		--chart-5: 0 0% 45.10%;
-		--sidebar: 0 0% 98.04%;
-		--sidebar-foreground: 0 0% 3.92%;
-		--sidebar-primary: 0 0% 9.02%;
-		--sidebar-primary-foreground: 0 0% 98.04%;
-		--sidebar-accent: 0 0% 96.08%;
-		--sidebar-accent-foreground: 0 0% 9.02%;
-		--sidebar-border: 0 0% 89.80%;
-		--sidebar-ring: 0 0% 63.14%;
-		--font-sans: var(--font-family);
-		--font-serif: var(--font-family);
-		--font-mono: var(--font-family);
-		--radius: 0rem;
-		--shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-		--shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-		--shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 1px 2px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 1px 2px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 2px 4px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 4px 6px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 8px 10px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-	}
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.92%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.92%;
+    --primary: 0 0% 45.1%;
+    --primary-foreground: 0 0% 98.04%;
+    --secondary: 0 0% 96.08%;
+    --secondary-foreground: 0 0% 9.02%;
+    --muted: 0 0% 96.08%;
+    --muted-foreground: 0 0% 44.31%;
+    --accent: 0 0% 96.08%;
+    --accent-foreground: 0 0% 9.02%;
+    --destructive: 357.14 100% 45.29%;
+    --destructive-foreground: 0 0% 96.08%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 63.14%;
+    --chart-1: 0 0% 45.1%;
+    --chart-2: 0 0% 45.1%;
+    --chart-3: 0 0% 45.1%;
+    --chart-4: 0 0% 45.1%;
+    --chart-5: 0 0% 45.1%;
+    --sidebar: 0 0% 98.04%;
+    --sidebar-foreground: 0 0% 3.92%;
+    --sidebar-primary: 0 0% 9.02%;
+    --sidebar-primary-foreground: 0 0% 98.04%;
+    --sidebar-accent: 0 0% 96.08%;
+    --sidebar-accent-foreground: 0 0% 9.02%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 63.14%;
+    --font-sans: var(--font-family);
+    --font-serif: var(--font-family);
+    --font-mono: var(--font-family);
+    --radius: 0rem;
+    --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+    --shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+    --shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 2px 4px -1px hsl(0 0% 0% / 0);
+    --shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 4px 6px -1px hsl(0 0% 0% / 0);
+    --shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 8px 10px -1px hsl(0 0% 0% / 0);
+    --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+  }
 
-	.dark {
-		--background: 0 0% 3.92%;
-		--foreground: 0 0% 98.04%;
-		--card: 0 0% 9.80%;
-		--card-foreground: 0 0% 98.04%;
-		--popover: 0 0% 14.90%;
-		--popover-foreground: 0 0% 98.04%;
-		--primary: 0 0% 45.10%;
-		--primary-foreground: 0 0% 98.04%;
-		--secondary: 0 0% 14.90%;
-		--secondary-foreground: 0 0% 98.04%;
-		--muted: 0 0% 14.90%;
-		--muted-foreground: 0 0% 63.14%;
-		--accent: 0 0% 25.10%;
-		--accent-foreground: 0 0% 98.04%;
-		--destructive: 358.84 100% 69.61%;
-		--destructive-foreground: 0 0% 14.90%;
-		--border: 0 0% 21.96%;
-		--input: 0 0% 32.16%;
-		--ring: 0 0% 45.10%;
-		--chart-1: 0 0% 45.10%;
-		--chart-2: 0 0% 45.10%;
-		--chart-3: 0 0% 45.10%;
-		--chart-4: 0 0% 45.10%;
-		--chart-5: 0 0% 45.10%;
-		--sidebar: 0 0% 9.02%;
-		--sidebar-foreground: 0 0% 98.04%;
-		--sidebar-primary: 0 0% 98.04%;
-		--sidebar-primary-foreground: 0 0% 9.02%;
-		--sidebar-accent: 0 0% 14.90%;
-		--sidebar-accent-foreground: 0 0% 98.04%;
-		--sidebar-border: 0 0% 100%;
-		--sidebar-ring: 0 0% 32.16%;
-		--font-sans: var(--font-family);
-		--font-serif: var(--font-family);
-		--font-mono: var(--font-family);
-		--radius: 0rem;
-		--shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-		--shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-		--shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 1px 2px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 1px 2px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 2px 4px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 4px 6px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.0), 0px 8px 10px -1px
-			hsl(0 0% 0% / 0.0);
-		--shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.0);
-	}
+  .dark {
+    --accent: 30 100% 60%; /* darker orange */
+    --primary: 30 100% 50%; /* dark orange */
+    --background: 0 0% 3.92%;
+    --foreground: 0 0% 98.04%;
+    --card: 0 0% 9.8%;
+    --card-foreground: 0 0% 98.04%;
+    --popover: 0 0% 14.9%;
+    --popover-foreground: 0 0% 98.04%;
+    --primary-foreground: 0 0% 98.04%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98.04%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.14%;
+    --accent-foreground: 0 0% 98.04%;
+    --destructive: 358.84 100% 69.61%;
+    --destructive-foreground: 0 0% 14.9%;
+    --border: 0 0% 21.96%;
+    --input: 0 0% 32.16%;
+    --ring: 0 0% 45.1%;
+    --chart-1: 0 0% 45.1%;
+    --chart-2: 0 0% 45.1%;
+    --chart-3: 0 0% 45.1%;
+    --chart-4: 0 0% 45.1%;
+    --chart-5: 0 0% 45.1%;
+    --sidebar: 0 0% 9.02%;
+    --sidebar-foreground: 0 0% 98.04%;
+    --sidebar-primary: 0 0% 98.04%;
+    --sidebar-primary-foreground: 0 0% 9.02%;
+    --sidebar-accent: 0 0% 14.9%;
+    --sidebar-accent-foreground: 0 0% 98.04%;
+    --sidebar-border: 0 0% 100%;
+    --sidebar-ring: 0 0% 32.16%;
+    --font-sans: var(--font-family);
+    --font-serif: var(--font-family);
+    --font-mono: var(--font-family);
+    --radius: 0rem;
+    --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+    --shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+    --shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 1px 2px -1px hsl(0 0% 0% / 0);
+    --shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 2px 4px -1px hsl(0 0% 0% / 0);
+    --shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 4px 6px -1px hsl(0 0% 0% / 0);
+    --shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0),
+      0px 8px 10px -1px hsl(0 0% 0% / 0);
+    --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0);
+  }
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

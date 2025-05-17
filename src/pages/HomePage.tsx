@@ -1,16 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { ExternalLink, ChevronRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getBlogs } from "@/services/blogService";
 import Header from "@/components/Header";
+import Background from "@/components/Background";
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
   const [blogs, setBlogs] = useState<
     {
       title: string;
@@ -27,8 +24,6 @@ export default function HomePage() {
     };
     fetchBlogs();
   }, []);
-
-  const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.3, 0]);
 
   const skills = {
     TypeScript:
@@ -68,10 +63,7 @@ export default function HomePage() {
       ref={containerRef}
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden pt-24 pb-24"
     >
-      <motion.div className="absolute inset-0" style={{ opacity: bgOpacity }}>
-        <div className="absolute top-10 left-10 w-72 h-72 bg-green-400/30 dark:bg-green-900/30 rounded-none filter blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-green-400/20 dark:bg-green-900/20 rounded-none filter blur-3xl" />
-      </motion.div>
+      <Background containerRef={containerRef} />
 
       <div className="max-w-3xl w-full space-y-16 relative z-10">
         <div>
@@ -81,7 +73,7 @@ export default function HomePage() {
             className="text-6xl sm:text-7xl font-bold relative inline-block"
             transition={{ duration: 0.2 }}
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
               winit.
             </span>
           </motion.h1>
@@ -94,7 +86,7 @@ export default function HomePage() {
             co-founder @{" "}
             <a
               href="https://metf.in"
-              className="text-green-400 hover:underline"
+              className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -103,7 +95,7 @@ export default function HomePage() {
             . full-stack dev @{" "}
             <a
               href="https://soldecoder.app"
-              className="text-green-400 hover:underline"
+              className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -121,12 +113,12 @@ export default function HomePage() {
           className="space-y-4"
         >
           <h2 className="text-2xl font-semibold flex items-center">
-            <span className="bg-green-400/10 text-green-500 dark:text-green-400 px-2 py-1 rounded-none mr-2 text-sm">
+            <span className="bg-primary/10 text-accent dark:text-primary px-2 py-1 rounded-none mr-2 text-sm">
               #
             </span>
             About
           </h2>
-          <div className="space-y-4 border-l-2 border-green-400/20 pl-5 py-2">
+          <div className="space-y-4 border-l-2 border-primary/20 pl-5 py-2">
             <p className="text-neutral-700 dark:text-neutral-300">
               Started with QBASIC {new Date().getFullYear() - 2013} years ago,
               dabbled in Unity, then shifted to Java for Minecraft modding in
@@ -142,7 +134,7 @@ export default function HomePage() {
 
             <Link
               to="/about"
-              className="inline-flex items-center gap-1 text-green-500 hover:underline group mt-2"
+              className="inline-flex items-center gap-1 text-accent hover:underline group mt-2"
             >
               Read my full story
               <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -158,7 +150,7 @@ export default function HomePage() {
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold flex items-center">
-            <span className="bg-green-400/10 text-green-500 dark:text-green-400 px-2 py-1 rounded-none mr-2 text-sm">
+            <span className="bg-primary/10 text-accent dark:text-primary px-2 py-1 rounded-none mr-2 text-sm">
               #
             </span>
             Projects
@@ -167,11 +159,11 @@ export default function HomePage() {
             {projects.map((project) => (
               <motion.div
                 key={project.name}
-                className="p-5 rounded-none backdrop-blur-sm bg-white/50 dark:bg-black/50 border border-neutral-200 dark:border-neutral-800 hover:border-green-400/70 dark:hover:border-green-400/30 transition-all duration-300 relative group"
+                className="p-5 rounded-none backdrop-blur-sm bg-white/50 dark:bg-black/50 border border-neutral-200 dark:border-neutral-800 hover:border-primary/70 dark:hover:border-primary/30 transition-all duration-300 relative group"
               >
                 <div className="flex justify-between">
                   <h3 className="font-medium flex items-center">
-                    <span className="text-green-500 transition-opacity text-sm mr-2">
+                    <span className="text-accent transition-opacity text-sm mr-2">
                       {">"}
                     </span>
                     {project.name}
@@ -185,7 +177,7 @@ export default function HomePage() {
                   >
                     <ExternalLink
                       size={16}
-                      className="text-neutral-400 hover:text-green-500 dark:hover:text-green-400"
+                      className="text-neutral-400 hover:text-accent dark:hover:text-primary"
                     />
                   </motion.a>
                 </div>
@@ -215,7 +207,7 @@ export default function HomePage() {
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold flex items-center">
-            <span className="bg-green-400/10 text-green-500 dark:text-green-400 px-2 py-1 rounded-none mr-2 text-sm">
+            <span className="bg-primary/10 text-accent dark:text-primary px-2 py-1 rounded-none mr-2 text-sm">
               #
             </span>
             Arsenal
@@ -230,7 +222,7 @@ export default function HomePage() {
                     className="border border-neutral-200 dark:border-neutral-800 p-4 rounded-none"
                   >
                     <div className="font-medium flex items-center mb-1">
-                      <span className="text-green-500 mr-2 text-sm">$</span>
+                      <span className="text-accent mr-2 text-sm">$</span>
                       {skill}
                     </div>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400">
@@ -251,7 +243,7 @@ export default function HomePage() {
           className="space-y-6"
         >
           <h2 className="text-2xl font-semibold flex items-center">
-            <span className="bg-green-400/10 text-green-500 dark:text-green-400 px-2 py-1 rounded-none mr-2 text-sm">
+            <span className="bg-primary/10 text-accent dark:text-primary px-2 py-1 rounded-none mr-2 text-sm">
               #
             </span>
             Blog
@@ -264,10 +256,10 @@ export default function HomePage() {
               >
                 <Link
                   to={blog.url}
-                  className="block group-hover:text-green-500 transition-colors"
+                  className="block group-hover:text-accent transition-colors"
                 >
                   <h3 className="text-xl font-medium flex items-center">
-                    <span className={"text-green-500 mr-2 transition-opacity"}>
+                    <span className={"text-accent mr-2 transition-opacity"}>
                       {">"}
                     </span>
                     {blog.title}
@@ -283,7 +275,7 @@ export default function HomePage() {
                   <motion.div>
                     <Link
                       to={blog.url}
-                      className="text-sm text-green-500 hover:text-green-600 dark:hover:text-green-400 inline-flex items-center gap-1 mt-1 font-medium group"
+                      className="text-sm text-accent hover:text-accent dark:hover:text-primary inline-flex items-center gap-1 mt-1 font-medium group"
                     >
                       Read more
                       <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

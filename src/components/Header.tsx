@@ -40,7 +40,7 @@ export default function Header() {
       >
         <div className="flex flex-row justify-between items-center">
           <motion.div className="flex items-center gap-2 text-sm text-neutral-500 backdrop-blur-sm w-fit px-3 py-1 rounded-none border border-neutral-200 dark:border-neutral-800">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
             <span>
               {currentTime.toLocaleTimeString([], {
                 hour: "2-digit",
@@ -91,7 +91,7 @@ export default function Header() {
                     <TooltipTrigger asChild>
                       <motion.a
                         href={item.href}
-                        className="text-neutral-600 dark:text-neutral-400 hover:text-green-500 dark:hover:text-green-400 flex items-center gap-2"
+                        className="text-neutral-600 dark:text-neutral-400 hover:text-accent dark:hover:text-primary flex items-center gap-2"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={item.onClick}

@@ -70,8 +70,8 @@ if (!root) {
 
 createRoot(root).render(
   <ThemeProvider defaultTheme="dark">
-    <ThemeKeyboardShortcutProvider>
-      <RouterProvider router={router} />
-    </ThemeKeyboardShortcutProvider>
+    {/* <ThemeKeyboardShortcutProvider> */}
+    <RouterProvider router={router} />
+    {/* </ThemeKeyboardShortcutProvider> */}
   </ThemeProvider>
 );

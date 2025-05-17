@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getBlog } from "@/services/blogService";
 import Header from "@/components/Header";
+import Background from "@/components/Background";
 
 export default function BlogPage() {
   const { title } = useParams<{ title: string }>();
@@ -13,12 +14,6 @@ export default function BlogPage() {
   const [error, setError] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.3, 0]);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -54,10 +49,7 @@ export default function BlogPage() {
       ref={containerRef}
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden pt-24 pb-24"
     >
-      <motion.div className="absolute inset-0" style={{ opacity: bgOpacity }}>
-        <div className="absolute top-10 left-10 w-72 h-72 bg-green-400/30 dark:bg-green-900/30 rounded-none filter blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-green-400/20 dark:bg-green-900/20 rounded-none filter blur-3xl" />
-      </motion.div>
+      <Background containerRef={containerRef} />
 
       <div className="max-w-3xl w-full space-y-12 relative z-10">
         <Header />
@@ -66,14 +58,14 @@ export default function BlogPage() {
           className="text-5xl sm:text-6xl font-bold relative inline-block"
           transition={{ duration: 0.2 }}
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             {formattedTitle}
           </span>
         </motion.h1>
 
         {loading ? (
           <div className="flex justify-center p-8">
-            <div className="w-10 h-10 border-4 border-green-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         ) : error ? (
           <div className="text-red-500 p-8 text-center">{error}</div>
@@ -99,7 +91,7 @@ export default function BlogPage() {
                   ),
                   a: (props) => (
                     <a
-                      className="text-green-500 hover:text-green-600 dark:hover:text-green-400"
+                      className="text-accent hover:text-accent dark:hover:text-primary"
                       target="_blank"
                       rel="noopener noreferrer"
                       {...props}
@@ -128,7 +120,7 @@ export default function BlogPage() {
                   ),
                   blockquote: (props) => (
                     <blockquote
-                      className="border-l-4 border-green-400 pl-4 italic my-4 text-neutral-600 dark:text-neutral-400"
+                      className="border-l-4 border-primary pl-4 italic my-4 text-neutral-600 dark:text-neutral-400"
                       {...props}
                     />
                   ),

@@ -1,25 +1,17 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Header from "@/components/Header";
+import Background from "@/components/Background";
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.3, 0]);
 
   return (
     <div
       ref={containerRef}
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden pt-24 pb-24"
     >
-      <motion.div className="absolute inset-0" style={{ opacity: bgOpacity }}>
-        <div className="absolute top-10 left-10 w-72 h-72 bg-green-400/30 dark:bg-green-900/30 rounded-none filter blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-green-400/20 dark:bg-green-900/20 rounded-none filter blur-3xl" />
-      </motion.div>
+      <Background containerRef={containerRef} />
 
       <div className="max-w-3xl w-full space-y-8 relative z-10">
         <Header />
@@ -28,7 +20,7 @@ export default function AboutPage() {
           className="text-6xl sm:text-7xl font-bold relative inline-block"
           transition={{ duration: 0.2 }}
         >
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             winit.
           </span>
         </motion.h1>
@@ -74,14 +66,14 @@ export default function AboutPage() {
               now i juggle uni, as much as i hate it. i freelance at{" "}
               <a
                 href="https://soldecoder.app"
-                className="text-green-500 dark:text-green-400 hover:text-green-600 dark:hover:text-green-400/30 transition-all"
+                className="text-accent dark:text-primary hover:text-accent dark:hover:text-primary/30 transition-all"
               >
                 soldecoder.app
               </a>{" "}
               where i write code handling thousands of dollars. i cofound{" "}
               <a
                 href="https://metf.in"
-                className="text-green-500 dark:text-green-400 hover:text-green-600 dark:hover:text-green-400/30 transition-all"
+                className="text-accent dark:text-primary hover:text-accent dark:hover:text-primary/30 transition-all"
               >
                 metf.in
               </a>{" "}
