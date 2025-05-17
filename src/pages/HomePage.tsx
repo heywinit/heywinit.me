@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getBlogs } from "@/services/blogService";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
+import EasterEggs from "@/components/EasterEggs";
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -64,6 +65,7 @@ export default function HomePage() {
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden pt-24 pb-24"
     >
       <Background containerRef={containerRef} />
+      <EasterEggs />
 
       <div className="max-w-3xl w-full space-y-16 relative z-10">
         <div>
@@ -160,6 +162,7 @@ export default function HomePage() {
               <motion.div
                 key={project.name}
                 className="p-5 rounded-none backdrop-blur-sm bg-white/50 dark:bg-black/50 border border-neutral-200 dark:border-neutral-800 hover:border-primary/70 dark:hover:border-primary/30 transition-all duration-300 relative group"
+                data-party-target="true"
               >
                 <div className="flex justify-between">
                   <h3 className="font-medium flex items-center">
@@ -253,6 +256,7 @@ export default function HomePage() {
               <motion.div
                 key={blog.title}
                 className="space-y-2 group border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-0"
+                data-party-target="true"
               >
                 <Link
                   to={blog.url}
