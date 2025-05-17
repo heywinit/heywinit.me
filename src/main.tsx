@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   RouterProvider,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
@@ -12,6 +13,7 @@ import {
 } from "./components/theme-provider.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
+import { ScrollToTop } from "./components/ScrollToTop.tsx";
 
 // Wrapper component that enables the global keyboard shortcut
 function ThemeKeyboardShortcutProvider({
@@ -23,18 +25,34 @@ function ThemeKeyboardShortcutProvider({
   return <>{children}</>;
 }
 
+// Root layout that includes ScrollToTop
+function RootLayout() {
+  return (
+    <>
+      <ScrollToTop />
+      <Outlet />
+    </>
+  );
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/about",
-    element: <AboutPage />,
-  },
-  {
-    path: "/blog/:title",
-    element: <BlogPage />,
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
+      },
+      {
+        path: "blog/:title",
+        element: <BlogPage />,
+      },
+    ],
   },
   {
     path: "/discord",
