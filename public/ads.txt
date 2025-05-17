@@ -1,0 +1,5 @@
+# ads.txt file for heywinit.me
+# Visit https://ads.txt.org/ for more info
+
+# This website currently does not use any ad networks
+# This file is a placeholder for future use 
