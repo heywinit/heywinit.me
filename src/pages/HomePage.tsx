@@ -13,6 +13,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Link } from "react-router-dom";
+import { getBlogs } from "@/services/blogService";
 
 export default function HomePage() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -22,6 +24,22 @@ export default function HomePage() {
     target: containerRef,
     offset: ["start start", "end start"],
   });
+  const [blogs, setBlogs] = useState<
+    {
+      title: string;
+      date: string;
+      summary: string;
+      url: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const blogs = await getBlogs();
+      setBlogs(blogs);
+    };
+    fetchBlogs();
+  }, []);
 
   const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.3, 0]);
 
@@ -54,48 +72,25 @@ export default function HomePage() {
 
   const projects = [
     {
-      name: "Project Alpha",
+      name: "baylag",
       description:
-        "A Solana-based NFT marketplace focused on minimal gas fees.",
-      tech: "TypeScript • React • Solana",
-      url: "https://github.com/heywinit/project-alpha",
+        "A minimal, offline-first personal finance app built for anyone who wants full control over their money.",
+      tech: "TypeScript • React • Bun",
+      url: "https://github.com/heywinit/baylag",
     },
     {
-      name: "DeFi Dashboard",
+      name: "mercon",
       description:
-        "Analytics dashboard for tracking DeFi investments across chains.",
-      tech: "Go • Next.js • Ethereum",
-      url: "https://github.com/heywinit/defi-dashboard",
+        "An all in one library for downloading data related to Meteora Transactions, Positions and Pools.",
+      tech: "Go • Solana • Postgres",
+      url: "https://github.com/heywinit/mercon",
     },
     {
-      name: "CryptoTracker",
-      description: "Real-time crypto price tracker with custom alerts.",
-      tech: "TypeScript • React • WebSockets",
-      url: "https://github.com/heywinit/crypto-tracker",
-    },
-  ];
-
-  const blogs = [
-    {
-      title: "Understanding Solana's Programming Model",
-      date: "May 15, 2023",
-      summary:
-        "A deep dive into how Solana's programming model differs from Ethereum and what that means for developers.",
-      url: "/blog/understanding-solana-programming-model",
-    },
-    {
-      title: "Building Type-Safe APIs with Go and TypeScript",
-      date: "March 22, 2023",
-      summary:
-        "How to create end-to-end type safety between your Go backend and TypeScript frontend for a better developer experience.",
-      url: "/blog/type-safe-apis-go-typescript",
-    },
-    {
-      title: "Web3 Authentication Methods Compared",
-      date: "January 10, 2023",
-      summary:
-        "A comparison of different web3 authentication methods including wallet connect, sign-in with Ethereum, and more.",
-      url: "/blog/web3-authentication-methods",
+      name: "lopnur",
+      description:
+        "A tool for benchmarking various Solana RPC Providers for Meteora and its programs",
+      tech: "TypeScript • Bun • Solana",
+      url: "https://github.com/heywinit/lopnur",
     },
   ];
 
@@ -253,13 +248,13 @@ export default function HomePage() {
               tools.
             </p>
 
-            <motion.a
-              href="/about"
+            <Link
+              to="/about"
               className="inline-flex items-center gap-1 text-green-500 hover:underline group mt-2"
             >
               Read my full story
               <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </motion.a>
+            </Link>
           </div>
         </motion.div>
 
@@ -375,8 +370,8 @@ export default function HomePage() {
                 key={blog.title}
                 className="space-y-2 group border-b border-neutral-200 dark:border-neutral-800 pb-6 last:border-0"
               >
-                <a
-                  href={blog.url}
+                <Link
+                  to={blog.url}
                   className="block group-hover:text-green-500 transition-colors"
                 >
                   <h3 className="text-xl font-medium flex items-center">
@@ -385,7 +380,7 @@ export default function HomePage() {
                     </span>
                     {blog.title}
                   </h3>
-                </a>
+                </Link>
                 <div className="text-sm inline-block bg-neutral-100 dark:bg-neutral-900 px-2 py-0.5 rounded-none text-neutral-600 dark:text-neutral-400">
                   {blog.date}
                 </div>
@@ -393,14 +388,15 @@ export default function HomePage() {
                   {blog.summary}
                 </p>
                 <div>
-                  <motion.a
-                    href={blog.url}
-                    className="text-sm text-green-500 hover:text-green-600 dark:hover:text-green-400 inline-flex items-center gap-1 mt-1 font-medium group"
-                    whileHover={{ x: 3 }}
-                  >
-                    Read more
-                    <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </motion.a>
+                  <motion.div>
+                    <Link
+                      to={blog.url}
+                      className="text-sm text-green-500 hover:text-green-600 dark:hover:text-green-400 inline-flex items-center gap-1 mt-1 font-medium group"
+                    >
+                      Read more
+                      <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
