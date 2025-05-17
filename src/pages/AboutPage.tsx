@@ -1,16 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { Github, Twitter, Mail, ArrowLeft } from "lucide-react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Link } from "react-router-dom";
+import Header from "@/components/Header";
 
 export default function AboutPage() {
-  const [showCopiedTooltip, setShowCopiedTooltip] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -18,16 +10,6 @@ export default function AboutPage() {
   });
 
   const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.3, 0]);
-
-  // Hide copied tooltip after a delay
-  useEffect(() => {
-    if (showCopiedTooltip) {
-      const timer = setTimeout(() => {
-        setShowCopiedTooltip(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [showCopiedTooltip]);
 
   return (
     <div
@@ -40,96 +22,16 @@ export default function AboutPage() {
       </motion.div>
 
       <div className="max-w-3xl w-full space-y-8 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-3"
+        <Header />
+
+        <motion.h1
+          className="text-6xl sm:text-7xl font-bold relative inline-block"
+          transition={{ duration: 0.2 }}
         >
-          <div className="flex flex-row justify-between items-center">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-sm text-neutral-500 backdrop-blur-sm w-fit px-3 py-1 rounded-none border border-neutral-200 dark:border-neutral-800 hover:border-green-400 dark:hover:border-green-400/30 transition-all"
-            >
-              <ArrowLeft size={16} />
-              <span>Back to Home</span>
-            </Link>
-
-            {/* Connect */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex gap-4"
-            >
-              {[
-                {
-                  id: "github",
-                  icon: <Github size={20} />,
-                  label: "GitHub",
-                  href: "https://github.com/heywinit",
-                },
-                {
-                  id: "twitter",
-                  icon: <Twitter size={20} />,
-                  label: "Twitter",
-                  href: "https://twitter.com/hiwinit",
-                },
-                {
-                  id: "email",
-                  icon: <Mail size={20} />,
-                  label: "Email",
-                  href: "mailto:heywinit@gmail.com",
-                  onClick: (e: { preventDefault: () => void }) => {
-                    e.preventDefault();
-                    navigator.clipboard.writeText("heywinit@gmail.com");
-                    setShowCopiedTooltip(true);
-                  },
-                },
-              ].map((item) => (
-                <motion.div key={item.id} className="relative">
-                  <TooltipProvider>
-                    <Tooltip
-                      open={item.id === "email" ? showCopiedTooltip : undefined}
-                    >
-                      <TooltipTrigger asChild>
-                        <motion.a
-                          href={item.href}
-                          className="text-neutral-600 dark:text-neutral-400 hover:text-green-500 dark:hover:text-green-400 flex items-center gap-2"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={item.onClick}
-                        >
-                          {item.icon}
-                        </motion.a>
-                      </TooltipTrigger>
-                      {item.id === "email" && (
-                        <TooltipContent className="bg-black text-white px-2 py-1 text-xs rounded-sm">
-                          Copied!
-                        </TooltipContent>
-                      )}
-                    </Tooltip>
-                  </TooltipProvider>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          <motion.h1
-            className="text-5xl sm:text-6xl font-bold relative inline-block"
-            transition={{ duration: 0.2 }}
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
-              the lore.
-            </span>
-          </motion.h1>
-
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 pt-2">
-            from qbasic on a sony vaio to code that handles thousands of
-            dollars.
-          </p>
-        </motion.div>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+            winit.
+          </span>
+        </motion.h1>
 
         {/* Bio */}
         <motion.div

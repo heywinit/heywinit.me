@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getBlog } from "@/services/blogService";
-import { ArrowLeft } from "lucide-react";
+import Header from "@/components/Header";
 
 export default function BlogPage() {
   const { title } = useParams<{ title: string }>();
@@ -60,32 +60,16 @@ export default function BlogPage() {
       </motion.div>
 
       <div className="max-w-3xl w-full space-y-12 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-6"
-        >
-          <div className="flex flex-row justify-between items-center">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-sm text-neutral-500 backdrop-blur-sm w-fit px-3 py-1 rounded-none border border-neutral-200 dark:border-neutral-800 hover:border-green-400 dark:hover:border-green-400/30 transition-all"
-            >
-              <ArrowLeft size={16} />
-              <span>Back to Home</span>
-            </Link>
-          </div>
+        <Header />
 
-          <motion.h1
-            className="text-4xl sm:text-5xl font-bold relative inline-block"
-            transition={{ duration: 0.2 }}
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
-              {formattedTitle}
-            </span>
-          </motion.h1>
-        </motion.div>
+        <motion.h1
+          className="text-5xl sm:text-6xl font-bold relative inline-block"
+          transition={{ duration: 0.2 }}
+        >
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">
+            {formattedTitle}
+          </span>
+        </motion.h1>
 
         {loading ? (
           <div className="flex justify-center p-8">
@@ -181,9 +165,10 @@ export default function BlogPage() {
                   img: (props) => {
                     const { src, alt, ...rest } = props;
                     return (
+                      // biome-ignore lint/a11y/useAltText: <explanation>
                       <img
                         src={src}
-                        alt={alt || "Blog content image"}
+                        alt={alt ? alt : "Blog content image"}
                         className="max-w-full h-auto rounded-sm my-4"
                         {...rest}
                       />
