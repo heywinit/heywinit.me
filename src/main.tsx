@@ -7,23 +7,10 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage.tsx";
-import {
-  ThemeProvider,
-  useThemeKeyboardShortcut,
-} from "./components/theme-provider.tsx";
+import { ThemeProvider } from "./components/theme-provider.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import { ScrollToTop } from "./components/ScrollToTop.tsx";
-
-// Wrapper component that enables the global keyboard shortcut
-function ThemeKeyboardShortcutProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  useThemeKeyboardShortcut();
-  return <>{children}</>;
-}
 
 // Root layout that includes ScrollToTop
 function RootLayout() {
@@ -70,8 +57,6 @@ if (!root) {
 
 createRoot(root).render(
   <ThemeProvider defaultTheme="dark">
-    {/* <ThemeKeyboardShortcutProvider> */}
     <RouterProvider router={router} />
-    {/* </ThemeKeyboardShortcutProvider> */}
   </ThemeProvider>
 );
