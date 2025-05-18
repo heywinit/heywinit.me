@@ -1,6 +1,6 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Mail, Twitter } from "lucide-react";
 
 const ContactSection = memo(() => {
 	return (
@@ -36,16 +36,16 @@ const ContactSection = memo(() => {
 					<Github className="h-5 w-5" />
 				</motion.a>
 				<motion.a
-					href="https://linkedin.com/in/username"
+					href="https://x.com/hiwinit"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="p-2 border border-neutral-200 dark:border-neutral-800 hover:border-primary/70 dark:hover:border-primary/30 transition-all"
 					whileHover={{ y: -5 }}
 				>
-					<Linkedin className="h-5 w-5" />
+					<Twitter className="h-5 w-5" />
 				</motion.a>
 				<motion.a
-					href="mailto:winit@example.com"
+					href="mailto:hi@heywinit.com"
 					className="p-2 border border-neutral-200 dark:border-neutral-800 hover:border-primary/70 dark:hover:border-primary/30 transition-all"
 					whileHover={{ y: -5 }}
 				>

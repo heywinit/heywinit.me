@@ -50,7 +50,6 @@ export default function HomePage() {
 			Solana:
 				"Specialized in building dApps and tools for the Solana ecosystem.",
 			Ethereum: "Experience with smart contracts and DeFi applications.",
-			Java: "Used to build minecraft mods & plugins using Forge and Spigot.",
 		}),
 		[],
 	);
@@ -67,7 +66,7 @@ export default function HomePage() {
 			{
 				name: "mercon",
 				description:
-					"An all in one library for downloading data related to Meteora Transactions, Positions and Pools.",
+					"An all in one library for downloading on-chain data related to Meteora Transactions, Positions and Pools.",
 				tech: "Go • Solana • Postgres",
 				url: "https://github.com/heywinit/mercon",
 			},
@@ -98,7 +97,7 @@ export default function HomePage() {
 				role: "Software Engineer",
 				period: "2024 - Present (again, yes)",
 				description:
-					"Building blockchain automation tools for the Solana and Ethereum ecosystem. Working on code handling hundreds of thousands of dollars daily.",
+					"Building blockchain automation tools for the Solana and Ethereum ecosystem. Working on code handling hundreds of thousands of dollars daily through Meteora DLMM Automation.",
 				tech: "TypeScript • React • Solana",
 				url: "https://soldecoder.app",
 			},
@@ -107,7 +106,7 @@ export default function HomePage() {
 				role: "Software Engineer",
 				period: "2022 - 2023",
 				description:
-					"Building blockchain automation tools for the Solana and Ethereum ecosystem. Working on code handling hundreds of thousands of dollars daily.",
+					"Worked on NFT launchpad automations and tools for moderating NFT projects.",
 				tech: "TypeScript • React • Solana",
 				url: "https://soldecoder.app",
 			},
