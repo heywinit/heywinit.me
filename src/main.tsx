@@ -11,6 +11,7 @@ import { ThemeProvider } from "./components/theme-provider.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import { ScrollToTop } from "./components/ScrollToTop.tsx";
+import { Analytics } from "@vercel/analytics/react";
 
 // Root layout that includes ScrollToTop
 function RootLayout() {
@@ -58,5 +59,6 @@ if (!root) {
 createRoot(root).render(
   <ThemeProvider defaultTheme="dark">
     <RouterProvider router={router} />
+    <Analytics />
   </ThemeProvider>
 );
