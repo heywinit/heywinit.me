@@ -114,30 +114,8 @@ export default function HomePage() {
 				company: "Freelance",
 				role: "Software Engineer",
 				period: "2020 - 2023",
-				description: (
-					<p>
-						Freelanced as a Software Engineer and Minecraft Mod Developer for 3
-						years. I worked for youtubers like{" "}
-						<a
-							href="https://www.youtube.com/user/MrBeast6000"
-							className="text-primary hover:underline"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							MR Beast Gaming
-						</a>
-						,{" "}
-						<a
-							href="https://www.youtube.com/user/TBNRFrags"
-							className="text-primary hover:underline"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							TBNR PrestonPlayz
-						</a>
-						.
-					</p>
-				),
+				description:
+					"Freelanced as a Software Engineer and Minecraft Mod Developer for 3 years.",
 				tech: "Java • TypeScript • Solana",
 			},
 		],
