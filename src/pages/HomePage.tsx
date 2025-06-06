@@ -183,7 +183,7 @@ export default function HomePage() {
 						</h2>
 						<div className="space-y-4 border-l-2 border-primary/20 pl-5 py-2">
 							<p className="text-neutral-700 dark:text-neutral-300">
-								i'm 19. Started with QBASIC {new Date().getFullYear() - 2013}{" "}
+								i'm 19. Started with QBASIC {new Date().getFullYear() - 2018}{" "}
 								years ago, dabbled in Unity, then shifted to Java for Minecraft
 								modding in high school. i wrote firmware for a TV set top box to
 								enable a recording option and i realized this is how i'll spend
