@@ -46,7 +46,7 @@ export default function AboutPage() {
             </p>
 
             <p className="text-neutral-700 dark:text-neutral-300">
-              started with qbasic in 2013, thanks to my school curriculum. that
+              started with qbasic in 2018, thanks to my school curriculum. that
               led to a dream of recreating gta in unity without knowing c#.
               pivoted to blender, tried making 3d models (s/o blender guru), but
               it didn't click. then came minecraft. figured out how to mod it
