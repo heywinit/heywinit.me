@@ -12,122 +12,121 @@ import BlogSection from "@/components/sections/BlogSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomePage() {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const [blogs, setBlogs] = useState<
-		{
-			title: string;
-			date: string;
-			summary: string;
-			url: string;
-		}[]
-	>([]);
-	const [blogLoading, setBlogLoading] = useState(true);
-	const [blogError, setBlogError] = useState<string | undefined>(undefined);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [blogs, setBlogs] = useState<
+    {
+      title: string;
+      date: string;
+      summary: string;
+      url: string;
+    }[]
+  >([]);
+  const [blogLoading, setBlogLoading] = useState(true);
+  const [blogError, setBlogError] = useState<string | undefined>(undefined);
 
-	useEffect(() => {
-		const fetchBlogs = async () => {
-			try {
-				setBlogLoading(true);
-				const fetchedBlogs = await getBlogs();
-				setBlogs(fetchedBlogs);
-				setBlogError(undefined);
-			} catch (error) {
-				console.error("Failed to fetch blogs:", error);
-				setBlogError("Failed to load blog posts. Please try again later.");
-			} finally {
-				setBlogLoading(false);
-			}
-		};
-		fetchBlogs();
-	}, []);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setBlogLoading(true);
+        const fetchedBlogs = await getBlogs();
+        setBlogs(fetchedBlogs);
+        setBlogError(undefined);
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+        setBlogError("Failed to load blog posts. Please try again later.");
+      } finally {
+        setBlogLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
 
-	const skills = useMemo(
-		() => ({
-			TypeScript:
-				"My primary language for web development and frontend applications.",
-			Golang: "When I want to build fast and efficient backend services.",
-			React: "Framework of choice for creating interactive user interfaces.",
-			Solana:
-				"Specialized in building dApps and tools for the Solana ecosystem.",
-			Ethereum: "Experience with smart contracts and DeFi applications.",
-		}),
-		[],
-	);
+  const skills = useMemo(
+    () => ({
+      TypeScript:
+        "My primary language for web development and frontend applications.",
+      Golang: "When I want to build fast and efficient backend services.",
+      React: "Framework of choice for creating interactive user interfaces.",
+      Solana:
+        "Specialized in building dApps and tools for the Solana ecosystem.",
+      Ethereum: "Experience with smart contracts and DeFi applications.",
+    }),
+    []
+  );
 
-	const projects = useMemo(
-		() => [
-			{
-				name: "DiscoDB",
-				description:
-					"A lightweight database hosted on discord servers enabling theoretically infinite storage.",
-				tech: "Go • Discord",
-				url: "https://github.com/heywinit/discodb",
-			},
-			{
-				name: "mercon",
-				description:
-					"An all in one library for downloading on-chain data related to Meteora Transactions, Positions and Pools.",
-				tech: "Go • Solana • Postgres",
-				url: "https://github.com/heywinit/mercon",
-			},
-			{
-				name: "lopnur",
-				description:
-					"A tool for benchmarking various Solana RPC Providers for Meteora and its programs",
-				tech: "TypeScript • Bun • Solana",
-				url: "https://github.com/heywinit/lopnur",
-			},
-		],
-		[],
-	);
+  const projects = useMemo(
+    () => [
+      {
+        name: "DiscoDB",
+        description:
+          "A lightweight database hosted on discord servers enabling theoretically infinite storage.",
+        tech: "Go • Discord",
+        url: "https://github.com/heywinit/discodb",
+      },
+      {
+        name: "mercon",
+        description:
+          "An all in one library for downloading on-chain data related to Meteora Transactions, Positions and Pools.",
+        tech: "Go • Solana • Postgres",
+        url: "https://github.com/heywinit/mercon",
+      },
+      {
+        name: "lopnur",
+        description:
+          "A tool for benchmarking various Solana RPC Providers for Meteora and its programs",
+        tech: "TypeScript • Bun • Solana",
+        url: "https://github.com/heywinit/lopnur",
+      },
+    ],
+    []
+  );
 
-	const employment = useMemo(
-		() => [
-			{
-				company: "Metfin",
-				role: "Co-Founder",
-				period: "2025 - Present",
-				description:
-					"Developing financial tools and infrastructure for the Meteora, leveraging Golang for backend services and TypeScript for client applications.",
-				tech: "Go • TypeScript • Solana",
-				url: "https://metf.in",
-			},
-			{
-				company: "SOLDecoder",
-				role: "Software Engineer",
-				period: "2024 - Present (again, yes)",
-				description:
-					"Building blockchain automation tools for the Solana and Ethereum ecosystem. Working on code handling hundreds of thousands of dollars daily through Meteora DLMM Automation.",
-				tech: "TypeScript • React • Solana",
-				url: "https://soldecoder.app",
-			},
-			{
-				company: "SOLDecoder",
-				role: "Software Engineer",
-				period: "2022 - 2023",
-				description:
-					"Worked on NFT launchpad automations and tools for moderating NFT projects.",
-				tech: "TypeScript • React • Solana",
-				url: "https://soldecoder.app",
-			},
-			{
-				company: "Freelance",
-				role: "Software Engineer",
-				period: "2020 - 2023",
-				description:
-					"Freelanced as a Software Engineer and Minecraft Mod Developer for 3 years.",
-				tech: "Java • TypeScript • Solana",
-			},
-		],
-		[],
-	);
+  const employment = useMemo(
+    () => [
+      {
+        company: "Metfin",
+        role: "Co-Founder",
+        period: "2025 - Present",
+        description:
+          "Developing financial tools and infrastructure for the Meteora, leveraging Golang for backend services and TypeScript for client applications.",
+        tech: "Go • TypeScript • Solana",
+      },
+      {
+        company: "SOLDecoder",
+        role: "Software Engineer",
+        period: "2024 - Present (again, yes)",
+        description:
+          "Building blockchain automation tools for the Solana and Ethereum ecosystem. Working on code handling hundreds of thousands of dollars daily through Meteora DLMM Automation.",
+        tech: "TypeScript • React • Solana",
+        url: "https://soldecoder.app",
+      },
+      {
+        company: "SOLDecoder",
+        role: "Software Engineer",
+        period: "2022 - 2023",
+        description:
+          "Worked on NFT launchpad automations and tools for moderating NFT projects.",
+        tech: "TypeScript • React • Solana",
+        url: "https://soldecoder.app",
+      },
+      {
+        company: "Freelance",
+        role: "Software Engineer",
+        period: "2020 - 2023",
+        description:
+          "Freelanced as a Software Engineer and Minecraft Mod Developer for 3 years.",
+        tech: "Java • TypeScript • Solana",
+      },
+    ],
+    []
+  );
 
-	// Add scroll to top functionality
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+  // Add scroll to top functionality
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-	return (
+  return (
     <div
       ref={containerRef}
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 bg-white dark:bg-black text-black dark:text-white relative overflow-hidden pt-24 pb-24"
